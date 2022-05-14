@@ -1,0 +1,305 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api Route list ",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/v1/signin_user": {
+            "post": {
+                "tags": [
+                    "SignIn User"
+                ],
+                "description": "use to signin user with recieved code",
+                "operationId": "781ed9c6a640efb432059a1d2e93aa9e",
+                "parameters": [
+                    {
+                        "name": "mobile",
+                        "in": "query",
+                        "description": "send mobile in body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "send code in body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/send_sms": {
+            "post": {
+                "tags": [
+                    "Send SMS"
+                ],
+                "description": "use to send sms to user",
+                "operationId": "e4a43d17c18e3838c883880961d3f833",
+                "parameters": [
+                    {
+                        "name": "mobile",
+                        "in": "path",
+                        "description": "send mobile in body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/check_sms_code": {
+            "post": {
+                "tags": [
+                    "Check SMS Code"
+                ],
+                "description": "use to check sms code that recieved by user",
+                "operationId": "f8e56b65759b5df6a87ef12f44e9f73f",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "send code in body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "path",
+                        "description": "send mobile in body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v5/pay_vip": {
+            "post": {
+                "tags": [
+                    "Pay"
+                ],
+                "summary": "search in ideas and category title",
+                "operationId": "7bb35e4194013cf3a868ecc932c51d62",
+                "parameters": [
+                    {
+                        "name": "vip_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "discount_code",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "upgrade",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user_info": {
+            "post": {
+                "tags": [
+                    "User info"
+                ],
+                "operationId": "037240cf084b212900865e53bd93faf3",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user_info_update": {
+            "post": {
+                "tags": [
+                    "User info"
+                ],
+                "operationId": "dda1439350a39ed651c8e080f3547564",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "instagram",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "marriageyear",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "birthyear",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "main_field_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sub_field_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_input_field",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "bio",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user_fcm_token": {
+            "post": {
+                "tags": [
+                    "User FCM Token"
+                ],
+                "operationId": "16d6a30855ca46628b705c5198dab586",
+                "parameters": [
+                    {
+                        "name": "user_token",
+                        "in": "path",
+                        "description": "send user token in header",
+                        "schema": {
+                            "type": "http"
+                        }
+                    },
+                    {
+                        "name": "fcm_token",
+                        "in": "query",
+                        "description": "send fcm token in body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

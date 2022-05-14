@@ -1,0 +1,36 @@
+@extends('admin.layouts.master')
+@include('admin.partials.header',[$title='ایجاد نقش'])
+@section('content')
+    <!-- begin::main content -->
+    <main class="main-content">
+        <div class="row">
+            @if(Session::has('message'))
+                <div class="alert alert-info">
+                    <div>{{session('message')}}</div>
+                </div>
+            @endif
+        </div>
+        @include('admin.partials.errors')
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <h6 class="card-title">ایجاد نقش</h6>
+                    <form role="form" method="POST" action="{{route('roles.store')}}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>عنوان نقش</label>
+                                <input type="text" class="form-control" name="name"  placeholder="عنوان نقش را وارد کنید" value="{{old('name')}}">
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- end::main content -->
+@endsection
