@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProvinceRequest extends FormRequest
+class SendCheckCodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,19 +19,13 @@ class ProvinceRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
         return [
-            'name'=>'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'name.required'=>'تکمیل عنوان استان الزامی است'
+            'mobile'=>'required',
+            'code' => 'required',
         ];
     }
 }

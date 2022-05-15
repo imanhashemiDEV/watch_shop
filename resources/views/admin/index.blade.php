@@ -10,7 +10,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h2 class="font-weight-bold m-b-10 line-height-30 primary-font">{{$users}}</h2>
-                                <h6 class="font-size-13 mb-2 text-primary font-weight-bold primary-font">تعداد کاربران</h6>
+                                <h6 class="mb-2 font-size-13 text-primary font-weight-bold primary-font">تعداد کاربران</h6>
 {{--                                <p class="m-0 small text-muted">لورم ایپسوم متن ساختگی با تولید</p>--}}
                             </div>
                             <div>
@@ -26,7 +26,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h2 class="font-weight-bold m-b-10 line-height-30 primary-font">0</h2>
-                                <h6 class="font-size-13 mb-2 text-success font-weight-bold primary-font">تعداد فروش</h6>
+                                <h6 class="mb-2 font-size-13 text-success font-weight-bold primary-font">تعداد فروش</h6>
 {{--                                <p class="m-0 small text-muted">لورم ایپسوم متن ساختگی با تولید</p>--}}
                             </div>
                             <div>
@@ -41,8 +41,8 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2 class="font-weight-bold m-b-10 line-height-30 primary-font">{{$articles}}</h2>
-                                <h6 class="font-size-13 mb-2 text-warning font-weight-bold primary-font">مجموع مقالات</h6>
+                                <h2 class="font-weight-bold m-b-10 line-height-30 primary-font">0</h2>
+                                <h6 class="mb-2 font-size-13 text-warning font-weight-bold primary-font">مجموع مقالات</h6>
 {{--                                <p class="m-0 small text-muted">لورم ایپسوم متن ساختگی با تولید</p>--}}
                             </div>
                             <div>
@@ -58,7 +58,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h2 class="font-weight-bold m-b-10 line-height-30 primary-font">0</h2>
-                                <h6 class="font-size-13 mb-2 text-info font-weight-bold primary-font">تعداد </h6>
+                                <h6 class="mb-2 font-size-13 text-info font-weight-bold primary-font">تعداد </h6>
 {{--                                <p class="m-0 small text-muted">لورم ایپسوم متن ساختگی با تولید</p>--}}
                             </div>
                             <div>

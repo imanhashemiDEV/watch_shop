@@ -12,9 +12,7 @@ class PanelController extends Controller
 {
     public function index()
     {
-
         $users = User::query()->count();
-        $articles = Article::query()->count();
-        return view('admin.index', compact('users','articles'));
+        return view('admin.index', compact('users'));
     }
 }

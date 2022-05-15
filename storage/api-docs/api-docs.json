@@ -6,48 +6,13 @@
     },
     "paths": {
         "/api": {},
-        "/api/v1/signin_user": {
-            "post": {
-                "tags": [
-                    "SignIn User"
-                ],
-                "description": "use to signin user with recieved code",
-                "operationId": "781ed9c6a640efb432059a1d2e93aa9e",
-                "parameters": [
-                    {
-                        "name": "mobile",
-                        "in": "query",
-                        "description": "send mobile in body",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "code",
-                        "in": "query",
-                        "description": "send code in body",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Its Ok",
-                        "content": {
-                            "application/json": {}
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/send_sms": {
             "post": {
                 "tags": [
                     "Send SMS"
                 ],
                 "description": "use to send sms to user",
-                "operationId": "e4a43d17c18e3838c883880961d3f833",
+                "operationId": "8a6a727c1433d8e4ff86e112dd6813eb",
                 "parameters": [
                     {
                         "name": "mobile",
@@ -75,7 +40,7 @@
                     "Check SMS Code"
                 ],
                 "description": "use to check sms code that recieved by user",
-                "operationId": "f8e56b65759b5df6a87ef12f44e9f73f",
+                "operationId": "6776e1400fd13cb191c23b1b805576d3",
                 "parameters": [
                     {
                         "name": "code",
@@ -106,34 +71,26 @@
                 }
             }
         },
-        "/api/v5/pay_vip": {
+        "/api/v1/register": {
             "post": {
                 "tags": [
-                    "Pay"
+                    "Register User"
                 ],
-                "summary": "search in ideas and category title",
-                "operationId": "7bb35e4194013cf3a868ecc932c51d62",
+                "description": "use to signin user with recieved code",
+                "operationId": "fd83cab1818154e58fe1ba7d34661c03",
                 "parameters": [
                     {
-                        "name": "vip_id",
+                        "name": "mobile",
                         "in": "query",
-                        "required": true,
+                        "description": "send mobile in body",
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "discount_code",
+                        "name": "name",
                         "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "upgrade",
-                        "in": "query",
-                        "required": true,
+                        "description": "send name in body",
                         "schema": {
                             "type": "string"
                         }
@@ -141,7 +98,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "its Ok",
+                        "description": "Its Ok",
                         "content": {
                             "application/json": {}
                         }
@@ -298,8 +255,5 @@
                 }
             }
         }
-    },
-    "security": [
-        []
-    ]
+    }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SmsCode extends Model
 {
     use HasFactory;
+
+   protected $fillable=[
+       'mobile',
+       'code'
+   ];
 }
