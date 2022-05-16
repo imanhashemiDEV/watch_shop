@@ -18,7 +18,7 @@
     <meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>judgment</title>
+    <title>watch shop</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
@@ -29,7 +29,7 @@
     <link href="{{url('/css/styles.css')}}" rel="stylesheet">
 
     <!-- Favicon  -->
-    <link rel="icon" href="{{url('')}}images/favicon.png">
+    <link rel="icon" href="{{url('images/favicon.png')}}">
 </head>
 <body data-spy="scroll" data-target=".fixed-top">
 
@@ -55,6 +55,7 @@
                         <h3>قضاوت بزرگترین مسئولیت را در زندگی هر شخص ایجاد کرده و سخت‌ترین عهده دنیاست.</h3>
                         @guest
                             <a class="btn-solid-lg page-scroll" href="{{route('login')}}">ورود</a>
+                            <a class="btn-solid-lg page-scroll" href="{{route('register')}}">ثبت نام</a>
                         @endguest
                         @auth
                             @php $user =auth()->user(); @endphp

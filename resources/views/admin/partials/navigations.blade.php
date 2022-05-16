@@ -7,6 +7,11 @@
                     <i class="icon ti-user"></i>
                 </a>
             </li>
+            <li data-toggle="tooltip" title="دسته بندی" @if(Request::is('admin/categories') || Request::is('admin/categories/*') ) class="active" @endif>
+                <a href="#categories" title="دسته بندی">
+                    <i class="icon ti-user"></i>
+                </a>
+            </li>
         </ul>
         <ul>
             <li data-toggle="tooltip" title="ویرایش پروفایل">
@@ -55,6 +60,16 @@
                     <li><a href="{{route('logs.index')}}" @if(Request::is('admin/logs')) class="active" @endif>لاگ سیستم</a></li>
                 </ul>
             </li>
+        </ul>
+         <ul id="categories" @if(Request::is('admin/categories') || Request::is('admin/categories/*') ) class="navigation-active" @endif>
+            <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
+                <a href="#">دسته بندی </a>
+                <ul>
+                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/categories/create')) class="active" @endif >ایجاد دسته بندی</a></li>
+                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/categories')) class="active" @endif>لیست دسته بندی ها</a></li>
+                </ul>
+            </li>
+
         </ul>
     </div>
 </div>
