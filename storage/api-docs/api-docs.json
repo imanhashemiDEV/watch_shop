@@ -16,17 +16,16 @@
                 "parameters": [
                     {
                         "name": "mobile",
-                        "in": "path",
+                        "in": "query",
                         "description": "send mobile in body",
-                        "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "It's Ok",
+                        "description": "Its Ok",
                         "content": {
                             "application/json": {}
                         }
@@ -43,19 +42,17 @@
                 "operationId": "6776e1400fd13cb191c23b1b805576d3",
                 "parameters": [
                     {
-                        "name": "code",
-                        "in": "path",
-                        "description": "send code in body",
-                        "required": true,
+                        "name": "mobile",
+                        "in": "query",
+                        "description": "send mobile in body",
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "mobile",
-                        "in": "path",
-                        "description": "send mobile in body",
-                        "required": true,
+                        "name": "code",
+                        "in": "query",
+                        "description": "send code in body",
                         "schema": {
                             "type": "string"
                         }
@@ -63,7 +60,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "It's Ok",
+                        "description": "Its Ok",
                         "content": {
                             "application/json": {}
                         }
@@ -94,6 +91,38 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "send address in body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "postal_code",
+                        "in": "query",
+                        "description": "send postal_code in body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "description": "send latitude in body",
+                        "schema": {
+                            "type": "double"
+                        }
+                    },
+                    {
+                        "name": "lng",
+                        "in": "query",
+                        "description": "send longtitude in body",
+                        "schema": {
+                            "type": "double"
+                        }
                     }
                 ],
                 "responses": {
@@ -111,7 +140,7 @@
                 "tags": [
                     "User info"
                 ],
-                "operationId": "037240cf084b212900865e53bd93faf3",
+                "operationId": "b379228ae574ffdb4ecfa8b41f2541d8",
                 "parameters": [
                     {
                         "name": "token",
@@ -125,129 +154,6 @@
                 "responses": {
                     "200": {
                         "description": "It's Ok",
-                        "content": {
-                            "application/json": {}
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/user_info_update": {
-            "post": {
-                "tags": [
-                    "User info"
-                ],
-                "operationId": "dda1439350a39ed651c8e080f3547564",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "instagram",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "city_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "gender",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "marriageyear",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "birthyear",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "main_field_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "sub_field_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "user_input_field",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "bio",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "It's Ok",
-                        "content": {
-                            "application/json": {}
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/user_fcm_token": {
-            "post": {
-                "tags": [
-                    "User FCM Token"
-                ],
-                "operationId": "16d6a30855ca46628b705c5198dab586",
-                "parameters": [
-                    {
-                        "name": "user_token",
-                        "in": "path",
-                        "description": "send user token in header",
-                        "schema": {
-                            "type": "http"
-                        }
-                    },
-                    {
-                        "name": "fcm_token",
-                        "in": "query",
-                        "description": "send fcm token in body",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Its Ok",
                         "content": {
                             "application/json": {}
                         }

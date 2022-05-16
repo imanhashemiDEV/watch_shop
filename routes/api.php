@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(function () {
 
     //    User Info
-    Route::post('user_info_update', [\App\Http\Controllers\Api\V1\UserInfoController::class, 'user_info_update']);
-    Route::post('user_info', [\App\Http\Controllers\Api\V1\UserInfoController::class, 'user_info']);
-
+    Route::post('user_info', [\App\Http\Controllers\Api\V1\UserController::class, 'user_info']);
 });
 
 

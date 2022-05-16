@@ -19,22 +19,21 @@ class AuthApiController extends Controller
 {
 
     /**
-     * @OA\Post (
+     * @OA\Post(
      ** path="/api/v1/send_sms",
-     *   tags={"Send SMS"},
-     *   description="use to send sms to user",
-     *  @OA\Parameter(
+     *  tags={"Send SMS"},
+     *  description="use to send sms to user",
+     *   @OA\Parameter(
      *      name="mobile",
-     *      in="path",
-     *      required=true,
-     *      description="send mobile in body",
+     *      in="query",
+     *     description="send mobile in body",
      *      @OA\Schema(
-     *           type="integer"
+     *           type="string"
      *      )
      *   ),
      *   @OA\Response(
      *      response=200,
-     *      description="It's Ok",
+     *      description="Its Ok",
      *      @OA\MediaType(
      *           mediaType="application/json",
      *      )
@@ -61,14 +60,19 @@ class AuthApiController extends Controller
             return Response()->json([
                 'result' => true,
                 'message' => "ارسال پیامک انجام شد.",
-                'data' => []
+                'data' => [
+                    'mobile' => $mobile,
+                    'code' => $code
+                ]
             ], 201);
         } else {
             return Response()->json(
                 [
                     'result' => false,
                     'message' => 'برای درخواست مجدد 2 دقیقه صبر کنید',
-                    'data' => []
+                    'data' => [
+                        'mobile' => $mobile,
+                    ]
                 ],
                 403
             );
@@ -77,31 +81,29 @@ class AuthApiController extends Controller
 
 
     /**
-     * @OA\Post (
+     * @OA\Post(
      ** path="/api/v1/check_sms_code",
-     *   tags={"Check SMS Code"},
-     *   description="use to check sms code that recieved by user",
-     *  @OA\Parameter(
-     *      name="code",
-     *      in="path",
-     *     required=true,
-     *     description="send code in body",
+     *  tags={"Check SMS Code"},
+     *  description="use to check sms code that recieved by user",
+     *   @OA\Parameter(
+     *      name="mobile",
+     *      in="query",
+     *     description="send mobile in body",
      *      @OA\Schema(
      *           type="string"
      *      )
      *   ),
-     *      @OA\Parameter(
-     *      name="mobile",
-     *      in="path",
-     *     required=true,
-     *     description="send mobile in body",
+     *   *   @OA\Parameter(
+     *      name="code",
+     *      in="query",
+     *     description="send code in body",
      *      @OA\Schema(
      *           type="string"
      *      )
      *   ),
      *   @OA\Response(
      *      response=200,
-     *      description="It's Ok",
+     *      description="Its Ok",
      *      @OA\MediaType(
      *           mediaType="application/json",
      *      )
@@ -117,16 +119,44 @@ class AuthApiController extends Controller
             ->where('code', $code)->first();
 
         if ($code != null) {
-            return Response()->json([
-                'result' => true,
-                'message' => 'کد وارد شده صحیح است',
-                'data' => []
-            ], 201);
+
+            $user = User::query()->where('mobile', $request->mobile)->first();
+
+            if ($user) {
+                return response()->json([
+                    'result' => true,
+                    'message' => "ثبت نام قبلاانجام شده است",
+                    'data' => [
+                        'id' => $user->id,
+                  'token' => $user->createToken('NewToken')->plainTextToken,
+                    ],
+                ], 201);
+            } else {
+
+                $user = User::query()->create([
+                    'name' => $request->name,
+                    'mobile' => $request->mobile,
+                    'password' => Hash::make(rand(111111, 999999))
+                ]);
+
+                return response()->json([
+                    'result' => true,
+                    'message' => "ثبت نام انجام شد",
+                    'data' => [
+                        'id' => $user->id,
+                        'token' => $user->createToken('NewToken')->plainTextToken,
+                    ],
+                ], 201);
+
+            }
+
         } else {
             return Response()->json([
                 'result' => false,
                 'message' => 'کد وارد شده اشتباه است',
-                'data' => []
+                'data' => [
+                    'mobile' => $mobile,
+                ]
             ], 406);
         }
     }
@@ -155,6 +185,42 @@ class AuthApiController extends Controller
      *      )
      *   ),
      *
+     * *     @OA\Parameter(
+     *      name="address",
+     *      in="query",
+     *     description="send address in body",
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *
+     * *     @OA\Parameter(
+     *      name="postal_code",
+     *      in="query",
+     *     description="send postal_code in body",
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *
+     * *     @OA\Parameter(
+     *      name="lat",
+     *      in="query",
+     *     description="send latitude in body",
+     *      @OA\Schema(
+     *           type="double"
+     *      )
+     *   ),
+     *
+     * *     @OA\Parameter(
+     *      name="lng",
+     *      in="query",
+     *     description="send longtitude in body",
+     *      @OA\Schema(
+     *           type="double"
+     *      )
+     *   ),
+     *
      *   @OA\Response(
      *      response=200,
      *      description="Its Ok",
@@ -167,30 +233,26 @@ class AuthApiController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::query()->where('mobile', $request->mobile)->first();
-        if ($user) {
-            return response()->json([
-                'result' => true,
-                'message' => "ثبت نام قبلاانجام شده است",
-                'data' => [
-                    'id' => $user->id,
-                    'token' => $user->createToken('NewToken')->plainTextToken,
-                ],
-            ], 201);
-        } else {
 
-            $user = User::query()->create([
-                'name' => $request->name,
-                'mobile' => $request->mobile,
-                'password' => Hash::make(rand(111111, 999999))
+        if ($user) {
+            $user->addresses()->create([
+                'address' => $request->address,
+                'postal_code' => $request->postal_code,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
             ]);
 
             return response()->json([
                 'result' => true,
-                'message' => "ثبت نام انجام شد",
-                'data' => [
-                    'id' => $user->id,
-                    'token' => $user->createToken('NewToken')->plainTextToken,
-                ],
+                'message' => "اطلاعات کاربر ثبت شد",
+                'data' => [],
+            ], 201);
+        } else {
+
+            return response()->json([
+                'result' => true,
+                'message' => "کاربری با این مشخصات یافت نشد",
+                'data' => [],
             ], 201);
         }
 

@@ -26,6 +26,10 @@ class RegisterRequest extends FormRequest
         return [
             'mobile'=>'required',
             'name' => 'required',
+            'address' => 'required',
+            'postal_code' => 'required',
+            'lat' => 'required',
+            'lng' => 'required',
         ];
     }
 

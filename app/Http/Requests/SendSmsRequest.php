@@ -24,7 +24,7 @@ class SendSmsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required',
+            'mobile' => 'required',
         ];
     }
 }
