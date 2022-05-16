@@ -7240,16 +7240,16 @@
         },
         {
             "name": "imanghafoori/php-token-analyzer",
-            "version": "v0.1.18",
+            "version": "v0.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imanghafoori1/php_token_analyzer.git",
-                "reference": "a39b3285db2322d474588167f041628b859abb8b"
+                "reference": "5b7143f5cc97f935aeb2cbf3f94ec34dd80d2f13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imanghafoori1/php_token_analyzer/zipball/a39b3285db2322d474588167f041628b859abb8b",
-                "reference": "a39b3285db2322d474588167f041628b859abb8b",
+                "url": "https://api.github.com/repos/imanghafoori1/php_token_analyzer/zipball/5b7143f5cc97f935aeb2cbf3f94ec34dd80d2f13",
+                "reference": "5b7143f5cc97f935aeb2cbf3f94ec34dd80d2f13",
                 "shasum": ""
             },
             "require": {
@@ -7283,9 +7283,9 @@
             ],
             "support": {
                 "issues": "https://github.com/imanghafoori1/php_token_analyzer/issues",
-                "source": "https://github.com/imanghafoori1/php_token_analyzer/tree/v0.1.18"
+                "source": "https://github.com/imanghafoori1/php_token_analyzer/tree/v0.1.19"
             },
-            "time": "2022-05-10T20:19:07+00:00"
+            "time": "2022-05-14T18:25:06+00:00"
         },
         {
             "name": "imanghafoori/smart-realtime-facades",
