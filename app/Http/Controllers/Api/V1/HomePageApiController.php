@@ -7,7 +7,7 @@ use App\Http\Services\Keys;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HomePageController extends Controller
+class HomePageApiController extends Controller
 {
 
 

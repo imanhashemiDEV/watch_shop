@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
+class Color extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'image',
-        'product_id'
+        'title',
+        'code'
     ];
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class,'color_product');
     }
 }

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Hekmatinasser\Verta\Facades\Verta;
 
-class UserController extends Controller
+class UserApiController extends Controller
 {
 
     /**
