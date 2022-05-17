@@ -14,6 +14,9 @@ Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(fun
 Route::prefix('/v1')->namespace('Api\V1')->group(function () {
 
     //auth
+    Route::post('test', [\App\Http\Controllers\Api\V1\AuthApiController::class, 'test']);
+
+
     Route::post('send_sms', [\App\Http\Controllers\Api\V1\AuthApiController::class, 'sendSms']);
     Route::post('check_sms_code', [\App\Http\Controllers\Api\V1\AuthApiController::class, 'checkSmsCode']);
     Route::post('register', [\App\Http\Controllers\Api\V1\AuthApiController::class, 'register']);
