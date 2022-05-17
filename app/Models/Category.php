@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Http\Resources\CategoryResource;
+use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -12,7 +15,8 @@ class Category extends Model
     protected $fillable = [
         'title',
         'slug',
-        'parent_id'
+        'parent_id',
+        'image'
     ];
 
     public function parent()
@@ -25,24 +29,27 @@ class Category extends Model
         return $this->hasMany(Category::class,'parent_id','id');
     }
 
-    public function companies()
+    public static function saveImage($file): string
     {
-        return $this->hasMany(Company::class);
+        $name = time() .'.'. $file->extension();
+        $smallImage = Image::make($file->getRealPath());
+        $bigImage = Image::make($file->getRealPath());
+
+        $smallImage->resize(256, 256, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        Storage::disk('local')->put('category/small/' . $name, (string)$smallImage->encode('jpg', 90));
+        Storage::disk('local')->put('category/big/' . $name, (string)$bigImage->encode('jpg', 90));
+
+        //$file->storeAs('category/small/', $name,'local');
+
+        return $name;
     }
 
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
-    }
-
-    public function files()
-    {
-        return $this->hasMany(File::class);
-    }
-
-    public function conferences()
-    {
-        return $this->hasMany(Article::class);
+    public static function getAllCategories(){
+        $categories = Category::query()->get();
+        return  CategoryResource::collection($categories);
     }
 
 }

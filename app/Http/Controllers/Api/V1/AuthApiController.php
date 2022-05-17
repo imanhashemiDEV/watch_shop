@@ -25,6 +25,7 @@ class AuthApiController extends Controller
      *  description="use to send sms to user",
      *   @OA\Parameter(
      *      name="mobile",
+     *      required=true,
      *      in="query",
      *     description="send mobile in body",
      *      @OA\Schema(
@@ -87,6 +88,7 @@ class AuthApiController extends Controller
      *  description="use to check sms code that recieved by user",
      *   @OA\Parameter(
      *      name="mobile",
+     *      required=true,
      *      in="query",
      *     description="send mobile in body",
      *      @OA\Schema(
@@ -95,6 +97,7 @@ class AuthApiController extends Controller
      *   ),
      *   *   @OA\Parameter(
      *      name="code",
+     *      required=true,
      *      in="query",
      *     description="send code in body",
      *      @OA\Schema(
@@ -128,13 +131,12 @@ class AuthApiController extends Controller
                     'message' => "ثبت نام قبلاانجام شده است",
                     'data' => [
                         'id' => $user->id,
-                  'token' => $user->createToken('NewToken')->plainTextToken,
+                        'token' => $user->createToken('NewToken')->plainTextToken,
                     ],
                 ], 201);
             } else {
 
                 $user = User::query()->create([
-                    'name' => $request->name,
                     'mobile' => $request->mobile,
                     'password' => Hash::make(rand(111111, 999999))
                 ]);
@@ -147,9 +149,7 @@ class AuthApiController extends Controller
                         'token' => $user->createToken('NewToken')->plainTextToken,
                     ],
                 ], 201);
-
             }
-
         } else {
             return Response()->json([
                 'result' => false,
@@ -168,8 +168,18 @@ class AuthApiController extends Controller
      *  tags={"Register User"},
      *  description="use to signin user with recieved code",
      *   @OA\Parameter(
+     *      name="image",
+     *      in="query",
+     *     description="send image in body",
+     *      @OA\Schema(
+     *           type="file"
+     *      )
+     *   ),
+     *
+     * *   @OA\Parameter(
      *      name="mobile",
      *      in="query",
+     *      required=true,
      *     description="send mobile in body",
      *      @OA\Schema(
      *           type="string"
@@ -179,6 +189,7 @@ class AuthApiController extends Controller
      *     @OA\Parameter(
      *      name="name",
      *      in="query",
+     *      required=true,
      *     description="send name in body",
      *      @OA\Schema(
      *           type="string"
@@ -187,6 +198,7 @@ class AuthApiController extends Controller
      *
      * *     @OA\Parameter(
      *      name="address",
+     *      required=true,
      *      in="query",
      *     description="send address in body",
      *      @OA\Schema(
@@ -196,6 +208,7 @@ class AuthApiController extends Controller
      *
      * *     @OA\Parameter(
      *      name="postal_code",
+     *      required=true,
      *      in="query",
      *     description="send postal_code in body",
      *      @OA\Schema(
@@ -205,6 +218,7 @@ class AuthApiController extends Controller
      *
      * *     @OA\Parameter(
      *      name="lat",
+     *      required=true,
      *      in="query",
      *     description="send latitude in body",
      *      @OA\Schema(
@@ -214,6 +228,7 @@ class AuthApiController extends Controller
      *
      * *     @OA\Parameter(
      *      name="lng",
+     *      required=true,
      *      in="query",
      *     description="send longtitude in body",
      *      @OA\Schema(
@@ -230,11 +245,19 @@ class AuthApiController extends Controller
      *   )
      *)
      **/
+
     public function register(RegisterRequest $request)
     {
+
         $user = User::query()->where('mobile', $request->mobile)->first();
 
+        $image = User::saveImage($request->image);
+
         if ($user) {
+            $user->update([
+                'name' => $request->name,
+                'profile_photo_path' => $image
+            ]);
             $user->addresses()->create([
                 'address' => $request->address,
                 'postal_code' => $request->postal_code,
@@ -245,7 +268,9 @@ class AuthApiController extends Controller
             return response()->json([
                 'result' => true,
                 'message' => "اطلاعات کاربر ثبت شد",
-                'data' => [],
+                'data' => [
+                    'user' => new UserResource($user)
+                ],
             ], 201);
         } else {
 

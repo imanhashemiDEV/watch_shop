@@ -6,6 +6,7 @@ use App\Models\Address;
 use Laravel\Jetstream\HasTeams;
 use Illuminate\Http\UploadedFile;
 use Laravel\Sanctum\HasApiTokens;
+use Intervention\Image\Facades\Image;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,7 @@ class User extends Authenticatable
     protected $guard_name = 'sanctum';
 
     protected $fillable = [
-        'name', 'email', 'password','mobile'
+        'name', 'email', 'password','mobile','profile_photo_path'
     ];
 
     /**
@@ -77,5 +78,26 @@ class User extends Authenticatable
 
     public function addresses(){
         return $this->hasMany(Address::class);
+    }
+
+    public static function saveImage($file): string
+    {
+        if($file){
+            $name = time() .'.'. $file->extension();
+            $smallImage = Image::make($file->getRealPath());
+            $bigImage = Image::make($file->getRealPath());
+
+            $smallImage->resize(256, 256, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            Storage::disk('local')->put('user_profile/small/' . $name, (string)$smallImage->encode('jpg', 90));
+            Storage::disk('local')->put('user_profile/big/' . $name, (string)$bigImage->encode('jpg', 90));
+
+            return $name;
+        }else{
+            return "";
+        }
+
     }
 }

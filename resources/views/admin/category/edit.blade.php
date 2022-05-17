@@ -15,13 +15,13 @@
             <div class="card-body">
                 <div class="container">
                     <h6 class="card-title">دسته بندی</h6>
-                    <form method="post" action="{{route('categories.update', $category->id)}}">
+                    <form method="post" action="{{route('categories.update', $category->id)}}" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
                         <div class="form-group row">
                             <label  class="col-sm-2 col-form-label">نام دسته بندی</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control text-left" value="{{$category->title}}" placeholder="نام دسته بندی" dir="rtl" name="title">
+                                <input type="text" class="text-left form-control" value="{{$category->title}}" placeholder="نام دسته بندی" dir="rtl" name="title">
                             </div>
                         </div>
                         <div class="form-group row" data-select2-id="23">
@@ -38,6 +38,10 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-group row custom-file col-sm-10 offset-2">
+                            <label class="custom-file-label" for="customFile">انتخاب عکس دسته بندی</label>
+                            <input type="file" class="custom-file-input" id="customFile" name='image'>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">

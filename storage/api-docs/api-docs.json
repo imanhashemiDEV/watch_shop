@@ -18,6 +18,7 @@
                         "name": "mobile",
                         "in": "query",
                         "description": "send mobile in body",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -45,6 +46,7 @@
                         "name": "mobile",
                         "in": "query",
                         "description": "send mobile in body",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -53,6 +55,7 @@
                         "name": "code",
                         "in": "query",
                         "description": "send code in body",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -77,9 +80,18 @@
                 "operationId": "fd83cab1818154e58fe1ba7d34661c03",
                 "parameters": [
                     {
+                        "name": "image",
+                        "in": "query",
+                        "description": "send image in body",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    {
                         "name": "mobile",
                         "in": "query",
                         "description": "send mobile in body",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -88,6 +100,7 @@
                         "name": "name",
                         "in": "query",
                         "description": "send name in body",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -96,6 +109,7 @@
                         "name": "address",
                         "in": "query",
                         "description": "send address in body",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -104,6 +118,7 @@
                         "name": "postal_code",
                         "in": "query",
                         "description": "send postal_code in body",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -112,6 +127,7 @@
                         "name": "lat",
                         "in": "query",
                         "description": "send latitude in body",
+                        "required": true,
                         "schema": {
                             "type": "double"
                         }
@@ -120,11 +136,29 @@
                         "name": "lng",
                         "in": "query",
                         "description": "send longtitude in body",
+                        "required": true,
                         "schema": {
                             "type": "double"
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/home_page": {
+            "get": {
+                "tags": [
+                    "Home Page"
+                ],
+                "description": "get home page data",
+                "operationId": "ba6d676cd260b88a6242fa96b3208b97",
                 "responses": {
                     "200": {
                         "description": "Its Ok",

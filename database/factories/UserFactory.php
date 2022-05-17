@@ -26,12 +26,13 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'سید ایمان هاشمی',
-            'email' => 'hashemi.iman@gmail.com',
+            'name' => 'مدیرکل',
+            'email' => 'manager@gmail.com',
             'email_verified_at' => now(),
             'mobile'=>"09167014556",
-            'username'=>'eimy13',
-            'password' => Hash::make('iman138313'), // password
+            'username'=>'manager',
+            'super_admin'=>true,
+            'password' => Hash::make('12345678'), // password
         ];
     }
 

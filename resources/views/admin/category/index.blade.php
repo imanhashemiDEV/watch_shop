@@ -18,18 +18,25 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="thead-light">
                         <tr>
-                            <th class="text-primary text-center align-middle">ردیف</th>
-                            <th class="text-primary text-center align-middle">عنوان دسته بندی</th>
-                            <th class="text-primary text-center align-middle">عنوان اسلاگ</th>
-                            <th class="text-primary text-center align-middle">دسته پدر</th>
-                            <th class="text-primary text-center align-middle">تاریخ ایجاد</th>
-                            <th class="text-primary text-center align-middle">ویرایش</th>
+                            <th class="text-center align-middle text-primary">ردیف</th>
+                            <th class="text-center align-middle text-primary">عکس</th>
+                            <th class="text-center align-middle text-primary">عنوان دسته بندی</th>
+                            <th class="text-center align-middle text-primary">عنوان اسلاگ</th>
+                            <th class="text-center align-middle text-primary">دسته پدر</th>
+                            <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
+                            <th class="text-center align-middle text-primary">ویرایش</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($categories as $category)
                             <tr>
                                 <td class="text-center align-middle">{{$i++}}</td>
+                                <td class="text-center align-middle">
+                                    <figure class="avatar avatar-sm">
+                                        <img src="{{ url('images/category/small/' . $category->image) }}"
+                                            class="rounded-circle" alt="image">
+                                    </figure>
+                                </td>
                                 <td class="text-center align-middle">{{$category->title}}</td>
                                 <td class="text-center align-middle">{{$category->slug}}</td>
                                 <td class="text-center align-middle">{{$category->parent->title}}</td>
