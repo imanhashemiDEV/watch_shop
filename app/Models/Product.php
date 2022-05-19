@@ -24,6 +24,7 @@ class Product extends Model
         'title_en',
         'guaranty',
         'discount',
+        'sell',
         'product_count'
     ];
 
@@ -76,7 +77,7 @@ class Product extends Model
 
     public static function getAllProducts(){
 
-        $product= Product::query()->get();
+        $product= Product::query()->paginate(12);
 
         return ProductResource::collection($product);
     }

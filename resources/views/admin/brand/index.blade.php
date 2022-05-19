@@ -27,9 +27,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($brands as $brand)
+                        @foreach($brands as $index => $brand)
                             <tr>
-                                <td class="text-center align-middle">{{$i++}}</td>
+                                <td class="text-center align-middle">{{$brands->firstItem() + $index}}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar-sm">
                                         <img src="{{ url('images/brands/small/' . $brand->image) }}"

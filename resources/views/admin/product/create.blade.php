@@ -48,7 +48,7 @@
                         <div class="form-group row" data-select2-id="23">
                             <label class="col-sm-3 col-form-label">انتخاب رنگ</label>
                             <div class="col-sm-9">
-                            <select class="js-example-basic-single select2-hidden-accessible" multiple="" name="colors[]" style="width: 100%;text-align: right" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                            <select class="form-select" multiple="" name="colors[]" style="width: 100%;text-align: right" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                 @foreach($colors as $key=>$value)
                                 <option style="" value="{{$key}}" >{{$value}}</option>
                               @endforeach

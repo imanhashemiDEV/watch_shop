@@ -22,15 +22,15 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="thead-light">
                         <tr>
-                            <th class="text-primary text-center align-middle">ردیف</th>
-                            <th class="text-primary text-center align-middle">لینک</th>
-                            <th class="text-primary text-center align-middle">حذف</th>
+                            <th class="text-center align-middle text-primary">ردیف</th>
+                            <th class="text-center align-middle text-primary">لینک</th>
+                            <th class="text-center align-middle text-primary">حذف</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($galleries as $gallery)
+                        @foreach($galleries as $index => $gallery)
                             <tr>
-                                <td class="text-center align-middle">{{$i++}}</td>
+                                <td class="text-center align-middle">{{$galleries->firstItem() + $index}}</td>
                                 <td class="text-center align-middle rtl">{{url('images/gallery')."/" . $gallery->url}}</td>
                                 <td class="text-center align-middle">
                                     <a class="btn btn-outline-danger" onclick="deleteItem({{$gallery->id}})">

@@ -1,9 +1,8 @@
 @extends('admin.layouts.master')
-@include('admin.partials.header',[$title='لیست نظرات'])
+@include('admin.partials.header',[$title='لیست رنگ ها'])
 @section('content')
     <!-- begin::main content -->
     <main class="main-content">
-
         <div class="row">
             @if(Session::has('message'))
                 <div class="alert alert-info">
@@ -19,35 +18,31 @@
                         <thead class="thead-light">
                         <tr>
                             <th class="text-center align-middle text-primary">ردیف</th>
-                            <th class="text-center align-middle text-primary">متن نظر</th>
-                            <th class="text-center align-middle text-primary">نام نظر دهنده</th>
+                            <th class="text-center align-middle text-primary">عنوان رنگ</th>
+                            <th class="text-center align-middle text-primary">کد رنگ</th>
+                            <th class="text-center align-middle text-primary"> رنگ</th>
                             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
-                            <th class="text-center align-middle text-primary">تایید یا عدم تایید</th>
+                            <th class="text-center align-middle text-primary">ویرایش</th>
                             <th class="text-center align-middle text-primary">حذف</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($comments as $index => $comment)
+                        @foreach($colors as $index => $color)
                             <tr>
-                                <td class="text-center align-middle">{{$comments->firstItem() + $index}}</td>
-                                <td class="text-center align-middle">{{$comment->body}}</td>
-                                <td class="text-center align-middle">{{$comment->user->name}}</td>
-                                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('%B %d، %Y')}}</td>
-                                <td class="text-center align-middle d-flex align-items-center justify-content-center">
-                                    <form action="{{route('comment.update', $comment->id)}}" method="post" style="margin: 0 !important;">
-                                        @csrf
-                                        @method('patch')
-                                        @if($comment->status ==0)
-                                            <input type="hidden" name="action" value="approved">
-                                            <button class="btn btn-outline-danger"> تایید</button>
-                                        @else
-                                            <input type="hidden" name="action" value="disapproved">
-                                            <button class="btn btn-outline-success"> عدم تایید</button>
-                                        @endif
-                                    </form>
+                                <td class="text-center align-middle">{{$colors->firstItem() + $index}}</td>
+                                <td class="text-center align-middle">{{$color->title}}</td>
+                                <td class="text-center align-middle">{{$color->code}}</td>
+                                <td class="text-center align-middle" style="background-color:{{ $color->code  }};  width:80px;">
+
+                                </td>
+                                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($color->created_at)->format('%B %d، %Y')}}</td>
+                                <td class="text-center align-middle">
+                                    <a class="btn btn-outline-info" href="{{route('colors.edit',$color->id)}}">
+                                         ویرایش
+                                    </a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a class="btn btn-outline-danger" onclick="deleteItem({{$comment->id}})">
+                                    <a class="btn btn-outline-danger" onclick="deleteItem({{$color->id}})">
                                          حذف
                                     </a>
                                 </td>
@@ -55,7 +50,7 @@
                         @endforeach
                     </table>
                     <div style="margin: 40px !important;" class="pagination pagination-rounded pagination-sm d-flex justify-content-center">
-                        {{$comments->appends(Request::except('page'))->links()}}
+                        {{$colors->appends(Request::except('page'))->links()}}
                     </div>
                 </div>
             </div>
@@ -68,7 +63,7 @@
     <script>
         function deleteItem(id) {
             Swal.fire({
-                title: 'حذف نظر',
+                title: 'حذف تگ',
                 text: "آیا از حذف مطمئن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
@@ -81,7 +76,7 @@
 
                     $.ajax(
                         {
-                            url: url + "/admin/comments/"+id,
+                            url: url + "/admin/colors/"+id,
                             type: 'delete',
                             dataType: "JSON",
                             data: {
@@ -91,8 +86,8 @@
                             success: function (response)
                             {
                                 Swal.fire(
-                                    'نظر حذف شد',
-                                    'نظر مورد نظر با موفقیت حذف شد',
+                                    'رنگ حذف شد',
+                                    'رنگ مورد نظر با موفقیت حذف شد',
                                     'باشه'
                                 );
                             },

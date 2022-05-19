@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ColorRequest;
 use App\Models\Color;
 use Illuminate\Http\Request;
 
@@ -12,17 +13,17 @@ class ColorController extends Controller
     public function index()
     {
         $colors = Color::query()->paginate(10);
-        return view('admin.color.colors',compact('colors'));
+        return view('admin.color.index',compact('colors'));
     }
 
 
     public function create()
     {
-        return view('admin.color.create_color');
+        return view('admin.color.create');
     }
 
 
-    public function store(Request $request)
+    public function store(ColorRequest $request)
     {
         Color::query()->create([
             'title'=>$request->input('title'),
@@ -42,11 +43,11 @@ class ColorController extends Controller
     public function edit($id)
     {
         $color = Color::query()->find($id);
-        return view('admin.color.update_color',compact('color'));
+        return view('admin.color.edit',compact('color'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(ColorRequest $request, $id)
     {
         Color::query()->find($id)->update([
             'title'=>$request->input('title'),

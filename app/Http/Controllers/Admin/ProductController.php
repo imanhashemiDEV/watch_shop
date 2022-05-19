@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditProductRequest;
 use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
@@ -16,7 +17,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::query()->paginate(10);
+        $products = Product::query()->latest()->paginate(10);
         return view('admin.product.index', compact('products'));
     }
 
@@ -49,7 +50,7 @@ class ProductController extends Controller
         ]);
 
         $colors = $request->colors;
-       // $product->colors()->attach($colors);
+        $product->colors()->attach($colors);
 
         return redirect()->back()->with('message', 'محصول با موفقیت ثبت شد');
     }
@@ -71,7 +72,7 @@ class ProductController extends Controller
     }
 
 
-    public function update(ProductRequest $request, $id)
+    public function update(EditProductRequest $request, $id)
     {
         $product = Product::query()->find($id);
 
@@ -97,9 +98,9 @@ class ProductController extends Controller
         ]);
 
         $colors = $request->colors;
-       // $product->colors()->sync($colors);
+        $product->colors()->sync($colors);
 
-        return redirect()->back()->with('message', 'محصول با موفقیت ویرایش شد');
+        return redirect()->route('products.index')->with('message', 'محصول با موفقیت ویرایش شد');
     }
 
     public function destroy($id)

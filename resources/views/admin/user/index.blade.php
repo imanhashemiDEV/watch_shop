@@ -17,19 +17,19 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="thead-light">
                         <tr>
-                            <th class="text-primary text-center align-middle">ردیف</th>
-                            <th class="text-primary text-center align-middle">نام و نام خانوادگی</th>
-                            <th class="text-primary text-center align-middle">ایمیل</th>
-                            <th class="text-primary text-center align-middle">موبایل</th>
-                            <th class="text-primary text-center align-middle">نقش های کاربر</th>
-                            <th class="text-primary text-center align-middle">ویرایش</th>
-                            <th class="text-primary text-center align-middle">تاریخ ایجاد</th>
+                            <th class="text-center align-middle text-primary">ردیف</th>
+                            <th class="text-center align-middle text-primary">نام و نام خانوادگی</th>
+                            <th class="text-center align-middle text-primary">ایمیل</th>
+                            <th class="text-center align-middle text-primary">موبایل</th>
+                            <th class="text-center align-middle text-primary">نقش های کاربر</th>
+                            <th class="text-center align-middle text-primary">ویرایش</th>
+                            <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($users as $index => $user)
                             <tr>
-                                <td class="text-center align-middle">{{$i++}}</td>
+                                <td class="text-center align-middle">{{$users->firstItem() + $index}}</td>
                                 <td class="text-center align-middle">{{$user->name}}</td>
                                 <td class="text-center align-middle">{{$user->email}}</td>
                                 <td class="text-center align-middle">{{$user->mobile}}</td>

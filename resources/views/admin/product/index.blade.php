@@ -31,9 +31,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
+                        @foreach($products as $index => $product)
                             <tr>
-                                <td class="text-center align-middle">{{$i++}}</td>
+                                <td class="text-center align-middle">{{$products->firstItem() + $index}}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar-sm">
                                         <img src="{{ url('images/product/small/' . $product->image) }}"

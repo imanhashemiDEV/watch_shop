@@ -17,17 +17,17 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="thead-light">
                         <tr>
-                            <th class="text-primary text-center align-middle">ردیف</th>
-                            <th class="text-primary text-center align-middle">عنوان تگ</th>
-                            <th class="text-primary text-center align-middle">تاریخ ایجاد</th>
-                            <th class="text-primary text-center align-middle">ویرایش</th>
-                            <th class="text-primary text-center align-middle">حذف</th>
+                            <th class="text-center align-middle text-primary">ردیف</th>
+                            <th class="text-center align-middle text-primary">عنوان تگ</th>
+                            <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
+                            <th class="text-center align-middle text-primary">ویرایش</th>
+                            <th class="text-center align-middle text-primary">حذف</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tags as $tag)
+                        @foreach($tags as $index => $tag)
                             <tr>
-                                <td class="text-center align-middle">{{$i++}}</td>
+                                <td class="text-center align-middle">{{$tags->firstItem() + $index}}</td>
                                 <td class="text-center align-middle">{{$tag->title}}</td>
                                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($tag->created_at)->format('%B %d، %Y')}}</td>
                                 <td class="text-center align-middle">

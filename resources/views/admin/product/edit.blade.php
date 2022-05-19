@@ -52,10 +52,15 @@
                             <div class="form-group row" data-select2-id="23">
                                 <label class="col-sm-3 col-form-label">انتخاب رنگ</label>
                                 <div class="col-sm-9">
-                                    <select class="" multiple="" name="colors[]" style="width: 100%;text-align: right"
+                                    <select class="form-select" multiple="" name="colors[]" style="width: 100%;text-align: right"
                                         style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         @foreach($colors as $key=>$value)
-                                        <option style="" value="{{$key}}">{{$value}}</option>
+                                            @if(in_array($key,$product->colors()->pluck('id')->toArray()))
+                                                <option selected value="{{$key}}">{{$value}}</option>
+                                            @else
+                                                <option value="{{$key}}">{{$value}}</option>
+                                            @endif
+
                                         @endforeach
                                     </select>
                                 </div>

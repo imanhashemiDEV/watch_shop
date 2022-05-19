@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('slug', 255)->unique();
             $table->integer('price')->default(0);
             $table->integer('review')->default(0);
+            $table->integer('sell')->default(0);
             $table->integer('product_count')->default(0);
             $table->string('image')->nullable();
             $table->string('guaranty')->nullable();

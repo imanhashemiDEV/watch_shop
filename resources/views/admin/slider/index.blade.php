@@ -27,9 +27,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($sliders as $slider)
+                        @foreach($sliders as $index => $slider)
                             <tr>
-                                <td class="text-center align-middle">{{$i++}}</td>
+                                <td class="text-center align-middle">{{$sliders->firstItem() + $index}}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar-sm">
                                         <img src="{{ url('images/sliders/small/' . $slider->image) }}"
