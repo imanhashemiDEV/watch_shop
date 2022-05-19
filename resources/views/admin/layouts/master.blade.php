@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{{url('panel/assets/media/image/favicon.png')}}">
     <meta name="theme-color" content="#5867dd">
     <link rel="stylesheet" href="{{url('panel/vendors/bundle.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('panel/vendors/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{url('panel/vendors/select2/select2.min.css')}}">
     <link rel="stylesheet" href="{{url('panel/plugins/sweet_alert/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{url('panel/plugins/dropzone/css/dropzone.css')}}">
     <link rel="stylesheet" href="{{url('/css/kamadatepicker.min.css')}}">
@@ -21,8 +21,7 @@
 @yield('content')
 <!-- begin::global scripts -->
 <script src="{{url('panel/vendors/bundle.js')}}"></script>
-<script src="{{url('panel/vendors/select2/js/select2.min.js')}}"></script>
-<script src="{{url('panel/assets/js/examples/select2.js')}}"></script>
+<script src="{{url('panel/vendors/select2/select2.full.min.js')}}"></script>
 <script src="{{url('panel/plugins/sweet_alert/sweetalert2.all.min.js')}}"></script>
 <script src="{{url('panel/plugins/dropzone/js/dropzone.js')}}"></script>
 <script src="{{url('panel/assets/js/custom.js')}}"></script>

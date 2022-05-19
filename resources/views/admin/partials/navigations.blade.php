@@ -9,7 +9,7 @@
             </li>
             <li data-toggle="tooltip" title=" محصولات" @if(Request::is('admin/categories') || Request::is('admin/categories/*') ) class="active" @endif>
                 <a href="#products" title="محصولات ">
-                    <i class="icon ti-shopping-cart"></i>
+                    <i class="icon ti-folder"></i>
                 </a>
             </li>
         </ul>
@@ -61,47 +61,53 @@
                 </ul>
             </li>
         </ul>
-         <ul id="products" @if(Request::is('admin/categories') || Request::is('admin/categories/*') ) class="navigation-active" @endif>
+         <ul id="products" @if(Request::is('admin/categories') || Request::is('admin/categories/*') || Request::is('admin/products/*') || Request::is('admin/products') || Request::is('admin/sliders/*') || Request::is('admin/sliders') || Request::is('admin/brands/*') || Request::is('admin/brands') || Request::is('admin/colors/*') || Request::is('admin/colors') || Request::is('admin/properties/*') || Request::is('admin/properties') || Request::is('admin/comments/*') ) class="navigation-active" @endif>
             <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
                 <a href="#">دسته بندی </a>
                 <ul>
-                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/categories/create')) class="active" @endif >ایجاد دسته بندی</a></li>
-                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/categories')) class="active" @endif>لیست دسته بندی ها</a></li>
+                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/brands/create')) class="active" @endif >ایجاد دسته بندی</a></li>
+                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/brands')) class="active" @endif>لیست دسته بندی ها</a></li>
                 </ul>
             </li>
-            <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
+            <li @if(Request::is('admin/sliders/*') || Request::is('admin/sliders')) class="open" @endif>
+                <a href="#"> اسلایدر ها </a>
+                <ul>
+                    <li><a href="{{route('sliders.create')}}" @if(Request::is('admin/sliders/create')) class="active" @endif >ایجاد اسلایدر </a></li>
+                    <li><a href="{{route('sliders.index')}}" @if(Request::is('admin/sliders')) class="active" @endif>لیست   اسلایدرها</a></li>
+                </ul>
+            </li>
+            <li @if(Request::is('admin/brands/*') || Request::is('admin/brands')) class="open" @endif>
                 <a href="#"> برند ها </a>
                 <ul>
-                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/categories/create')) class="active" @endif >ایجاد دسته بندی</a></li>
-                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/categories')) class="active" @endif>لیست دسته بندی ها</a></li>
+                    <li><a href="{{route('brands.create')}}" @if(Request::is('admin/brands/create')) class="active" @endif >ایجاد برند </a></li>
+                    <li><a href="{{route('brands.index')}}" @if(Request::is('admin/brands')) class="active" @endif>لیست   برندها</a></li>
                 </ul>
             </li>
-            <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
+            <li @if(Request::is('admin/products/*') || Request::is('admin/products')) class="open" @endif>
                 <a href="#">  محصولات </a>
                 <ul>
-                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/categories/create')) class="active" @endif >ایجاد دسته بندی</a></li>
-                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/categories')) class="active" @endif>لیست دسته بندی ها</a></li>
+                    <li><a href="{{route('products.create')}}" @if(Request::is('admin/products/create')) class="active" @endif > ایجاد محصول  </a></li>
+                    <li><a href="{{route('products.index')}}" @if(Request::is('admin/products')) class="active" @endif>لیست   محصولات</a></li>
                 </ul>
             </li>
-            <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
+            <li @if(Request::is('admin/colors/*') || Request::is('admin/colors')) class="open" @endif>
                 <a href="#">  رنگ ها </a>
                 <ul>
-                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/categories/create')) class="active" @endif >ایجاد دسته بندی</a></li>
-                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/categories')) class="active" @endif>لیست دسته بندی ها</a></li>
+                    <li><a href="{{route('colors.create')}}" @if(Request::is('admin/colors/create')) class="active" @endif > ایجاد رنگ   </a></li>
+                    <li><a href="{{route('colors.index')}}" @if(Request::is('admin/colors')) class="active" @endif>لیست   رنگ ها</a></li>
                 </ul>
             </li>
-            <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
+            <li @if(Request::is('admin/properties/*') || Request::is('admin/properties')) class="open" @endif>
                 <a href="#">  ویژگی محصولات</a>
                 <ul>
-                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/categories/create')) class="active" @endif >ایجاد دسته بندی</a></li>
-                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/categories')) class="active" @endif>لیست دسته بندی ها</a></li>
+                    <li><a href="{{route('properties.create')}}" @if(Request::is('admin/properties/create')) class="active" @endif >ایجاد  ویژگی محصول</a></li>
+                    <li><a href="{{route('properties.index')}}" @if(Request::is('admin/properties')) class="active" @endif>لیست  ویژگی های محصول</a></li>
                 </ul>
             </li>
-            <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
+            <li @if(Request::is('admin/comments/*') || Request::is('admin/comments')) class="open" @endif>
                 <a href="#">   نظرات</a>
                 <ul>
-                    <li><a href="{{route('categories.create')}}" @if(Request::is('admin/categories/create')) class="active" @endif >ایجاد دسته بندی</a></li>
-                    <li><a href="{{route('categories.index')}}" @if(Request::is('admin/categories')) class="active" @endif>لیست دسته بندی ها</a></li>
+                    <li><a href="{{route('comments.index')}}" @if(Request::is('admin/comments')) class="active" @endif>لیست  نظرها</a></li>
                 </ul>
             </li>
 

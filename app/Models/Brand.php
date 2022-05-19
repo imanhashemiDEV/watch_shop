@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\BrandResource;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -35,5 +36,10 @@ class Brand extends Model
         Storage::disk('local')->put('brands/big/' . $name, (string)$bigImage->encode('jpg', 90));
 
         return $name;
+    }
+
+    public static function getAllBrands(){
+        $brands= Brand::query()->get();
+        return BrandResource::collection($brands);
     }
 }

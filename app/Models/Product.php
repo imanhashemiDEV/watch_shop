@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Http\Resources\ProductResource;
+use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory;
 
     protected $fillable=[
         'title',
@@ -20,6 +23,7 @@ class Product extends Model
         'brand_id',
         'title_en',
         'guaranty',
+        'discount',
         'product_count'
     ];
 
@@ -52,5 +56,28 @@ class Product extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status','1');
+    }
+
+    public static function saveImage($file): string
+    {
+        $name = time() .'.'. $file->extension();
+        $smallImage = Image::make($file->getRealPath());
+        $bigImage = Image::make($file->getRealPath());
+
+        $smallImage->resize(256, 256, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        Storage::disk('local')->put('product/small/' . $name, (string)$smallImage->encode('jpg', 90));
+        Storage::disk('local')->put('product/big/' . $name, (string)$bigImage->encode('jpg', 90));
+
+        return $name;
+    }
+
+    public static function getAllProducts(){
+
+        $product= Product::query()->get();
+
+        return ProductResource::collection($product);
     }
 }

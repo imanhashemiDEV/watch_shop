@@ -53,10 +53,16 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        $category = Category::query()->find($id);
 
-        $image = Category::saveImage($request->image);
+        if($request->image){
+            $image = Category::saveImage($request->image);
+        }else{
+            $image = $category->image;
+        }
 
-        $category = Category::query()->find($id)->update([
+
+        $category->update([
             'title' => $request->input('title'),
             'slug' => Helper::make_slug($request->input('title')),
             'parent_id' => $request->input('parent_id'),
@@ -69,5 +75,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
+
+        return redirect()->back();
     }
 }

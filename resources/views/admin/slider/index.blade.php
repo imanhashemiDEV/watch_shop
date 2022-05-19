@@ -32,7 +32,7 @@
                                 <td class="text-center align-middle">{{$i++}}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar-sm">
-                                        <img src="{{ url('images/category/small/' . $slider->image) }}"
+                                        <img src="{{ url('images/sliders/small/' . $slider->image) }}"
                                             class="rounded-circle" alt="image">
                                     </figure>
                                 </td>
@@ -43,9 +43,13 @@
                                     </a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a class="btn btn-outline-info" href="{{route('sliders.edit',$slider->id)}}">
-                                         ویرایش
-                                    </a>
+                                    <form action="{{ route('sliders.destroy', $slider->id) }}" method="post" >
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-outline-danger">
+                                            حذف
+                                       </button>
+                                    </form>
                                 </td>
                                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($slider->created_at)->format('%B %d، %Y')}}</td>
 

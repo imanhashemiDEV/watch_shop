@@ -25,6 +25,7 @@
                             <th class="text-center align-middle text-primary">دسته پدر</th>
                             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
                             <th class="text-center align-middle text-primary">ویرایش</th>
+                            <th class="text-center align-middle text-primary">حذف</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,6 +46,15 @@
                                     <a class="btn btn-outline-info" href="{{route('categories.edit',$category->id)}}">
                                          ویرایش
                                     </a>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <form action="{{ route('categories.destroy', $category->id) }}" method="post" >
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-outline-danger">
+                                            حذف
+                                       </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

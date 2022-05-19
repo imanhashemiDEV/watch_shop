@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\SliderResource;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -30,5 +31,12 @@ class Slider extends Model
         Storage::disk('local')->put('sliders/big/' . $name, (string)$bigImage->encode('jpg', 90));
 
         return $name;
+    }
+
+    public static function getSliders(){
+
+        $sliders= Slider::query()->get();
+
+        return SliderResource::collection($sliders);
     }
 }

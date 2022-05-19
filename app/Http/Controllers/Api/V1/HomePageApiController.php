@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Slider;
 use App\Models\Category;
 use App\Http\Services\Keys;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class HomePageApiController extends Controller
             'result' => true,
             'message' => "صفحه اصلی فروشگاه ساعت",
             'data' => [
-                Keys::category  => Category::getAllCategories(),
+                Keys::sliders  => Slider::getSliders(),
+                Keys::categories  => Category::getAllCategories(),
 
             ],
         ], 200);

@@ -32,7 +32,7 @@
                                 <td class="text-center align-middle">{{$i++}}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar-sm">
-                                        <img src="{{ url('images/category/small/' . $brand->image) }}"
+                                        <img src="{{ url('images/brands/small/' . $brand->image) }}"
                                             class="rounded-circle" alt="image">
                                     </figure>
                                 </td>
@@ -43,9 +43,13 @@
                                     </a>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a class="btn btn-outline-info" href="{{route('brands.edit',$brand->id)}}">
-                                         ویرایش
-                                    </a>
+                                    <form action="{{ route('brands.destroy', $brand->id) }}" method="post" >
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-outline-danger">
+                                            حذف
+                                       </button>
+                                    </form>
                                 </td>
                                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($brand->created_at)->format('%B %d، %Y')}}</td>
                             </tr>

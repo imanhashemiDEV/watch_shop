@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SliderRequest;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class SliderController extends Controller
         return view('admin.slider.create');
     }
 
-    public function store(Request $request)
+    public function store(SliderRequest $request)
     {
 
         $image = Slider::saveImage($request->image);
@@ -45,10 +46,15 @@ class SliderController extends Controller
 
     public function update(Request $request, $id)
     {
+        $slider = Slider::query()->find($id);
 
-        $image = Slider::saveImage($request->image);
+        if($request->image){
+            $image = Slider::saveImage($request->image);
+        }else{
+            $image = $slider->image;
+        }
 
-        $slider = Slider::query()->find($id)->update([
+        $slider->update([
             'title' => $request->input('title'),
             'image' => $image
         ]);
@@ -59,5 +65,7 @@ class SliderController extends Controller
     public function destroy($id)
     {
         Slider::destroy($id);
+
+        return redirect()->back();
     }
 }

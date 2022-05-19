@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BrandRequest;
 
 class BrandController extends Controller
 {
@@ -19,7 +20,7 @@ class BrandController extends Controller
         return view('admin.brand.create');
     }
 
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
 
         $image = Brand::saveImage($request->image);
@@ -45,10 +46,15 @@ class BrandController extends Controller
 
     public function update(Request $request, $id)
     {
+        $brand = Brand::query()->find($id);
 
-        $image = Brand::saveImage($request->image);
+        if($request->image){
+            $image = Brand::saveImage($request->image);
+        }else{
+            $image = $brand->image;
+        }
 
-        $brand = Brand::query()->find($id)->update([
+        $brand->update([
             'title' => $request->input('title'),
             'image' => $image
         ]);
@@ -59,5 +65,7 @@ class BrandController extends Controller
     public function destroy($id)
     {
         Brand::destroy($id);
+
+        return redirect()->back();
     }
 }
