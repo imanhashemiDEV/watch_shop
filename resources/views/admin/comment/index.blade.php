@@ -11,56 +11,11 @@
                 </div>
             @endif
         </div>
-        <?php $i=(isset($_GET['page']))  ? (($_GET['page']-1)*20)+1 : 1; ?>
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive" tabindex="8" style="overflow: hidden; outline: none;">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead class="thead-light">
-                        <tr>
-                            <th class="text-center align-middle text-primary">ردیف</th>
-                            <th class="text-center align-middle text-primary">متن نظر</th>
-                            <th class="text-center align-middle text-primary">نام نظر دهنده</th>
-                            <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
-                            <th class="text-center align-middle text-primary">تایید یا عدم تایید</th>
-                            <th class="text-center align-middle text-primary">حذف</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($comments as $index => $comment)
-                            <tr>
-                                <td class="text-center align-middle">{{$comments->firstItem() + $index}}</td>
-                                <td class="text-center align-middle">{{$comment->body}}</td>
-                                <td class="text-center align-middle">{{$comment->user->name}}</td>
-                                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('%B %d، %Y')}}</td>
-                                <td class="text-center align-middle d-flex align-items-center justify-content-center">
-                                    <form action="{{route('comment.update', $comment->id)}}" method="post" style="margin: 0 !important;">
-                                        @csrf
-                                        @method('patch')
-                                        @if($comment->status ==0)
-                                            <input type="hidden" name="action" value="approved">
-                                            <button class="btn btn-outline-danger"> تایید</button>
-                                        @else
-                                            <input type="hidden" name="action" value="disapproved">
-                                            <button class="btn btn-outline-success"> عدم تایید</button>
-                                        @endif
-                                    </form>
-                                </td>
-                                <td class="text-center align-middle">
-                                    <a class="btn btn-outline-danger" onclick="deleteItem({{$comment->id}})">
-                                         حذف
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                    <div style="margin: 40px !important;" class="pagination pagination-rounded pagination-sm d-flex justify-content-center">
-                        {{$comments->appends(Request::except('page'))->links()}}
-                    </div>
-                </div>
+               <livewire:admin.comments/>
             </div>
         </div>
-
     </main>
     <!-- end::main content -->
 @endsection

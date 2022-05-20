@@ -24,8 +24,8 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function article()
+    public function product()
     {
-        return $this->belongsTo(Article::class);
+        return $this->belongsTo(Product::class);
     }
 }

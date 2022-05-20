@@ -11,9 +11,8 @@ Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(fun
 
     // Payment
 
-    // Comments
-
-
+    // save product comment
+    Route::post('save_product_comment', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'saveComment']);
 });
 
 

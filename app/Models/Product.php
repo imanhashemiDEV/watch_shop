@@ -55,9 +55,14 @@ class Product extends Model
             ->withPivot(['value']);
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->where('status','1');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public static function saveImage($file): string

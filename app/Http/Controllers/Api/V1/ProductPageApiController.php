@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\api\V1;
 
+use App\Models\Brand;
+use App\Models\Comment;
+use App\Models\Product;
 use App\Http\Services\Keys;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
-use App\Models\Brand;
-use App\Models\Product;
 
 class ProductPageApiController extends Controller
 {
@@ -59,5 +60,24 @@ class ProductPageApiController extends Controller
             ],
         ], 200);
     }
+
+
+    public function saveComment(Request $request){
+
+        $product =  Product::query()->find($request->product_id);
+
+        $comment = new Comment;
+        $comment->body=$request->body;
+        $comment->user_id=auth()->user()->id;
+
+        $product->comments()->save($comment);
+
+        return response()->json([
+            'result' => true,
+            'message' => " نظر ثبت شد و پس از تایید نمایش داده خواهد شد",
+            'data' => [],
+        ], 200);
+    }
+
 
 }
