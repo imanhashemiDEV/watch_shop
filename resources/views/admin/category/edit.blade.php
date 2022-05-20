@@ -64,3 +64,21 @@
     </main>
     <!-- end::main content -->
 @endsection
+@section('scripts')
+    <script>
+
+        $(document).ready(function () {
+
+            $('#customFile').on('change', function () {
+                //get the file name
+                var fileName = $(this).val().replace('C:\\fakepath\\', " ")
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+
+        });
+
+        $('.form-select').select2();
+
+    </script>
+@endsection

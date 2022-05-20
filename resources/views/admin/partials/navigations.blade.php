@@ -61,7 +61,7 @@
                 </ul>
             </li>
         </ul>
-         <ul id="products" @if(Request::is('admin/categories') || Request::is('admin/categories/*') || Request::is('admin/products/*') || Request::is('admin/products') || Request::is('admin/sliders/*') || Request::is('admin/sliders') || Request::is('admin/brands/*') || Request::is('admin/brands') || Request::is('admin/colors/*') || Request::is('admin/colors') || Request::is('admin/properties/*') || Request::is('admin/properties') || Request::is('admin/comments/*') ) class="navigation-active" @endif>
+         <ul id="products" @if(Request::is('admin/categories') || Request::is('admin/categories/*') || Request::is('admin/products/*') || Request::is('admin/products') || Request::is('admin/property_group/*') || Request::is('admin/property_group') || Request::is('admin/sliders/*') || Request::is('admin/sliders') || Request::is('admin/brands/*') || Request::is('admin/brands') || Request::is('admin/colors/*') || Request::is('admin/colors') || Request::is('admin/properties/*') || Request::is('admin/properties') || Request::is('admin/comments/*') || Request::is('admin/create_product_properties/*')  ) class="navigation-active" @endif>
             <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
                 <a href="#">دسته بندی </a>
                 <ul>
@@ -83,6 +83,13 @@
                     <li><a href="{{route('brands.index')}}" @if(Request::is('admin/brands')) class="active" @endif>لیست   برندها</a></li>
                 </ul>
             </li>
+            <li @if(Request::is('admin/colors/*') || Request::is('admin/colors')) class="open" @endif>
+                <a href="#">  رنگ ها </a>
+                <ul>
+                    <li><a href="{{route('colors.create')}}" @if(Request::is('admin/colors/create')) class="active" @endif > ایجاد رنگ   </a></li>
+                    <li><a href="{{route('colors.index')}}" @if(Request::is('admin/colors')) class="active" @endif>لیست   رنگ ها</a></li>
+                </ul>
+            </li>
             <li @if(Request::is('admin/products/*') || Request::is('admin/products')) class="open" @endif>
                 <a href="#">  محصولات </a>
                 <ul>
@@ -90,11 +97,11 @@
                     <li><a href="{{route('products.index')}}" @if(Request::is('admin/products')) class="active" @endif>لیست   محصولات</a></li>
                 </ul>
             </li>
-            <li @if(Request::is('admin/colors/*') || Request::is('admin/colors')) class="open" @endif>
-                <a href="#">  رنگ ها </a>
+            <li @if(Request::is('admin/property_group/*') || Request::is('admin/property_group')) class="open" @endif>
+                <a href="#">   گروه ویژگی </a>
                 <ul>
-                    <li><a href="{{route('colors.create')}}" @if(Request::is('admin/colors/create')) class="active" @endif > ایجاد رنگ   </a></li>
-                    <li><a href="{{route('colors.index')}}" @if(Request::is('admin/colors')) class="active" @endif>لیست   رنگ ها</a></li>
+                    <li><a href="{{route('property_group.create')}}" @if(Request::is('admin/property_group/create')) class="active" @endif >ایجاد گروه ویژگی </a></li>
+                    <li><a href="{{route('property_group.index')}}" @if(Request::is('admin/property_group')) class="active" @endif>لیست گروه ویژگی های </a></li>
                 </ul>
             </li>
             <li @if(Request::is('admin/properties/*') || Request::is('admin/properties')) class="open" @endif>

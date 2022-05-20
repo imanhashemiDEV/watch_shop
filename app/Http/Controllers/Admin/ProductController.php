@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\PropertyGroup;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -115,21 +116,18 @@ class ProductController extends Controller
     public function createProductProperties($id)
     {
         $product = Product::query()->find($id);
-        return view('admin.product.add_properties',compact('product'));
+        $property_groups =PropertyGroup::query()->get();
+        // foreach($property_groups as $property_group){
+        //     dd($property_group->properties);
+        // }
+
+        return view('admin.product.add_properties',compact('product','property_groups'));
     }
 
     public function storeProductProperties(Request $request,$id)
     {
         $product =Product::query()->find($id);
-
-
-        $prop = collect($request->get('properties'))->filter(function ($item){
-            if(!empty($item['value'])){
-                return $item;
-            }
-        });
-
-        $product->properties()->sync($prop);
+        $product->properties()->sync($request->properties);
 
         return redirect()->back()->with('message', 'ویژگی های محصول با موفقیت ثبت شد');
     }
@@ -149,8 +147,4 @@ class ProductController extends Controller
       return view('front.search', compact('categories','search'));
     }
 
-    public function getUrl(Request $request)
-    {
-        dd($request->input('search'));
-    }
 }

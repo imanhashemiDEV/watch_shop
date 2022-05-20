@@ -13,14 +13,14 @@ class PropertyController extends Controller
     public function index()
     {
         $properties = Property::query()->paginate(10);
-        return view('admin.peoperties.property', compact('properties'));
+        return view('admin.properties.index', compact('properties'));
     }
 
 
     public function create()
     {
         $property_groups = PropertyGroup::query()->pluck('title','id');
-       return view('admin.peoperties.create_property',compact('property_groups'));
+       return view('admin.properties.create',compact('property_groups'));
     }
 
 
@@ -45,7 +45,7 @@ class PropertyController extends Controller
     {
         $property_groups = PropertyGroup::query()->pluck('title','id');
         $property = Property::query()->find($id);
-        return view('admin.peoperties.update_property', compact('property_groups','property'));
+        return view('admin.properties.edit', compact('property_groups','property'));
     }
 
 
@@ -64,5 +64,7 @@ class PropertyController extends Controller
     public function destroy($id)
     {
         Property::destroy($id);
+
+        return redirect()->back();
     }
 }

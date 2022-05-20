@@ -16,9 +16,9 @@ class CreatePropertyGroupsTable extends Migration
         Schema::create('property_groups', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')
-                ->on('categories')->cascadeOnUpdate()->cascadeOnDelete();
+            // $table->bigInteger('category_id')->unsigned();
+            // $table->foreign('category_id')->references('id')
+            //     ->on('categories')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

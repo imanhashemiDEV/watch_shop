@@ -31,7 +31,10 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'admin'])->group
     Route::get('/comments',[\App\Http\Controllers\Admin\CommentController::class,'index'])->name('comments.index');
     Route::delete('/comments/{id}',[\App\Http\Controllers\Admin\CommentController::class,'destroy'])->name('comment.destroy');
     Route::patch('/comments/{id}',[\App\Http\Controllers\Admin\CommentController::class,'update'])->name('comment.update');
-
-
+    Route::get('/create_product_gallery/{id}',[\App\Http\Controllers\Admin\GalleryController::class,'addGallery'])->name('create.product.gallery');
+    Route::post('/store_product_gallery/{id}',[\App\Http\Controllers\Admin\GalleryController::class,'storeGallery'])->name('store.product.gallery');
+    Route::delete('/delete_product_gallery/{id}',[\App\Http\Controllers\Admin\GalleryController::class,'deleteGallery'])->name('delete.product.gallery');
+    Route::get('/create_product_properties/{id}',[\App\Http\Controllers\Admin\ProductController::class,'createProductProperties'])->name('create.product.properties');
+    Route::post('/store_product_properties/{id}',[\App\Http\Controllers\Admin\ProductController::class,'storeProductProperties'])->name('store.product.properties');
 });
 

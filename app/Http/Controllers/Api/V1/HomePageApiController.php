@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Slider;
+use App\Models\Product;
 use App\Models\Category;
 use App\Http\Services\Keys;
 use Illuminate\Http\Request;
@@ -34,6 +35,9 @@ class HomePageApiController extends Controller
             'data' => [
                 Keys::sliders  => Slider::getSliders(),
                 Keys::categories  => Category::getAllCategories(),
+                Keys::amazing_products  => Product::getAmazingProducts(),
+                Keys::newest_products  => Product::getNewestProducts(),
+
 
             ],
         ], 200);

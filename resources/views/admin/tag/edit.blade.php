@@ -21,7 +21,7 @@
                         <div class="form-group row">
                             <label  class="col-sm-2 col-form-label">نام تگ</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control text-left" value="{{$tag->title}}" placeholder="نام دسته بندی" dir="ltr" name="title">
+                                <input type="text" class="text-left form-control" value="{{$tag->title}}"  dir="ltr" name="title">
                             </div>
                         </div>
                         <div class="form-group row">

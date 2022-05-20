@@ -25,6 +25,8 @@
                             <th class="text-center align-middle text-primary"> تعداد محصول</th>
                             <th class="text-center align-middle text-primary">دسته بندی</th>
                             <th class="text-center align-middle text-primary">برند </th>
+                            <th class="text-center align-middle text-primary">ویژگی ها</th>
+                            <th class="text-center align-middle text-primary">گالری</th>
                             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
                             <th class="text-center align-middle text-primary">ویرایش</th>
                             <th class="text-center align-middle text-primary">حذف</th>
@@ -45,6 +47,16 @@
                                 <td class="text-center align-middle">{{$product->product_count}}</td>
                                 <td class="text-center align-middle">{{$product->category->title}}</td>
                                 <td class="text-center align-middle">{{$product->brand->title}}</td>
+                                <td class="text-center align-middle">
+                                    <a class="btn btn-outline-info" href="{{route('create.product.properties',$product->id)}}">
+                                        ویژگی ها
+                                   </a>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <a class="btn btn-outline-info" href="{{route('create.product.gallery',$product->id)}}">
+                                        گالری
+                                   </a>
+                                </td>
                                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($product->created_at)->format('%B %d، %Y')}}</td>
                                 <td class="text-center align-middle">
                                     <a class="btn btn-outline-info" href="{{route('products.edit',$product->id)}}">

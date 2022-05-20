@@ -13,14 +13,14 @@ class PropertyGroupController extends Controller
     public function index()
     {
         $property_groups = PropertyGroup::query()->paginate(10);
-        return  view('admin.peoperty_group.property_groups',compact('property_groups'));
+        return  view('admin.property_group.index',compact('property_groups'));
     }
 
 
     public function create()
     {
-        $categories=Category::query()->where('parent_id','!=',0)->pluck('title','id');
-        return view('admin.peoperty_group.create_property_group',compact('categories'));
+        $categories=Category::query()->pluck('title','id');
+        return view('admin.property_group.create',compact('categories'));
     }
 
 
@@ -28,7 +28,7 @@ class PropertyGroupController extends Controller
     {
         PropertyGroup::query()->create([
             'title'=>$request->title,
-            'category_id'=>$request->category_id
+           // 'category_id'=>$request->category_id
         ]);
 
         return redirect()->back()->with('message','گروه ویژگی ها با موفقیت اضافه شد');
@@ -37,14 +37,14 @@ class PropertyGroupController extends Controller
 
     public function show($id)
     {
-
+      //
     }
 
     public function edit($id)
     {
-        $categories=Category::query()->where('parent_id','!=',0)->pluck('title','id');
+        $categories=Category::query()->pluck('title','id');
         $property_group = PropertyGroup::query()->find($id);
-        return view('admin.peoperty_group.update_property_group',compact('property_group','categories'));
+        return view('admin.property_group.edit',compact('property_group','categories'));
     }
 
 
@@ -52,7 +52,7 @@ class PropertyGroupController extends Controller
     {
         PropertyGroup::query()->find($id)->update([
             'title'=>$request->title,
-            'category_id'=>$request->category_id
+           // 'category_id'=>$request->category_id
         ]);
 
         return redirect()->back()->with('message','گروه ویژگی ها با موفقیت ویرایش شد');
@@ -62,5 +62,7 @@ class PropertyGroupController extends Controller
     public function destroy($id)
     {
         PropertyGroup::destroy($id);
+
+        return redirect()->back();
     }
 }

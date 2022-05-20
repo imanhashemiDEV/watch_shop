@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Http\Resources\ProductResource;
 use Intervention\Image\Facades\Image;
+use App\Http\Resources\ProductResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\ProductListResource;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -77,8 +78,40 @@ class Product extends Model
 
     public static function getAllProducts(){
 
-        $product= Product::query()->paginate(12);
+        $products= Product::query()->paginate(12);
 
-        return ProductResource::collection($product);
+        return ProductListResource::collection($products);
+    }
+
+
+    public static function getProductsByCategory($id){
+
+        $products= Product::query()->where('category_id',$id)->paginate(12);
+
+        return ProductListResource::collection($products);
+    }
+
+
+    public static function getProductsByBrand($id){
+
+        $products= Product::query()->where('brand_id',$id)->paginate(12);
+
+        return ProductListResource::collection($products);
+    }
+
+
+    public static function getAmazingProducts(){
+
+        $products= Product::query()->get();
+
+        return ProductListResource::collection($products);
+    }
+
+
+    public static function getNewestProducts(){
+
+        $products= Product::query()->latest()->get();
+
+        return ProductResource::collection($products);
     }
 }
