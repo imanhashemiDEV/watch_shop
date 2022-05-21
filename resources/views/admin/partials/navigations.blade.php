@@ -61,7 +61,7 @@
                 </ul>
             </li>
         </ul>
-         <ul id="products" @if(Request::is('admin/categories') || Request::is('admin/categories/*') || Request::is('admin/products/*') || Request::is('admin/products') || Request::is('admin/property_group/*') || Request::is('admin/property_group') || Request::is('admin/sliders/*') || Request::is('admin/sliders') || Request::is('admin/brands/*') || Request::is('admin/brands') || Request::is('admin/colors/*') || Request::is('admin/colors') || Request::is('admin/properties/*') || Request::is('admin/properties') || Request::is('admin/comments/*') || Request::is('admin/create_product_properties/*')  ) class="navigation-active" @endif>
+         <ul id="products" @if(Request::is('admin/categories') || Request::is('admin/categories/*') || Request::is('admin/products/*') || Request::is('admin/products') || Request::is('admin/property_group/*') || Request::is('admin/property_group') || Request::is('admin/sliders/*') || Request::is('admin/sliders') || Request::is('admin/brands/*') || Request::is('admin/brands') || Request::is('admin/colors/*') || Request::is('admin/colors') || Request::is('admin/properties/*') || Request::is('admin/properties') || Request::is('admin/comments/*') || Request::is('admin/create_product_properties/*') || Request::is('admin/create_product_gallery/*') ) class="navigation-active" @endif>
             <li @if(Request::is('admin/categories/*') || Request::is('admin/categories')) class="open" @endif>
                 <a href="#">دسته بندی </a>
                 <ul>

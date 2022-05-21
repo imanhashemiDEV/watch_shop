@@ -4,66 +4,37 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
-
-    public function index()
+    public function addGallery($product_id)
     {
-        $galleries = Gallery::query()->paginate(20);
-        return view('admin.gallery.index', compact('galleries'));
+        $product = Product::query()->find($product_id);
+        return view('admin.product.add_gallery',compact('product'));
     }
 
-
-    public function create()
+    public function storeGallery(Request $request,$product_id)
     {
-        return view('admin.gallery.create');
-    }
 
-
-    public function store(Request $request)
-    {
-        if($request->hasFile('file')){
-            $image = $request->file('file');
-            $fileName = time().'-'.$image->getClientOriginalName();
-            $image->move(public_path('images/gallery'), $fileName);
-        }
+        $image = Gallery::saveImage($request->file('file'));
 
         Gallery::query()->create([
-            'url'=>$fileName,
+            'image'=>$image,
+            'product_id'=>$product_id
         ]);
 
         return redirect()->back()->with('message','عکس با موفقیت ثبت شد');
     }
 
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-    public function destroy($id)
+    public function deleteGallery($id)
     {
         $gallery = Gallery::query()->find($id);
-        $path = public_path()."/images/gallery/".$gallery->url;
+        $path = public_path()."/images/product/".$gallery->image;
         unlink($path);
         $gallery->delete();
 
         return redirect()->back();
     }
-
 }
