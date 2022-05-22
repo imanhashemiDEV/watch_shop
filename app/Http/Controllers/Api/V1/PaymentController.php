@@ -70,7 +70,12 @@ class PaymentController extends Controller
 
     public function callback(Request $request)
     {
+            if ($_GET['Status'] == 'OK') {
 
+                $authority = $_GET['Authority'];
+                dd($authority );
+
+            }
         $order = Order::query()->where('transaction_id',$request->get('Authority'))->first();
 
         if($request->get('Status')=="OK"){
@@ -79,38 +84,10 @@ class PaymentController extends Controller
             ]);
         }
 
-        // if ($_GET['Status'] == 'OK') {
-
-        //     $data = [
-        //         'amount' => $amount,
-        //         'authority' => $authority,
-        //     ];
-
-        //     $result = Zarinpal::verify($data);
-
-        //     if ($result['statusCode'] == 100 or $result['statusCode'] == 101) {
-
-        //         $lessonShop = LessonShop::where('authority', $authority)->get();
-        //         foreach ($lessonShop as $lesson) {
-        //             $lesson->status = 1; // verified
-        //             $lesson->refId = $result['refId'];
-        //             $log_lessons[] = (array)$lesson;
-        //             $lesson->save();
-
-        //             Lesson::query()->find($lesson->lesson_id)->increment('ordered');
-        //         }
 
 
 
-        //         $ref = $result['refId'];
 
-        //         return view('admin.lessonsshop.accept', compact(['ref']));
-
-        //     } else {
-
-        //         return view('admin.lessonsshop.reject');
-        //     }
-        // }
     }
 
 }
