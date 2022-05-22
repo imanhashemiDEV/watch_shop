@@ -31,7 +31,7 @@
                         <tbody>
                         @foreach($categories as $index => $category)
                             <tr>
-                                <td class="text-center align-middle">{{$catrgories->firstItem() + $index  }}</td>
+                                <td class="text-center align-middle">{{$categories->firstItem() + $index  }}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar-sm">
                                         <img src="{{ url('images/category/small/' . $category->image) }}"

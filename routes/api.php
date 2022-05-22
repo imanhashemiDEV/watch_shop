@@ -10,6 +10,7 @@ Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(fun
     Route::post('profile', [\App\Http\Controllers\Api\V1\UserApiController::class, 'user_info']);
 
     // Payment
+    Route::post('/payment',[\App\Http\Controllers\Api\V1\PaymentController::class,'payment'])->name('save.payment');
 
     // save product comment
     Route::post('save_product_comment', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'saveComment']);
@@ -41,4 +42,7 @@ Route::prefix('/v1')->namespace('Api\V1')->group(function () {
 
     // get product details
     Route::get('product_details/{id}', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'productDetail']);
+
+    // payment callback
+    Route::get('payment/callback',[\App\Http\Controllers\Api\V1\PaymentController::class,'callback']);
 });
