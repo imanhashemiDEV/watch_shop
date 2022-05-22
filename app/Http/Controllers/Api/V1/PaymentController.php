@@ -2,92 +2,93 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\Helper;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Shetabit\Multipay\Invoice;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentRequest;
+use App\Models\OrderDetail;
 use Shetabit\Payment\Facade\Payment;
 
 class PaymentController extends Controller
 {
 
-
     public function payment(PaymentRequest $request)
     {
-        $products_id = $request->products_id;
-        $count = $request->count;
+        $total_price = 0;
+        $user = auth()->user();
 
-        $products = Product::query()->whereIn('id',$products_id)->get();
-        $total_price=0;
-        foreach($products as $product){
-            if($product->discount==0){
-                $total_price +=$product->price;
-
-            }else{
-                $total_price += $product->price - ((($product->price) * ($product->discount))/100);
+        foreach ($request->orders as $order) {
+            $product = Product::query()->find($order['product_id']);
+            if ($product->discount == 0) {
+                $total_price += $product->price * $order['count'];
+            } else {
+                $total_price += ($product->price - ((($product->price) * ($product->discount)) / 100)) * $order['count'];
             }
-
         }
 
+
         $order = Order::query()->create([
-            'price' => $total_price,
+            'total_price' => $total_price,
             'status' => 0,
-            'address_id' => auth()->user()->addresses()->latest()->first()->id ,
-            'user_id' => auth()->user()->id
+            'address_id' => $user->addresses()->latest()->first()->id,
+            'user_id' => $user->id,
+            'code'=>Helper::generateRandomRefId(6)
         ]);
 
-        foreach ($products as $key=>$value) {
-
-            $order->orderDetails()->create([
-                'product_id' => $value->id,
-                'count' => $count[$key],
-                'price' => $value->price,
+        foreach ($request->orders as $orderDetail) {
+            $product = Product::query()->find($orderDetail['product_id']);
+            OrderDetail::query()->create([
+                'order_id' => $order->id,
+                'product_id' => $orderDetail['product_id'],
+                'count' => $orderDetail['count'],
+                'price' => $product->price,
+                'discount_price' => $product->price - ((($product->price) * ($product->discount)) / 100),
             ]);
         }
 
-        // $invoice = (new Invoice)->amount($total_price);
-        // return Payment::purchase($invoice,function($driver, $transactionId) use($order) {
-        //     $order->update([
-        //         'transaction_id'=>$transactionId
-        //     ]);
-        // })->pay()->render();
-
         $result =  Payment::purchase(
-            (new Invoice)->amount(1000),
-            function($driver, $transactionId) use($order){
-                    $order->update([
-                 'transaction_id'=>$transactionId
-             ]);
+            (new Invoice)->amount($total_price),
+            function ($driver, $transactionId) use ($order) {
+                $order->update([
+                    'transaction_id' => $transactionId
+                ]);
             }
         )->pay()->toJson();
 
         return json_decode($result);
-
-
     }
 
     public function callback(Request $request)
     {
-            if ($_GET['Status'] == 'OK') {
 
-                $authority = $_GET['Authority'];
-                dd($authority );
+        if ($_GET['Status'] == 'OK') {
 
-            }
-        $order = Order::query()->where('transaction_id',$request->get('Authority'))->first();
+            $authority = $_GET['Authority'];
 
-        if($request->get('Status')=="OK"){
+            $order = Order::query()->where('transaction_id', $authority)->first();
             $order->update([
-                'status'=>1,
+                'status' => 1,
             ]);
+
+            $code = $order->code;
+
+            $order_details = OrderDetail::query()->where('order_id', $order->id)->get();
+
+            foreach($order_details as $order_detail){
+              $product = Product::query()->find($order_detail->product_id);
+              $product->increment('sell');
+            }
+
+            return view('admin.pay.accept', compact('code'));
+
+        }else{
+
+            return view('admin.pay.reject');
+
         }
 
-
-
-
-
     }
-
 }

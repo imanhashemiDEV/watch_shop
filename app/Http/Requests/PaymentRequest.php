@@ -24,8 +24,19 @@ class PaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            'products_id'=>'required|array',
-            'count'=>'required|array'
+            'orders'=>'required|array',
+            'orders.*.product_id'=>'required',
+            'orders.*.count'=>'required',
         ];
+    }
+
+    public function messages(){
+        return [
+            'orders.required'=>'ارسال لیست خرید الزامی است',
+            'orders.array'=>'خرید باید به صورت لیست باشد',
+            'orders.*.product_id.required'=>'آیدی محصول الزامی است',
+            'orders.*.count.required'=>'تعداد محصول الزامی است',
+        ];
+
     }
 }

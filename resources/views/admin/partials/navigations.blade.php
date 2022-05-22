@@ -12,6 +12,11 @@
                     <i class="icon ti-folder"></i>
                 </a>
             </li>
+            <li data-toggle="tooltip" title=" سفارشات" @if(Request::is('admin/orders') ) class="active" @endif>
+                <a href="#orders" title="سفارشات ">
+                    <i class="icon ti-folder"></i>
+                </a>
+            </li>
         </ul>
         <ul>
             <li data-toggle="tooltip" title="ویرایش پروفایل">
@@ -117,7 +122,14 @@
                     <li><a href="{{route('comments.index')}}" @if(Request::is('admin/comments')) class="active" @endif>لیست  نظرها</a></li>
                 </ul>
             </li>
-
+        </ul>
+        <ul id="orders" @if(Request::is('admin/orders')) class="navigation-active" @endif>
+            <li @if( Request::is('admin/orders')) class="open" @endif>
+                <a href="#">سفارشات</a>
+                <ul>
+                    <li><a href="{{route('orders.index')}}" @if(Request::is('admin/orders')) class="active" @endif>لیست سفارشات</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

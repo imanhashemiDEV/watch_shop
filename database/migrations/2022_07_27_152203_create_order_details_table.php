@@ -22,7 +22,7 @@ class CreateOrderDetailsTable extends Migration
             $table->foreign('product_id')->references('id')
                 ->on('products');
             $table->integer('count')->default(0);
-            $table->integer('price')->default(0);
+            $table->integer('total_price')->default(0);
             $table->timestamps();
         });
     }
