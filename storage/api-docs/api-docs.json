@@ -13,17 +13,26 @@
                 ],
                 "description": "use to send sms to user",
                 "operationId": "8a6a727c1433d8e4ff86e112dd6813eb",
-                "parameters": [
-                    {
-                        "name": "mobile",
-                        "in": "query",
-                        "description": "send mobile in body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "mobile"
+                                ],
+                                "properties": {
+                                    "mobile": {
+                                        "type": "string",
+                                        "format": "mobile",
+                                        "example": "09167014556"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -41,26 +50,32 @@
                 ],
                 "description": "use to check sms code that recieved by user",
                 "operationId": "6776e1400fd13cb191c23b1b805576d3",
-                "parameters": [
-                    {
-                        "name": "mobile",
-                        "in": "query",
-                        "description": "send mobile in body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "code",
-                        "in": "query",
-                        "description": "send code in body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "mobile",
+                                    "code"
+                                ],
+                                "properties": {
+                                    "mobile": {
+                                        "type": "string",
+                                        "format": "mobile",
+                                        "example": "09167014556"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "9986"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -158,7 +173,7 @@
                     "Home Page"
                 ],
                 "description": "get home page data",
-                "operationId": "ba6d676cd260b88a6242fa96b3208b97",
+                "operationId": "ba234a2b88dccdce503413dab0609599",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -174,7 +189,7 @@
                 "tags": [
                     "User info"
                 ],
-                "operationId": "b379228ae574ffdb4ecfa8b41f2541d8",
+                "operationId": "5ff842c90f96fbf9cd4abe8720194194",
                 "parameters": [
                     {
                         "name": "token",

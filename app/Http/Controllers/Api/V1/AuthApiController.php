@@ -23,15 +23,13 @@ class AuthApiController extends Controller
      ** path="/api/v1/send_sms",
      *  tags={"Send SMS"},
      *  description="use to send sms to user",
-     *   @OA\Parameter(
-     *      name="mobile",
-     *      required=true,
-     *      in="query",
-     *     description="send mobile in body",
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
+     * @OA\RequestBody(
+     *    required=true,
+     *    @OA\JsonContent(
+     *       required={"mobile"},
+     *       @OA\Property(property="mobile", type="string", format="mobile", example="09167014556"),
+     *    ),
+     * ),
      *   @OA\Response(
      *      response=200,
      *      description="Its Ok",
@@ -86,24 +84,14 @@ class AuthApiController extends Controller
      ** path="/api/v1/check_sms_code",
      *  tags={"Check SMS Code"},
      *  description="use to check sms code that recieved by user",
-     *   @OA\Parameter(
-     *      name="mobile",
-     *      required=true,
-     *      in="query",
-     *     description="send mobile in body",
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
-     *   *   @OA\Parameter(
-     *      name="code",
-     *      required=true,
-     *      in="query",
-     *     description="send code in body",
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
+     *   * @OA\RequestBody(
+     *    required=true,
+     *    @OA\JsonContent(
+     *       required={"mobile","code"},
+     *       @OA\Property(property="mobile", type="string", format="mobile", example="09167014556"),
+     *       @OA\Property(property="code", type="string", format="text", example="9986"),
+     *    ),
+     * ),
      *   @OA\Response(
      *      response=200,
      *      description="Its Ok",
@@ -119,7 +107,7 @@ class AuthApiController extends Controller
         $mobile = $request->input('mobile');
 
         $code = SmsCode::query()->where('mobile', $mobile)
-            ->where('code', $code)->first();
+            ->where('code', $code)->latest()->first();
 
         if ($code != null) {
 
@@ -287,5 +275,4 @@ class AuthApiController extends Controller
         // }
 
     }
-
 }
