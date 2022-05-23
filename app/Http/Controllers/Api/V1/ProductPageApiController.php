@@ -98,6 +98,16 @@ class ProductPageApiController extends Controller
      ** path="/api/v1/product_details/{id}",
      *  tags={"Product Details"},
      *  description="get product details data by product id",
+     *     @OA\Parameter(
+     *         description="product id",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         ),
+     *     ),
      *   @OA\Response(
      *      response=200,
      *      description="Its Ok",
@@ -109,7 +119,6 @@ class ProductPageApiController extends Controller
      **/
     public function productDetail($id)
     {
-
         $product =  Product::query()->find($id);
 
         return response()->json([
@@ -127,15 +136,7 @@ class ProductPageApiController extends Controller
      ** path="/api/v1/save_product_comment",
      *  tags={"Product Details"},
      *  description="save user comment for product",
-     *   security={ * {"sanctum": {}}, * },
-     *   @OA\RequestBody(
-     *    required=true,
-     *    @OA\JsonContent(
-     *       required={"mobile","code"},
-     *       @OA\Property(property="mobile", type="string", format="mobile", example="09167014556"),
-     *       @OA\Property(property="code", type="string", format="text", example="9986"),
-     *    ),
-     * ),
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
      *      description="Its Ok",
@@ -148,20 +149,18 @@ class ProductPageApiController extends Controller
     public function saveComment(Request $request)
     {
         $user = auth()->user();
+        $product =  Product::query()->find($request->product_id);
 
-        var_dump($user->id);
-        // $product =  Product::query()->find($request->product_id);
+        $comment = new Comment;
+        $comment->body = $request->body;
+        $comment->user_id = auth()->user()->id;
 
-        // $comment = new Comment;
-        // $comment->body = $request->body;
-        // $comment->user_id = auth()->user()->id;
+        $product->comments()->save($comment);
 
-        // $product->comments()->save($comment);
-
-        // return response()->json([
-        //     'result' => true,
-        //     'message' => " نظر ثبت شد و پس از تایید نمایش داده خواهد شد",
-        //     'data' => [],
-        // ], 200);
+        return response()->json([
+            'result' => true,
+            'message' => " نظر ثبت شد و پس از تایید نمایش داده خواهد شد",
+            'data' => [],
+        ], 200);
     }
 }

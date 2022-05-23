@@ -21,7 +21,7 @@ class AuthApiController extends Controller
     /**
      * @OA\Post(
      ** path="/api/v1/send_sms",
-     *  tags={"Send SMS"},
+     *  tags={"Auth Api"},
      *  description="use to send sms to user",
      * @OA\RequestBody(
      *    required=true,
@@ -82,7 +82,7 @@ class AuthApiController extends Controller
     /**
      * @OA\Post(
      ** path="/api/v1/check_sms_code",
-     *  tags={"Check SMS Code"},
+     *  tags={"Auth Api"},
      *  description="use to check sms code that recieved by user",
      *   @OA\RequestBody(
      *    required=true,
@@ -152,7 +152,7 @@ class AuthApiController extends Controller
     /**
      * @OA\Post(
      ** path="/api/v1/register",
-     *  tags={"Register User"},
+     *  tags={"Auth Api"},
      *  description="use to signin user with recieved code",
      * @OA\RequestBody(
      *    required=true,
@@ -227,7 +227,7 @@ class AuthApiController extends Controller
                 'result' => true,
                 'message' => "اطلاعات کاربر ثبت شد",
                 'data' => [
-                    'user' => $user
+                    'user' => new UserResource($user)
                 ],
             ], 201);
         } else {

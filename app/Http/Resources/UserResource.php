@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'mobile'=>$this->mobile,
-            'address'=> AddressResource::collection($this->addresses)
+            'address'=> AddressResource::collection($this->addresses)->first()
         ];
     }
 

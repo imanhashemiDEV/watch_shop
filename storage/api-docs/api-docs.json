@@ -9,7 +9,7 @@
         "/api/v1/send_sms": {
             "post": {
                 "tags": [
-                    "Send SMS"
+                    "Auth Api"
                 ],
                 "description": "use to send sms to user",
                 "operationId": "8a6a727c1433d8e4ff86e112dd6813eb",
@@ -46,7 +46,7 @@
         "/api/v1/check_sms_code": {
             "post": {
                 "tags": [
-                    "Check SMS Code"
+                    "Auth Api"
                 ],
                 "description": "use to check sms code that recieved by user",
                 "operationId": "6776e1400fd13cb191c23b1b805576d3",
@@ -89,7 +89,7 @@
         "/api/v1/register": {
             "post": {
                 "tags": [
-                    "Register User"
+                    "Auth Api"
                 ],
                 "description": "use to signin user with recieved code",
                 "operationId": "fd83cab1818154e58fe1ba7d34661c03",
@@ -217,6 +217,18 @@
                 ],
                 "description": "get product details data by product id",
                 "operationId": "18948df93b0fb66334d988e9154b3f0b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -234,32 +246,6 @@
                 ],
                 "description": "save user comment for product",
                 "operationId": "b12402913a51122f83b6ad7956e9998a",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "mobile",
-                                    "code"
-                                ],
-                                "properties": {
-                                    "mobile": {
-                                        "type": "string",
-                                        "format": "mobile",
-                                        "example": "09167014556"
-                                    },
-                                    "code": {
-                                        "type": "string",
-                                        "format": "text",
-                                        "example": "9986"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -275,22 +261,12 @@
                 ]
             }
         },
-        "/api/v1/user_info": {
+        "/api/v1/profile": {
             "post": {
                 "tags": [
                     "User info"
                 ],
-                "operationId": "5ff842c90f96fbf9cd4abe8720194194",
-                "parameters": [
-                    {
-                        "name": "token",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "operationId": "29df1511df7eaf64ce674cacc25bfc50",
                 "responses": {
                     "200": {
                         "description": "It's Ok",
@@ -298,7 +274,12 @@
                             "application/json": {}
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         }
     },

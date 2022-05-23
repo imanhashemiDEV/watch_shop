@@ -15,17 +15,9 @@ class UserApiController extends Controller
 
     /**
      * @OA\Post(
-     ** path="/api/v1/user_info",
+     * path="/api/v1/profile",
      *   tags={"User info"},
-     *   @OA\Parameter(
-     *      name="token",
-     *      in="query",
-     *      required=true,
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
-     *
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
      *      description="It's Ok",
@@ -35,7 +27,7 @@ class UserApiController extends Controller
      *   )
      *)
      **/
-    public function user_info( Request $request)
+    public function profile(Request $request)
     {
         $user = auth()->user();
 
@@ -45,6 +37,4 @@ class UserApiController extends Controller
             'data' => new UserResource($user),
         ], 200);
     }
-
-
 }

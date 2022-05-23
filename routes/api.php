@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(function () {
 
     //    User Info
-    Route::post('profile', [\App\Http\Controllers\Api\V1\UserApiController::class, 'user_info']);
+    Route::post('profile', [\App\Http\Controllers\Api\V1\UserApiController::class, 'profile']);
 
     // Payment
-    Route::post('/payment',[\App\Http\Controllers\Api\V1\PaymentController::class,'payment'])->name('save.payment');
+    Route::post('payment',[\App\Http\Controllers\Api\V1\PaymentController::class,'payment'])->name('save.payment');
 
     // save product comment
     Route::post('save_product_comment', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'saveComment']);
