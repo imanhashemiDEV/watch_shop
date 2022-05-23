@@ -34,7 +34,7 @@
                                 <td class="text-center align-middle">{{$order->user->name}}</td>
                                 <td class="text-center align-middle">{{number_format($order->total_price)}} تومان</td>
                                 <td class="text-center align-middle">
-                                    <a class="btn btn-outline-info" href="{{route('create.product.properties',$order->id)}}">
+                                    <a class="btn btn-outline-info" href="{{route('order.details',$order->id)}}">
                                          لیست محصولات
                                    </a>
                                 </td>

@@ -84,7 +84,7 @@ class AuthApiController extends Controller
      ** path="/api/v1/check_sms_code",
      *  tags={"Check SMS Code"},
      *  description="use to check sms code that recieved by user",
-     *   * @OA\RequestBody(
+     *   @OA\RequestBody(
      *    required=true,
      *    @OA\JsonContent(
      *       required={"mobile","code"},
@@ -149,84 +149,54 @@ class AuthApiController extends Controller
         }
     }
 
-
     /**
      * @OA\Post(
      ** path="/api/v1/register",
      *  tags={"Register User"},
      *  description="use to signin user with recieved code",
-     *   @OA\Parameter(
-     *      name="image",
-     *      in="query",
-     *     description="send image in body",
-     *      @OA\Schema(
-     *           type="file"
-     *      )
-     *   ),
-     *
-     * *   @OA\Parameter(
-     *      name="mobile",
-     *      in="query",
-     *      required=true,
-     *     description="send mobile in body",
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
-     *
-     *     @OA\Parameter(
-     *      name="name",
-     *      in="query",
-     *      required=true,
-     *     description="send name in body",
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
-     *
-     * *     @OA\Parameter(
-     *      name="address",
-     *      required=true,
-     *      in="query",
-     *     description="send address in body",
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
-     *
-     * *     @OA\Parameter(
-     *      name="postal_code",
-     *      required=true,
-     *      in="query",
-     *     description="send postal_code in body",
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
-     *
-     * *     @OA\Parameter(
-     *      name="lat",
-     *      required=true,
-     *      in="query",
-     *     description="send latitude in body",
-     *      @OA\Schema(
-     *           type="double"
-     *      )
-     *   ),
-     *
-     * *     @OA\Parameter(
-     *      name="lng",
-     *      required=true,
-     *      in="query",
-     *     description="send longtitude in body",
-     *      @OA\Schema(
-     *           type="double"
-     *      )
-     *   ),
-     *
+     * @OA\RequestBody(
+     *    required=true,
+     *         @OA\MediaType(
+     *           mediaType="multipart/form-data",
+     *           @OA\Schema(
+     *               @OA\Property(
+     *                  property="image",
+     *                  type="array",
+     *                  @OA\Items(
+     *                       type="string",
+     *                       format="binary",
+     *                  ),
+     *               ),
+     *           @OA\Property(
+     *                  property="mobile",
+     *                  type="string",
+     *               ),
+     *          @OA\Property(
+     *                  property="name",
+     *                  type="string",
+     *               ),
+     *          @OA\Property(
+     *                  property="address",
+     *                  type="string",
+     *               ),
+     *          @OA\Property(
+     *                  property="postal_code",
+     *                  type="string",
+     *               ),
+     *          @OA\Property(
+     *                  property="lat",
+     *                  type="double",
+     *               ),
+     *          @OA\Property(
+     *                  property="lng",
+     *                  type="double",
+     *               ),
+     *           ),
+     *       )
+     * ),
      *   @OA\Response(
      *      response=200,
-     *      description="Its Ok",
+     *      description="Data saved",
      *      @OA\MediaType(
      *           mediaType="application/json",
      *      )
@@ -257,7 +227,7 @@ class AuthApiController extends Controller
                 'result' => true,
                 'message' => "اطلاعات کاربر ثبت شد",
                 'data' => [
-                    'user' => new UserResource($user)
+                    'user' => $user
                 ],
             ], 201);
         } else {
@@ -268,11 +238,6 @@ class AuthApiController extends Controller
                 'data' => [],
             ], 201);
         }
-
-        // $user = auth()->loginUsingId($user->id);
-
-        // if (!auth()->attempt($data)) {
-        // }
 
     }
 }

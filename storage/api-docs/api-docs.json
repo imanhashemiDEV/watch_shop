@@ -93,73 +93,48 @@
                 ],
                 "description": "use to signin user with recieved code",
                 "operationId": "fd83cab1818154e58fe1ba7d34661c03",
-                "parameters": [
-                    {
-                        "name": "image",
-                        "in": "query",
-                        "description": "send image in body",
-                        "schema": {
-                            "type": "file"
-                        }
-                    },
-                    {
-                        "name": "mobile",
-                        "in": "query",
-                        "description": "send mobile in body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "send name in body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "address",
-                        "in": "query",
-                        "description": "send address in body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "postal_code",
-                        "in": "query",
-                        "description": "send postal_code in body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "lat",
-                        "in": "query",
-                        "description": "send latitude in body",
-                        "required": true,
-                        "schema": {
-                            "type": "double"
-                        }
-                    },
-                    {
-                        "name": "lng",
-                        "in": "query",
-                        "description": "send longtitude in body",
-                        "required": true,
-                        "schema": {
-                            "type": "double"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "image": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "type": "string"
+                                    },
+                                    "lat": {
+                                        "type": "number",
+                                        "format": "double"
+                                    },
+                                    "lng": {
+                                        "type": "number",
+                                        "format": "double"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
-                        "description": "Its Ok",
+                        "description": "Data saved",
                         "content": {
                             "application/json": {}
                         }
@@ -182,6 +157,122 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/v1/product_page": {
+            "get": {
+                "tags": [
+                    "Product Page"
+                ],
+                "description": "get products page data",
+                "operationId": "76cdb1686df5aebd24f91d19375a0664",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products_by_category/{id}": {
+            "get": {
+                "tags": [
+                    "Product Page"
+                ],
+                "description": "get products data by category id",
+                "operationId": "d56383d24a70363d25ec63f3650dc274",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products_by_brand/{id}": {
+            "get": {
+                "tags": [
+                    "Product Page"
+                ],
+                "description": "get products data by brand id",
+                "operationId": "5023ecdfe37dc38f294e1c45e1761716",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product_details/{id}": {
+            "get": {
+                "tags": [
+                    "Product Details"
+                ],
+                "description": "get product details data by product id",
+                "operationId": "18948df93b0fb66334d988e9154b3f0b",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/save_product_comment": {
+            "post": {
+                "tags": [
+                    "Product Details"
+                ],
+                "description": "save user comment for product",
+                "operationId": "b12402913a51122f83b6ad7956e9998a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "mobile",
+                                    "code"
+                                ],
+                                "properties": {
+                                    "mobile": {
+                                        "type": "string",
+                                        "format": "mobile",
+                                        "example": "09167014556"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "9986"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/v1/user_info": {
@@ -208,6 +299,16 @@
                         }
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Bearer",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     }

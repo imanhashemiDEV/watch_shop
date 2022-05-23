@@ -37,8 +37,6 @@ class HomePageApiController extends Controller
                 Keys::categories  => Category::getAllCategories(),
                 Keys::amazing_products  => Product::getAmazingProducts(),
                 Keys::newest_products  => Product::getNewestProducts(),
-
-
             ],
         ], 200);
     }

@@ -14,7 +14,7 @@
             </li>
             <li data-toggle="tooltip" title=" سفارشات" @if(Request::is('admin/orders') ) class="active" @endif>
                 <a href="#orders" title="سفارشات ">
-                    <i class="icon ti-folder"></i>
+                    <i class="icon ti-shopping-cart"></i>
                 </a>
             </li>
         </ul>
@@ -123,7 +123,7 @@
                 </ul>
             </li>
         </ul>
-        <ul id="orders" @if(Request::is('admin/orders')) class="navigation-active" @endif>
+        <ul id="orders" @if(Request::is('admin/orders') || Request::is('admin/order_details/*')) class="navigation-active" @endif>
             <li @if( Request::is('admin/orders')) class="open" @endif>
                 <a href="#">سفارشات</a>
                 <ul>

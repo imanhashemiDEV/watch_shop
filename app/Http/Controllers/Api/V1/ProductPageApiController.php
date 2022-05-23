@@ -12,7 +12,22 @@ use App\Http\Resources\ProductResource;
 
 class ProductPageApiController extends Controller
 {
-    public function productsPage(){
+    /**
+     * @OA\Get(
+     ** path="/api/v1/product_page",
+     *  tags={"Product Page"},
+     *  description="get products page data",
+     *   @OA\Response(
+     *      response=200,
+     *      description="Its Ok",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
+    public function productsPage()
+    {
         return response()->json([
             'result' => true,
             'message' => "صفحه محصولات فروشگاه ساعت",
@@ -24,7 +39,22 @@ class ProductPageApiController extends Controller
     }
 
 
-    public function productsByCategory($id){
+    /**
+     * @OA\Get(
+     ** path="/api/v1/products_by_category/{id}",
+     *  tags={"Product Page"},
+     *  description="get products data by category id",
+     *   @OA\Response(
+     *      response=200,
+     *      description="Its Ok",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
+    public function productsByCategory($id)
+    {
         return response()->json([
             'result' => true,
             'message' => "صفحه محصولات فروشگاه ساعت بر اساس دسته بندی",
@@ -36,7 +66,22 @@ class ProductPageApiController extends Controller
     }
 
 
-    public function productsByBrand($id){
+    /**
+     * @OA\Get(
+     ** path="/api/v1/products_by_brand/{id}",
+     *  tags={"Product Page"},
+     *  description="get products data by brand id",
+     *   @OA\Response(
+     *      response=200,
+     *      description="Its Ok",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
+    public function productsByBrand($id)
+    {
         return response()->json([
             'result' => true,
             'message' => " صفحه محصولات فروشگاه ساعت بر اساس برند",
@@ -48,7 +93,22 @@ class ProductPageApiController extends Controller
     }
 
 
-    public function productDetail($id){
+    /**
+     * @OA\Get(
+     ** path="/api/v1/product_details/{id}",
+     *  tags={"Product Details"},
+     *  description="get product details data by product id",
+     *   @OA\Response(
+     *      response=200,
+     *      description="Its Ok",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
+    public function productDetail($id)
+    {
 
         $product =  Product::query()->find($id);
 
@@ -56,28 +116,52 @@ class ProductPageApiController extends Controller
             'result' => true,
             'message' => " صفحه محصولات فروشگاه ساعت بر اساس برند",
             'data' => [
-                 new ProductResource($product)
+                new ProductResource($product)
             ],
         ], 200);
     }
 
 
-    public function saveComment(Request $request){
+    /**
+     * @OA\Post(
+     ** path="/api/v1/save_product_comment",
+     *  tags={"Product Details"},
+     *  description="save user comment for product",
+     *   security={ * {"sanctum": {}}, * },
+     *   @OA\RequestBody(
+     *    required=true,
+     *    @OA\JsonContent(
+     *       required={"mobile","code"},
+     *       @OA\Property(property="mobile", type="string", format="mobile", example="09167014556"),
+     *       @OA\Property(property="code", type="string", format="text", example="9986"),
+     *    ),
+     * ),
+     *   @OA\Response(
+     *      response=200,
+     *      description="Its Ok",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
+    public function saveComment(Request $request)
+    {
+        $user = auth()->user();
 
-        $product =  Product::query()->find($request->product_id);
+        var_dump($user->id);
+        // $product =  Product::query()->find($request->product_id);
 
-        $comment = new Comment;
-        $comment->body=$request->body;
-        $comment->user_id=auth()->user()->id;
+        // $comment = new Comment;
+        // $comment->body = $request->body;
+        // $comment->user_id = auth()->user()->id;
 
-        $product->comments()->save($comment);
+        // $product->comments()->save($comment);
 
-        return response()->json([
-            'result' => true,
-            'message' => " نظر ثبت شد و پس از تایید نمایش داده خواهد شد",
-            'data' => [],
-        ], 200);
+        // return response()->json([
+        //     'result' => true,
+        //     'message' => " نظر ثبت شد و پس از تایید نمایش داده خواهد شد",
+        //     'data' => [],
+        // ], 200);
     }
-
-
 }

@@ -37,5 +37,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'admin'])->group
     Route::get('/create_product_properties/{id}',[\App\Http\Controllers\Admin\ProductController::class,'createProductProperties'])->name('create.product.properties');
     Route::post('/store_product_properties/{id}',[\App\Http\Controllers\Admin\ProductController::class,'storeProductProperties'])->name('store.product.properties');
     Route::get('/orders',[\App\Http\Controllers\Admin\OrderController::class,'orders'])->name('orders.index');
+    Route::get('/order_details/{id}',[\App\Http\Controllers\Admin\OrderController::class,'orderDetails'])->name('order.details');
 });
 
