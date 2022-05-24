@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration
             $table->string('guaranty')->nullable();
             $table->string('discount')->default(0);
             $table->text('description')->nullable();
+            $table->boolean('is_special')->default(false);
+            $table->timestamp('special_expiration')->useCurrent();
 
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate();

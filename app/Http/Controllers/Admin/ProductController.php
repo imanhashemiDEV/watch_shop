@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Helper;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\EditProductRequest;
-use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Color;
+use App\Helpers\Helper;
 use App\Models\Product;
-use App\Models\PropertyGroup;
+use App\Models\Category;
+use App\Helpers\DateShamsi;
 use Illuminate\Http\Request;
+use App\Models\PropertyGroup;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
+use App\Http\Requests\EditProductRequest;
 
 class ProductController extends Controller
 {
@@ -45,6 +46,8 @@ class ProductController extends Controller
             'title_en' => $request->input('title_en'),
             'guaranty' => $request->input('guaranty'),
             'product_count' => $request->input('product_count'),
+            'is_special' => $request->input('is_special'),
+            'special_expiration' => ($request->input('special_expiration') != null) ? DateShamsi::shamsi_to_miladi($request->input('special_expiration')) : now(),
             'image' => $image,
             'category_id' => $request->input('category_id'),
             'brand_id' => $request->input('brand_id')
@@ -93,6 +96,8 @@ class ProductController extends Controller
             'title_en' => $request->input('title_en'),
             'guaranty' => $request->input('guaranty'),
             'product_count' => $request->input('product_count'),
+            'is_special' => $request->input('is_special') =="on" ? true : false,
+            'special_expiration' => ($request->input('special_expiration') != null) ? DateShamsi::shamsi_to_miladi($request->input('special_expiration')) : now(),
             'image' => $image,
             'category_id' => $request->input('category_id'),
             'brand_id' => $request->input('brand_id')
@@ -117,10 +122,6 @@ class ProductController extends Controller
     {
         $product = Product::query()->find($id);
         $property_groups =PropertyGroup::query()->get();
-        // foreach($property_groups as $property_group){
-        //     dd($property_group->properties);
-        // }
-
         return view('admin.product.add_properties',compact('product','property_groups'));
     }
 

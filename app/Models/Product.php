@@ -26,7 +26,9 @@ class Product extends Model
         'guaranty',
         'discount',
         'sell',
-        'product_count'
+        'product_count',
+        'is_special',
+        'special_expiration'
     ];
 
     public function category()

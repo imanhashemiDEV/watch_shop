@@ -27,7 +27,7 @@
                             <th class="text-center align-middle text-primary">برند </th>
                             <th class="text-center align-middle text-primary">ویژگی ها</th>
                             <th class="text-center align-middle text-primary">گالری</th>
-                            <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
+                            <th class="text-center align-middle text-primary"> شگفت انگیز</th>
                             <th class="text-center align-middle text-primary">ویرایش</th>
                             <th class="text-center align-middle text-primary">حذف</th>
                         </tr>
@@ -57,7 +57,14 @@
                                         گالری
                                    </a>
                                 </td>
-                                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($product->created_at)->format('%B %d، %Y')}}</td>
+                                <td class="text-center align-middle">
+                                    @if ($product->is_special)
+                                            <span class="badge badge-danger">شگفت انگیز</span>
+                                        @else
+                                            <span
+                                                class="badge badge-success">عادی</span>
+                                        @endif
+                                </td>
                                 <td class="text-center align-middle">
                                     <a class="btn btn-outline-info" href="{{route('products.edit',$product->id)}}">
                                          ویرایش

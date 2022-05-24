@@ -49,6 +49,20 @@
                                         value="{{$product->discount}}">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck" @if($product->is_special) checked @endif name="is_special">
+                                        <label class="custom-control-label" for="customCheck"> فروش شگفت انگیز </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="col-form-label"> تاریخ انقضای شگفت انگیز</label>
+                                </div>
+                                <div class="col-sm-6">
+                                        <input type="text" id="tarikh" class="text-left form-control" dir="rtl" name="special_expiration" value="{{\Hekmatinasser\Verta\Verta::instance($product->special_expiration)->format('Y-n-j')}}">
+                                </div>
+                            </div>
                             <div class="form-group row" data-select2-id="23">
                                 <label class="col-sm-3 col-form-label">انتخاب رنگ</label>
                                 <div class="col-sm-9">
@@ -143,6 +157,21 @@
 @section('scripts')
 <script>
     $(document).ready(function () {
+
+        var customOptions = {
+                placeholder: "روز / ماه / سال"
+                , twodigit: false
+                , closeAfterSelect: true
+                , nextButtonIcon: "fa fa-arrow-circle-right"
+                , previousButtonIcon: "fa fa-arrow-circle-left"
+                , buttonsColor: "#5867dd"
+                , markToday: true
+                , markHolidays: true
+                , highlightSelectedDay: true
+                , sync: true
+                , gotoToday: true
+            }
+            kamaDatepicker('tarikh', customOptions);
 
             $('#customFile').on('change', function () {
                 //get the file name

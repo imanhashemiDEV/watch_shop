@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{url('panel/vendors/select2/select2.min.css')}}">
     <link rel="stylesheet" href="{{url('panel/plugins/sweet_alert/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{url('panel/plugins/dropzone/css/dropzone.css')}}">
-    <link rel="stylesheet" href="{{url('/css/kamadatepicker.min.css')}}">
+    <link rel="stylesheet" href="{{url('css/kamadatepicker.min.css')}}">
     <link rel="stylesheet" href="{{ url('panel/vendors/colorpicker/css/bootstrap-colorpicker.min.css') }}"
         type="text/css">
     <link rel="stylesheet" href="{{url('panel/assets/css/app.css')}}" type="text/css">
