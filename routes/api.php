@@ -12,6 +12,9 @@ Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(fun
     //    user profile
     Route::post('profile', [\App\Http\Controllers\Api\V1\UserApiController::class, 'profile']);
 
+    // get user addresses
+    Route::post('user_addresses', [\App\Http\Controllers\Api\V1\UserApiController::class, 'userAddresses']);
+
     // payment
     Route::post('payment',[\App\Http\Controllers\Api\V1\PaymentController::class,'payment'])->name('save.payment');
 

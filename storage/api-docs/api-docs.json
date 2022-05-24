@@ -393,6 +393,27 @@
                     }
                 ]
             }
+        },
+        "/api/v1/user_addresses": {
+            "post": {
+                "tags": [
+                    "User info"
+                ],
+                "operationId": "b5db4f6858b49ac58f5eeff1e2b4b009",
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "components": {

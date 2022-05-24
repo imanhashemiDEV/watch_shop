@@ -37,4 +37,29 @@ class UserApiController extends Controller
             'data' => new UserResource($user),
         ], 200);
     }
+
+   /**
+     * @OA\Post(
+     * path="/api/v1/user_addresses",
+     *   tags={"User info"},
+     *   security={{"sanctum":{}}},
+     *   @OA\Response(
+     *      response=200,
+     *      description="It's Ok",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
+    public function userAddresses(){
+
+        $user = auth()->user();
+
+        return response()->json([
+            'result' => true,
+            'message' => 'its Ok',
+            'data' => $user->addresses,
+        ], 200);
+    }
 }
