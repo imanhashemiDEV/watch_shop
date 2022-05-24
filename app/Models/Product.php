@@ -83,42 +83,4 @@ class Product extends Model
         return $name;
     }
 
-    public static function getAllProducts(){
-
-        $products= Product::query()->paginate(12);
-
-        return ProductListResource::collection($products);
-    }
-
-
-    public static function getProductsByCategory($id){
-
-        $products= Product::query()->where('category_id',$id)->paginate(12);
-
-        return ProductListResource::collection($products);
-    }
-
-
-    public static function getProductsByBrand($id){
-
-        $products= Product::query()->where('brand_id',$id)->paginate(12);
-
-        return ProductListResource::collection($products);
-    }
-
-
-    public static function getAmazingProducts(){
-
-        $products= Product::query()->get();
-
-        return ProductListResource::collection($products);
-    }
-
-
-    public static function getNewestProducts(){
-
-        $products= Product::query()->latest()->get();
-
-        return ProductResource::collection($products);
-    }
 }

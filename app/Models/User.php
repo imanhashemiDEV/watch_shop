@@ -29,7 +29,12 @@ class User extends Authenticatable
     protected $guard_name = 'sanctum';
 
     protected $fillable = [
-        'name', 'email', 'password','mobile','profile_photo_path'
+        'name',
+        'email',
+        'password',
+        'mobile',
+        'profile_photo_path',
+        'phone'
     ];
 
     /**
@@ -98,6 +103,19 @@ class User extends Authenticatable
         }else{
             return "";
         }
+    }
 
+    public static function updateRegisteredUser($user,$request,$image){
+        $user->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'profile_photo_path' => $image
+        ]);
+        $user->addresses()->create([
+            'address' => $request->address,
+            'postal_code' => $request->postal_code,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+        ]);
     }
 }

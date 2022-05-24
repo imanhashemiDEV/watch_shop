@@ -25,10 +25,15 @@ class AuthApiController extends Controller
      *  description="use to send sms to user",
      * @OA\RequestBody(
      *    required=true,
-     *    @OA\JsonContent(
-     *       required={"mobile"},
-     *       @OA\Property(property="mobile", type="string", format="mobile", example="09167014556"),
-     *    ),
+     * *         @OA\MediaType(
+     *           mediaType="multipart/form-data",
+     *           @OA\Schema(
+     *           @OA\Property(
+     *                  property="mobile",
+     *                  type="string",
+     *               ),
+     *     )
+     *   )
      * ),
      *   @OA\Response(
      *      response=200,
@@ -43,18 +48,13 @@ class AuthApiController extends Controller
     {
         $mobile = $request->input('mobile');
 
-        $codeInfo = SmsCode::query()->where('mobile', $mobile)
-            ->where('created_at', '>', Carbon::now()->subMinutes(2))
-            ->first();
+        $checkSmS = SmsCode::checkTwoMinutes($mobile);
 
-        if ($codeInfo == null) {
+        if ($checkSmS == null) {
 
             $code = rand(1111, 9999);
 
-            SmsCode::query()->create([
-                'mobile' => $mobile,
-                'code' => $code
-            ]);
+            SmsCode::createSmsCode($mobile, $code);
 
             return Response()->json([
                 'result' => true,
@@ -84,13 +84,21 @@ class AuthApiController extends Controller
      ** path="/api/v1/check_sms_code",
      *  tags={"Auth Api"},
      *  description="use to check sms code that recieved by user",
-     *   @OA\RequestBody(
+     * @OA\RequestBody(
      *    required=true,
-     *    @OA\JsonContent(
-     *       required={"mobile","code"},
-     *       @OA\Property(property="mobile", type="string", format="mobile", example="09167014556"),
-     *       @OA\Property(property="code", type="string", format="text", example="9986"),
-     *    ),
+     * *         @OA\MediaType(
+     *           mediaType="multipart/form-data",
+     *           @OA\Schema(
+     *           @OA\Property(
+     *                  property="mobile",
+     *                  type="string",
+     *               ),
+     *           @OA\Property(
+     *                  property="code",
+     *                  type="string",
+     *               ),
+     *     )
+     *   )
      * ),
      *   @OA\Response(
      *      response=200,
@@ -106,10 +114,9 @@ class AuthApiController extends Controller
         $code = $request->input('code');
         $mobile = $request->input('mobile');
 
-        $code = SmsCode::query()->where('mobile', $mobile)
-            ->where('code', $code)->latest()->first();
+        $check = SmsCode::checkSend($mobile, $code);
 
-        if ($code != null) {
+        if ($check != null) {
 
             $user = User::query()->where('mobile', $request->mobile)->first();
 
@@ -153,6 +160,7 @@ class AuthApiController extends Controller
      * @OA\Post(
      ** path="/api/v1/register",
      *  tags={"Auth Api"},
+     *  security={{"sanctum":{}}},
      *  description="use to signin user with recieved code",
      * @OA\RequestBody(
      *    required=true,
@@ -168,7 +176,7 @@ class AuthApiController extends Controller
      *                  ),
      *               ),
      *           @OA\Property(
-     *                  property="mobile",
+     *                  property="phone",
      *                  type="string",
      *               ),
      *          @OA\Property(
@@ -206,22 +214,13 @@ class AuthApiController extends Controller
 
     public function register(RegisterRequest $request)
     {
-
-        $user = User::query()->where('mobile', $request->mobile)->first();
+        $user = auth()->user();
 
         $image = User::saveImage($request->image);
 
         if ($user) {
-            $user->update([
-                'name' => $request->name,
-                'profile_photo_path' => $image
-            ]);
-            $user->addresses()->create([
-                'address' => $request->address,
-                'postal_code' => $request->postal_code,
-                'lat' => $request->lat,
-                'lng' => $request->lng,
-            ]);
+
+            User::updateRegisteredUser($user, $request, $image);
 
             return response()->json([
                 'result' => true,
@@ -238,6 +237,5 @@ class AuthApiController extends Controller
                 'data' => [],
             ], 201);
         }
-
     }
 }

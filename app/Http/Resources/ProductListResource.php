@@ -19,11 +19,11 @@ class ProductListResource extends JsonResource
             'title'=>$this->title,
             'price'=>$this->price,
             'discount'=>$this->discount,
+            'discount_price'=>($this->price - ((($this->price) * ($this->discount)) / 100)),
             'product_count'=>$this->product_count,
             'category'=>$this->category->title,
             'brand'=>$this->brand->title,
             'image'=> url('images/product/small/'.$this->image),
-            'description'=>$this->description,
         ];
     }
 }

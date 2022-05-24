@@ -16,16 +16,11 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "mobile"
-                                ],
                                 "properties": {
                                     "mobile": {
-                                        "type": "string",
-                                        "format": "mobile",
-                                        "example": "09167014556"
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -53,22 +48,14 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "mobile",
-                                    "code"
-                                ],
                                 "properties": {
                                     "mobile": {
-                                        "type": "string",
-                                        "format": "mobile",
-                                        "example": "09167014556"
+                                        "type": "string"
                                     },
                                     "code": {
-                                        "type": "string",
-                                        "format": "text",
-                                        "example": "9986"
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -106,7 +93,7 @@
                                             "format": "binary"
                                         }
                                     },
-                                    "mobile": {
+                                    "phone": {
                                         "type": "string"
                                     },
                                     "name": {
@@ -139,16 +126,21 @@
                             "application/json": {}
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
-        "/api/v1/home_page": {
+        "/api/v1/home": {
             "get": {
                 "tags": [
                     "Home Page"
                 ],
                 "description": "get home page data",
-                "operationId": "ba234a2b88dccdce503413dab0609599",
+                "operationId": "762138e69d864f137e7bcc4c732267af",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -159,13 +151,81 @@
                 }
             }
         },
-        "/api/v1/product_page": {
+        "/api/v1/all_products": {
             "get": {
                 "tags": [
-                    "Product Page"
+                    "Products Page"
                 ],
                 "description": "get products page data",
-                "operationId": "76cdb1686df5aebd24f91d19375a0664",
+                "operationId": "53b5fcca2bfe64f5d3b0a05388d05528",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/newest_products": {
+            "get": {
+                "tags": [
+                    "Products Page"
+                ],
+                "description": "get products page data",
+                "operationId": "26c3920b28c4e8c01ed5c181406b8706",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cheapest_products": {
+            "get": {
+                "tags": [
+                    "Products Page"
+                ],
+                "description": "get products page data",
+                "operationId": "c877ea60fc125eadd9f505c610232bce",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/most_expensive_products": {
+            "get": {
+                "tags": [
+                    "Products Page"
+                ],
+                "description": "get products page data",
+                "operationId": "e1106b3c025c88ce2547d4dbed9a4f99",
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/most_viewed_products": {
+            "get": {
+                "tags": [
+                    "Products Page"
+                ],
+                "description": "get products page data",
+                "operationId": "c059ac3ff6d911b79d1713ede90e9d88",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -179,10 +239,20 @@
         "/api/v1/products_by_category/{id}": {
             "get": {
                 "tags": [
-                    "Product Page"
+                    "Products Page"
                 ],
                 "description": "get products data by category id",
                 "operationId": "d56383d24a70363d25ec63f3650dc274",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -196,10 +266,52 @@
         "/api/v1/products_by_brand/{id}": {
             "get": {
                 "tags": [
-                    "Product Page"
+                    "Products Page"
                 ],
                 "description": "get products data by brand id",
                 "operationId": "5023ecdfe37dc38f294e1c45e1761716",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Its Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/search_product": {
+            "post": {
+                "tags": [
+                    "Products Page"
+                ],
+                "description": "search product",
+                "operationId": "769331895fbf1fb47c853f5601e735f6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "search": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Its Ok",

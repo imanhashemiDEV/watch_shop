@@ -44,6 +44,9 @@ return [
     'exists' => 'گزینه انتخاب شده :attribute صحیح نمی باشد',
     'file' => 'گزینه :attribute باید یک فایل باشد',
     'filled' => 'گزینه :attribute نمی تواند خالی باشد',
+    'search' => 'گزینه :attribute نمی تواند خالی باشد',
+    'lat' => 'گزینه :attribute نمی تواند خالی باشد',
+    'lng' => 'گزینه :attribute نمی تواند خالی باشد',
     'gt' => [
         'numeric' => 'گزینه :attribute باید بزرگتر از :value باشد',
         'file' => 'گزینه :attribute باید بزرگتر از :value کیلوبایت باشد',
@@ -192,6 +195,9 @@ return [
         'holding_date'=>'تاریخ برگزاری',
         'accept_article_date'=>'تاریخ پذیرش مقالات',
         'registration_deadline_date'=>'تاریخ ثبت نام',
+        'search'=>'جستجو',
+        'lat'=>'طول جغرافیایی',
+        'lng'=>'عرض جغرافیایی',
 
     ],
 ];

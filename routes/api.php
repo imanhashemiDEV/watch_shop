@@ -6,14 +6,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(function () {
 
-    //    User Info
+    // register user name and address
+    Route::post('register', [\App\Http\Controllers\Api\V1\AuthApiController::class, 'register']);
+
+    //    user profile
     Route::post('profile', [\App\Http\Controllers\Api\V1\UserApiController::class, 'profile']);
 
-    // Payment
+    // payment
     Route::post('payment',[\App\Http\Controllers\Api\V1\PaymentController::class,'payment'])->name('save.payment');
 
     // save product comment
     Route::post('save_product_comment', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'saveComment']);
+
 });
 
 
@@ -25,14 +29,23 @@ Route::prefix('/v1')->namespace('Api\V1')->group(function () {
     // check recieved sms
     Route::post('check_sms_code', [\App\Http\Controllers\Api\V1\AuthApiController::class, 'checkSmsCode']);
 
-    // register user name and address
-    Route::post('register', [\App\Http\Controllers\Api\V1\AuthApiController::class, 'register']);
+    // get home page
+    Route::get('home', [\App\Http\Controllers\Api\V1\HomePageApiController::class, 'home']);
 
-    // get home page info
-    Route::get('home_page', [\App\Http\Controllers\Api\V1\HomePageApiController::class, 'homePage']);
+    // get all products
+    Route::get('all_products', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'allProducts']);
 
-    // get products page info
-    Route::get('products_page', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'productsPage']);
+    // get newest products
+    Route::get('newestl_products', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'newestProducts']);
+
+    // get most expensive products
+    Route::get('most_expensive_products', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'mostExpensiveProducts']);
+
+    // get most viewed products
+    Route::get('most_viewed_products', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'mostViewedProducts']);
+
+    // get cheapest products
+    Route::get('cheapest_products', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'cheapestProducts']);
 
     // get products by category
     Route::get('products_by_category/{id}', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'productsByCategory']);
@@ -45,4 +58,7 @@ Route::prefix('/v1')->namespace('Api\V1')->group(function () {
 
     // payment callback
     Route::get('payment/callback',[\App\Http\Controllers\Api\V1\PaymentController::class,'callback']);
+
+    // search product
+    Route::post('search_product', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'searchProduct']);
 });

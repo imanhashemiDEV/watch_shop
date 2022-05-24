@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'title_en'=>$this->title_en,
             'price'=>$this->price,
             'discount'=>$this->discount,
+            'discount_price'=>($this->price - ((($this->price) * ($this->discount)) / 100)),
             'guaranty'=>$this->guaranty,
             'product_count'=>$this->product_count,
             'category'=>$this->category->title,

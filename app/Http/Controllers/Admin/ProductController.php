@@ -135,7 +135,7 @@ class ProductController extends Controller
 
     public function searchProduct(Request $request)
     {
-        $categories = Category::query()->where('parent_id', '!=', 0)->get();
+      $categories = Category::query()->where('parent_id', '!=', 0)->get();
 
       $search = $request->search;
       $products = Product::query()->where('title','like','%'.$search.'%')
