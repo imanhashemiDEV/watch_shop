@@ -14,17 +14,17 @@ class Comments extends Component
     protected $paginationTheme='bootstrap';
 
     public function changeStatus($id){
-
         $comment = Comment::query()->find($id);
-        if($comment->status==0){
-            $comment->status=1;
+        if($comment->status=='accepted'){
+            $comment->status='rejected';
             $comment->save();
-
-        }else{
-            $comment->status=0;
+        }else if($comment->status=='rejected'){
+            $comment->status='accepted';
+            $comment->save();
+        }else if($comment->status=='draft'){
+            $comment->status='accepted';
             $comment->save();
         }
-
     }
 
     public function deleteComment($id){

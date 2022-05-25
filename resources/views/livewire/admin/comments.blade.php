@@ -6,7 +6,7 @@
             <th class="text-center align-middle text-primary">متن نظر</th>
             <th class="text-center align-middle text-primary">نام نظر دهنده</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
-            <th class="text-center align-middle text-primary">تایید یا عدم تایید</th>
+            <th class="text-center align-middle text-primary">وضعیت</th>
             <th class="text-center align-middle text-primary">حذف</th>
         </tr>
         </thead>
@@ -18,11 +18,14 @@
                 <td class="text-center align-middle">{{$comment->user->name}}</td>
                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('%B %d، %Y')}}</td>
                 <td class="text-center align-middle" wire:click="changeStatus({{ $comment->id }})">
-                    @if ($comment->status == 0)
+                    @if ($comment->status =='accepted')
                             <span class="cursor-pointer badge badge-success">تایید</span>
-                        @else
+                        @elseif ($comment->status =='rejected')
                             <span
                                 class="cursor-pointer badge badge-danger">عدم تایید</span>
+                        @else
+                                <span
+                                class="cursor-pointer badge badge-info">بررسی اولیه </span>
                         @endif
                 </td>
                 <td class="text-center align-middle">

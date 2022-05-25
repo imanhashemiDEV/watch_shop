@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Slider;
+use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Sliders extends Component
+class Products extends Component
 {
     use WithPagination;
 
@@ -14,7 +14,7 @@ class Sliders extends Component
 
     public function render()
     {
-        $sliders = Slider::query()->paginate(10);
-        return view('livewire.admin.sliders', compact('sliders'));
+        $products = Product::query()->latest()->paginate(10);
+        return view('livewire.admin.products', compact('products'));
     }
 }

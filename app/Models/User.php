@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserStatus;
 use App\Models\Address;
 use Laravel\Jetstream\HasTeams;
 use Illuminate\Http\UploadedFile;
@@ -66,6 +67,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function user_status($status)
+    {
+        switch ($status) {
+            case UserStatus::Active:
+                return "فعال";
+                break;
+            case UserStatus::InActive:
+                return "غیرفعال ";
+                break;
+            default:
+                return "نامشخص";
+                break;
+        }
+    }
 
     public function updateProfilePhoto(UploadedFile $photo)
     {

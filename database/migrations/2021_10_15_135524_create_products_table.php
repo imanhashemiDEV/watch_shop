@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ProductStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -28,13 +29,11 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_special')->default(false);
             $table->timestamp('special_expiration')->useCurrent();
-
+            $table->String('status')->default(ProductStatus::Active->value);
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate();
-
             $table->bigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands')->cascadeOnUpdate();
-
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PaymentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('price')->default(0);
             $table->integer('discount_price')->default(0);
             $table->integer('code')->default(0);
-            $table->smallInteger('status')->default(0);
+            $table->String('status')->default(PaymentStatus::Draft->value);
             $table->string('transaction_id')->nullable();
 
             $table->unsignedBigInteger('address_id');

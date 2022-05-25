@@ -6,7 +6,7 @@ enum PaymentStatus: String
 {
     case Success = 'success';
 
-    case Fail = 'fail';
+    case Failed = 'failed';
 
-    case Reject = 'reject';
+    case Draft = 'draft';
 }

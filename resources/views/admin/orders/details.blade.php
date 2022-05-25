@@ -22,6 +22,7 @@
                             <th class="text-center align-middle text-primary"> قیمت بدون تخفیف </th>
                             <th class="text-center align-middle text-primary"> قیمت با تخفیف</th>
                             <th class="text-center align-middle text-primary"> تعداد</th>
+                            <th class="text-center align-middle text-primary"> وضعیت تحویل</th>
                             <th class="text-center align-middle text-primary">تاریخ تراکنش</th>
                         </tr>
                         </thead>
@@ -33,6 +34,15 @@
                                 <td class="text-center align-middle">{{number_format($order->price)}} تومان</td>
                                 <td class="text-center align-middle">{{number_format($order->discount_price)}} تومان</td>
                                 <td class="text-center align-middle">{{$order->count}}</td>
+                                <td class="text-center align-middle">
+                                    @if ($order->status =='cancelled')
+                                    <span class="cursor-pointer badge badge-danger">مرجوع شده</span>
+                                    @elseif ($order->status =='recieved')
+                                    <span class="cursor-pointer badge badge-success">تحویل شده</span>
+                                    @else
+                                    <span class="cursor-pointer badge badge-info">در حال پردازش</span>
+                                    @endif
+                                </td>
                                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($order->created_at)->format('%B %d، %Y')}}</td>
                             </tr>
                         @endforeach

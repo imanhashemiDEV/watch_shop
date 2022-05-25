@@ -8,5 +8,7 @@ enum OrderStatus: String
 
     case Cancelled = 'cancelled';
 
-    case InProgress = 'inProgress';
+    case Failed = 'failed';
+
+    case Draft = 'draft';
 }

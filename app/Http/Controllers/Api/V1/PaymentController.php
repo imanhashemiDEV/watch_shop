@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enums\OrderStatus;
+use App\Enums\PaymentStatus;
 use App\Helpers\Helper;
 use App\Models\Order;
 use App\Models\Product;
@@ -28,7 +30,6 @@ class PaymentController extends Controller
                 $total_price += ($product->price - ((($product->price) * ($product->discount)) / 100)) * $order['count'];
             }
         }
-
 
         $order = Order::query()->create([
             'total_price' => $total_price,
@@ -63,28 +64,39 @@ class PaymentController extends Controller
 
     public function callback(Request $request)
     {
+        $authority = $_GET['Authority'];
+
+        $order = Order::query()->where('transaction_id', $authority)->first();
+        $code = $order->code;
+        $order_details = OrderDetail::query()->where('order_id', $order->id)->get();
 
         if ($_GET['Status'] == 'OK') {
 
-            $authority = $_GET['Authority'];
-
-            $order = Order::query()->where('transaction_id', $authority)->first();
             $order->update([
-                'status' => 1,
+                'status' => PaymentStatus::Success,
             ]);
-
-            $code = $order->code;
-
-            $order_details = OrderDetail::query()->where('order_id', $order->id)->get();
 
             foreach($order_details as $order_detail){
               $product = Product::query()->find($order_detail->product_id);
               $product->increment('sell');
+
             }
 
             return view('admin.pay.accept', compact('code'));
 
         }else{
+
+            $order->update([
+                'status' => PaymentStatus::Failed,
+            ]);
+
+            foreach($order_details as $order_detail){
+              $product = Product::query()->find($order_detail->product_id);
+              $product->increment('sell');
+
+              $order_detail->status = OrderStatus::Failed;
+              $order_detail->save();
+            }
 
             return view('admin.pay.reject');
 

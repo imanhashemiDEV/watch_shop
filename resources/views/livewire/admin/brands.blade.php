@@ -1,3 +1,45 @@
-<div>
-    {{-- Success is as dangerous as failure. --}}
+<div class="table-responsive" tabindex="8" style="overflow: hidden; outline: none;">
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th class="text-center align-middle text-primary">ردیف</th>
+            <th class="text-center align-middle text-primary">عکس</th>
+            <th class="text-center align-middle text-primary">عنوان</th>
+            <th class="text-center align-middle text-primary">ویرایش</th>
+            <th class="text-center align-middle text-primary">حذف</th>
+            <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($brands as $index => $brand)
+            <tr>
+                <td class="text-center align-middle">{{$brands->firstItem() + $index}}</td>
+                <td class="text-center align-middle">
+                    <figure class="avatar avatar-sm">
+                        <img src="{{ url('images/brands/small/' . $brand->image) }}"
+                            class="rounded-circle" alt="image">
+                    </figure>
+                </td>
+                <td class="text-center align-middle">{{$brand->title}}</td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-info" href="{{route('brands.edit',$brand->id)}}">
+                         ویرایش
+                    </a>
+                </td>
+                <td class="text-center align-middle">
+                    <form action="{{ route('brands.destroy', $brand->id) }}" method="post" >
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-outline-danger">
+                            حذف
+                       </button>
+                    </form>
+                </td>
+                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($brand->created_at)->format('%B %d، %Y')}}</td>
+            </tr>
+        @endforeach
+    </table>
+    <div style="margin: 40px !important;" class="pagination pagination-rounded pagination-sm d-flex justify-content-center">
+        {{$brands->appends(Request::except('page'))->links()}}
+    </div>
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,7 @@ class CreateOrderDetailsTable extends Migration
                 ->on('products');
             $table->integer('count')->default(0);
             $table->integer('total_price')->default(0);
+            $table->String('status')->default(OrderStatus::Draft->value);
             $table->timestamps();
         });
     }
