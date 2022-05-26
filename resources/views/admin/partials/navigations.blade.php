@@ -2,7 +2,7 @@
 <div class="navigation">
     <div class="navigation-icon-menu">
         <ul>
-            <li data-toggle="tooltip" title="کاربران" @if(Request::is('admin/users') || Request::is('admin/users/*') || Request::is('admin/roles') || Request::is('admin/roles/*') || Request::is('admin/permissions') || Request::is('admin/permissions/*') || Request::is('admin/logs')  ) class="active" @endif>
+            <li data-toggle="tooltip" title="کاربران" @if(Request::is('admin/users') || Request::is('admin/users/*') || Request::is('admin/roles') || Request::is('admin/roles/*') || Request::is('admin/permissions') || Request::is('admin/permissions/*') || Request::is('admin/logs') || Request::is('admin/create_role_permissions/*') || Request::is('admin/create_user_roles/*')) class="active" @endif>
                 <a href="#users" title="مدیریت کاربران">
                     <i class="icon ti-user"></i>
                 </a>
@@ -37,7 +37,7 @@
         </ul>
     </div>
     <div class="navigation-menu-body">
-        <ul id="users" @if(Request::is('admin/users') || Request::is('admin/users/*') || Request::is('admin/roles') || Request::is('admin/roles/*') || Request::is('admin/permissions') || Request::is('admin/permissions/*') || Request::is('admin/logs')  ) class="navigation-active" @endif>
+        <ul id="users" @if(Request::is('admin/users') || Request::is('admin/users/*') || Request::is('admin/roles') || Request::is('admin/roles/*') || Request::is('admin/permissions') || Request::is('admin/permissions/*') || Request::is('admin/logs')  || Request::is('admin/create_role_permissions/*') || Request::is('admin/create_user_roles/*')  ) class="navigation-active" @endif>
             <li @if(Request::is('admin/users/*') || Request::is('admin/users')) class="open" @endif>
                 <a href="#">مدیریت کاربران</a>
                 <ul>

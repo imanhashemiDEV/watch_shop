@@ -12,7 +12,7 @@
             <th class="text-primary text-center align-middle">عنوان نقش</th>
             <th class="text-primary text-center align-middle">مجوزها</th>
             <th class="text-primary text-center align-middle">ویرایش</th>
-            <th class="text-primary text-center align-middle">حذف</th>
+{{--            <th class="text-primary text-center align-middle">حذف</th>--}}
             <th class="text-primary text-center align-middle">تاریخ ایجاد</th>
         </tr>
         </thead>

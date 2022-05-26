@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Enums\OrderStatus;
+use App\Enums\UserStatus;
 use App\Models\Brand;
 use App\Models\User;
 use Livewire\Component;
@@ -37,6 +39,20 @@ class Users extends Component
     public function deleteArticle($id)
     {
         $this->dispatchBrowserEvent('deleteUser',['id'=>$id]);
+    }
+
+    public function changeStatus($id)
+    {
+        $user = User::query()->find($id);
+        if($user->status===UserStatus::Active->value){
+            $user->update([
+                'status'=>UserStatus::InActive->value
+            ]);
+        }else{
+            $user->update([
+                'status'=>UserStatus::Active->value
+            ]);
+        }
     }
 
     public function render()

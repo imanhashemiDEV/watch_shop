@@ -42,8 +42,12 @@ class Orders extends Component
 
     public function render()
     {
-        $orders = Order::query()->orderBy('id','DESC')->
-        where('refId', 'like', '%'.$this->search.'%')->paginate(30);
+        $orders = Order::query()->orderBy('id','DESC')
+            ->where('code', 'like', '%'.$this->search.'%')
+            ->orWhereHas('user',function ($q){
+                return $q->where('name', 'like', '%'.$this->search.'%')
+                          ->where('mobile', 'like', '%'.$this->search.'%');
+            })->paginate(30);
         return view('livewire.admin.orders', compact('orders'));
     }
 }

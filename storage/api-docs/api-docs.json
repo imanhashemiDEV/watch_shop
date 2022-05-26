@@ -157,7 +157,7 @@
                     "Products Page"
                 ],
                 "description": "get products page data",
-                "operationId": "53b5fcca2bfe64f5d3b0a05388d05528",
+                "operationId": "8a52a2bf2c81faf5db37666d41d02544",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -174,7 +174,7 @@
                     "Products Page"
                 ],
                 "description": "get products page data",
-                "operationId": "26c3920b28c4e8c01ed5c181406b8706",
+                "operationId": "6f0d45fe830e165f2e88d31e040af146",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -191,7 +191,7 @@
                     "Products Page"
                 ],
                 "description": "get products page data",
-                "operationId": "c877ea60fc125eadd9f505c610232bce",
+                "operationId": "e98bb029f58d92aad548ccfd7bf8808b",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -208,7 +208,7 @@
                     "Products Page"
                 ],
                 "description": "get products page data",
-                "operationId": "e1106b3c025c88ce2547d4dbed9a4f99",
+                "operationId": "4ab79235e9a951ef1ab58c7dfabb58f9",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -225,7 +225,7 @@
                     "Products Page"
                 ],
                 "description": "get products page data",
-                "operationId": "c059ac3ff6d911b79d1713ede90e9d88",
+                "operationId": "ea06ffc556ddc74c7d842e2abe24484f",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -242,7 +242,7 @@
                     "Products Page"
                 ],
                 "description": "get products data by category id",
-                "operationId": "d56383d24a70363d25ec63f3650dc274",
+                "operationId": "91e5d2a4042bdf5b5a085b55d209cf78",
                 "parameters": [
                     {
                         "name": "id",
@@ -269,7 +269,7 @@
                     "Products Page"
                 ],
                 "description": "get products data by brand id",
-                "operationId": "5023ecdfe37dc38f294e1c45e1761716",
+                "operationId": "effb338af4623ede6b0711f3fa28a04f",
                 "parameters": [
                     {
                         "name": "id",
@@ -296,7 +296,7 @@
                     "Products Page"
                 ],
                 "description": "search product",
-                "operationId": "769331895fbf1fb47c853f5601e735f6",
+                "operationId": "ea7d13513536f8619780a90251848c9f",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -328,7 +328,7 @@
                     "Product Details"
                 ],
                 "description": "get product details data by product id",
-                "operationId": "18948df93b0fb66334d988e9154b3f0b",
+                "operationId": "4f07ea0c3f4b174b0e7fa2ef8cc2d177",
                 "parameters": [
                     {
                         "name": "id",
@@ -357,7 +357,7 @@
                     "Product Details"
                 ],
                 "description": "save user comment for product",
-                "operationId": "b12402913a51122f83b6ad7956e9998a",
+                "operationId": "866e6cee254de9df77dd5c99369c6c12",
                 "responses": {
                     "200": {
                         "description": "Its Ok",
@@ -400,6 +400,69 @@
                     "User info"
                 ],
                 "operationId": "b5db4f6858b49ac58f5eeff1e2b4b009",
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user_received_orders": {
+            "post": {
+                "tags": [
+                    "User info"
+                ],
+                "operationId": "d87f6e1cae6151cdfba1a5ddf96323d4",
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user_cancelled_orders": {
+            "post": {
+                "tags": [
+                    "User info"
+                ],
+                "operationId": "235d4a1abfca4dbd613c6ae418f7091b",
+                "responses": {
+                    "200": {
+                        "description": "It's Ok",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user_processing_orders": {
+            "post": {
+                "tags": [
+                    "User info"
+                ],
+                "operationId": "865f8dc6b8fddf7d0d7c915722094ffd",
                 "responses": {
                     "200": {
                         "description": "It's Ok",

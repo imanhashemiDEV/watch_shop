@@ -13,6 +13,12 @@ Route::prefix('/v1')->namespace('Api\V1')->middleware('auth:sanctum')->group(fun
     Route::post('profile', [\App\Http\Controllers\Api\V1\UserApiController::class, 'profile']);
     // get user addresses
     Route::post('user_addresses', [\App\Http\Controllers\Api\V1\UserApiController::class, 'userAddresses']);
+    // get user received orders
+    Route::post('user_received_orders', [\App\Http\Controllers\Api\V1\UserApiController::class, 'userReceivedOrders']);
+    // get user canceled orders
+    Route::post('user_cancelled_orders', [\App\Http\Controllers\Api\V1\UserApiController::class, 'userCancelledOrders']);
+    // get user processing orders
+    Route::post('user_processing_orders', [\App\Http\Controllers\Api\V1\UserApiController::class, 'userProcessingOrders']);
 
     //===================== Order =====================//
     // payment
@@ -55,7 +61,7 @@ Route::prefix('/v1')->namespace('Api\V1')->group(function () {
     Route::get('product_details/{id}', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'productDetail']);
     // search product
     Route::post('search_product', [\App\Http\Controllers\Api\V1\ProductPageApiController::class, 'searchProduct']);
-    
+
     //===================== Order =====================//
     // payment callback
     Route::get('payment/callback', [\App\Http\Controllers\Api\V1\PaymentController::class, 'callback']);

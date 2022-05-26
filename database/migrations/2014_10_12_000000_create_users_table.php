@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\UserStatus;
+use App\Enums\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->String('status')->default(UserStatus::Active->value);
+            $table->String('status')->default(OrderStatus::Active->value);
             $table->timestamps();
         });
     }

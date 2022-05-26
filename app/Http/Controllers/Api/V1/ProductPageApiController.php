@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\V1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Brand;
 use App\Models\Comment;

@@ -18,13 +18,19 @@
                     <form role="form" method="POST" action="{{route('store.role.permission',$role->id)}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-                            <label>{{$role->name}}</label>
-                            @foreach($permissions as $permission)
-                                <div class="form-check border">
-                                    <input @if($role->hasPermissionTo($permission->name)) checked  @endif type="checkbox" name="permissions[]" value="{{$permission->name}}" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">{{$permission->name}}</label>
+                            <div class="row">
+                                <div class="col-6 offset-3">
+                                    <div class="list-group" id="list-tab" role="tablist">
+                                        <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="#" role="tab">   مجوزها برای نقش  {{$role->name}} </a>
+                                        @foreach($permissions as $permission)
+                                            <div class="form-check  d-flex align-items-center">
+                                                <input @if($role->hasPermissionTo($permission->name)) checked  @endif type="checkbox" name="permissions[]" value="{{$permission->name}}" class="form-check-input" id="exampleCheck1">
+                                                <a class="list-group-item list-group-item-action mt-2" for="exampleCheck1" data-toggle="list" href="#" role="tab">{{$permission->name}}</a>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

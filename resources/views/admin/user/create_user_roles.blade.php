@@ -18,13 +18,20 @@
                     <form role="form" method="POST" action="{{route('store.user.roles',$user->id)}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-                            <label>{{$user->name}}</label>
-                            @foreach($roles as $role)
-                                <div class="form-check">
-                                    <input  @if($user->hasRole($role->name)) checked  @endif type="checkbox" name="roles[]" value="{{$role->name}}" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">{{$role->name}}</label>
+                            <div class="row">
+                                <div class="col-6 offset-3">
+                                    <label></label>
+                                    <div class="list-group" id="list-tab" role="tablist">
+                                        <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="#" role="tab">نقش های کاربر {{$user->name}}</a>
+                                        @foreach($roles as $role)
+                                            <div class="form-check  d-flex align-items-center">
+                                                <input  @if($user->hasRole($role->name)) checked  @endif type="checkbox" name="roles[]" value="{{$role->name}}" class="form-check-input" id="exampleCheck1">
+                                                <a class="list-group-item list-group-item-action mt-2" for="exampleCheck1" data-toggle="list" href="#" role="tab">{{$role->name}}</a>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

@@ -24,7 +24,7 @@ class CreateOrderDetailsTable extends Migration
                 ->on('products');
             $table->integer('count')->default(0);
             $table->integer('total_price')->default(0);
-            $table->String('status')->default(OrderStatus::Draft->value);
+            $table->String('status')->default(OrderStatus::Processing->value);
             $table->timestamps();
         });
     }

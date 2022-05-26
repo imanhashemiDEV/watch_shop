@@ -15,6 +15,7 @@ class OrderDetail extends Model
         'count',
         'product_id',
         'order_id',
+        'status'
     ];
 
     public function order()
