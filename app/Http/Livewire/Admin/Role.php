@@ -3,11 +3,10 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Brand;
-use App\Models\Slider;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Sliders extends Component
+class Role extends Component
 {
     use WithPagination;
 
@@ -20,7 +19,7 @@ class Sliders extends Component
 
     protected $listeners = [
         'refreshComponent' => '$refresh',
-        'destroySlider',
+        'destroyRole',
     ];
 
     public function updatingSearch()
@@ -28,22 +27,21 @@ class Sliders extends Component
         $this->resetPage();
     }
 
-    public function destroySlider($id)
+    public function destroyRole($id)
     {
-        Slider::destroy($id);
+        \Spatie\Permission\Models\Role::destroy($id);
         $this->emit('refreshComponent');
     }
 
-    public function deleteSlider($id)
+    public function deleteRole($id)
     {
-        $this->dispatchBrowserEvent('deleteSlider',['id'=>$id]);
-
+        $this->dispatchBrowserEvent('deleteRole',['id'=>$id]);
     }
 
     public function render()
     {
-        $sliders = Slider::query()->orderBy('id','DESC')->
-        where('title', 'like', '%'.$this->search.'%')->paginate(30);
-        return view('livewire.admin.sliders', compact('sliders'));
+        $roles = \Spatie\Permission\Models\Role::query()->orderBy('id','DESC')
+        ->where('name', 'like', '%'.$this->search.'%')->paginate(30);
+        return view('livewire.admin.role',compact('roles'));
     }
 }

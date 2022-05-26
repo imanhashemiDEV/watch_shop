@@ -1,4 +1,10 @@
 <div class="table-responsive" tabindex="8" style="overflow: hidden; outline: none;">
+    <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">عنوان جستجو</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control text-left"  dir="rtl" wire:model="search" >
+        </div>
+    </div>
     <table class="table table-striped table-bordered table-hover">
         <thead class="thead-light">
         <tr>
@@ -27,16 +33,11 @@
                     </a>
                 </td>
                 <td class="text-center align-middle">
-                    <form action="{{ route('sliders.destroy', $slider->id) }}" method="post" >
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-outline-danger">
-                            حذف
-                       </button>
-                    </form>
+                    <a class="btn btn-outline-danger" wire:click="deleteSlider({{$slider->id}})">
+                        حذف
+                    </a>
                 </td>
                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($slider->created_at)->format('%B %d، %Y')}}</td>
-
             </tr>
         @endforeach
     </table>

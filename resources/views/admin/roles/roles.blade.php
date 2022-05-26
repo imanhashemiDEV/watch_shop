@@ -8,7 +8,6 @@
     }
 </style>
 @section('content')
-    <!-- begin::main content -->
     <main class="main-content">
         <div class="row">
             @if(Session::has('category'))
@@ -20,50 +19,35 @@
         <?php $i=(isset($_GET['page']))  ? (($_GET['page']-1)*20)+1 : 1; ?>
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive" tabindex="8" style="overflow: hidden; outline: none;">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead class="thead-light">
-                        <tr>
-                            <th class="text-primary text-center align-middle">ردیف</th>
-                            <th class="text-primary text-center align-middle">عنوان نقش</th>
-                            <th class="text-primary text-center align-middle">مجوزها</th>
-                            <th class="text-primary text-center align-middle">ویرایش</th>
-                            <th class="text-primary text-center align-middle">حذف</th>
-                            <th class="text-primary text-center align-middle">تاریخ ایجاد</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($roles as $role)
-                            <tr>
-                                <td class="text-center align-middle">{{$i++}}</td>
-                                <td class="text-center align-middle">{{$role->name}}</td>
-                                <td class="text-center align-middle">
-                                    <a class="btn btn-outline-info" href="{{route('create.role.permission',$role->id)}}">
-                                        مجوزها
-                                    </a>
-                                </td>
-                                <td class="text-center align-middle">
-                                    <a class="btn btn-outline-info" href="{{route('roles.edit',$role->id)}}">
-                                        ویرایش
-                                    </a>
-                                </td>
-                                <td class="text-center align-middle">
-                                    <form  method="post" action="{{route('roles.destroy',$role->id)}}">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-outline-info" >حذف</button>
-                                    </form>
-                                </td>
-                                <td class="text-center align-middle ">{{\Hekmatinasser\Verta\Verta::instance($role->created_at)->format('%B %d، %Y')}}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                    <div style="margin: 40px !important;" class="pagination pagination-rounded pagination-sm d-flex justify-content-center">
-                        {{$roles->appends(Request::except('page'))->links()}}
-                    </div>
-                </div>
+               <livewire:admin.role/>
             </div>
         </div>
     </main>
-    <!-- end::main content -->
+@endsection
+@section('scripts')
+    <script>
+        window.addEventListener('deleteRole', event => {
+            Swal.fire({
+                title: 'حذف نقش',
+                text: "آیا از حذف مطمئن هستید؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله',
+                cancelButtonText: 'خیر',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    Livewire.emit('destroyRole',event.detail.id);
+
+                    Swal.fire(
+                        'نقش حذف شد',
+                        'نقش مورد نظر با موفقیت حذف شد',
+                    );
+
+                }
+            });
+        })
+    </script>
 @endsection

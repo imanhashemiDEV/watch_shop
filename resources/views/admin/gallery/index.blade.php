@@ -8,7 +8,6 @@
     }
 </style>
 @section('content')
-    <!-- begin::main content -->
     <main class="main-content">
         <?php $i=(isset($_GET['page']))  ? (($_GET['page']-1)*20)+1 : 1; ?>
             @if(Session::has('message'))
@@ -47,13 +46,12 @@
             </div>
         </div>
     </main>
-    <!-- end::main content -->
 @endsection
 @section('scripts')
     <script>
-        function deleteItem(id) {
+        window.addEventListener('deleteGallery', event => {
             Swal.fire({
-                title: 'حذف عکس',
+                title: 'حذف گالری',
                 text: "آیا از حذف مطمئن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
@@ -64,31 +62,16 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    $.ajax(
-                        {
-                            url: url + "/admin/galleries/"+id,
-                            type: 'delete',
-                            dataType: "JSON",
-                            data: {
-                                _token:"{{csrf_token()}}",
-                                "id": id
-                            },
-                            success: function (response)
-                            {
-                                Swal.fire(
-                                    'عکس حذف شد',
-                                    'عکس مورد نظر با موفقیت حذف شد',
-                                    'باشه'
-                                );
-                            },
-                            error: function(xhr) {
-                                console.log(xhr.responseText);
-                            }
-                        });
+                    Livewire.emit('destroyGallery',event.detail.id);
 
-                    location.reload();
+                    Swal.fire(
+                        'گالری حذف شد',
+                        'گالری مورد نظر با موفقیت حذف شد',
+                        'باشه'
+                    );
+
                 }
             });
-        }
+        })
     </script>
 @endsection

@@ -18,3 +18,31 @@
     </div>
 </main>
 @endsection
+@section('scripts')
+    <script>
+        window.addEventListener('deleteOrder', event => {
+            Swal.fire({
+                title: 'حذف فروش',
+                text: "آیا از حذف مطمئن هستید؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله',
+                cancelButtonText: 'خیر',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    Livewire.emit('destroyOrder',event.detail.id);
+
+                    Swal.fire(
+                        'فروش حذف شد',
+                        'فروش مورد نظر با موفقیت حذف شد',
+                        'باشه'
+                    );
+
+                }
+            });
+        })
+    </script>
+@endsection

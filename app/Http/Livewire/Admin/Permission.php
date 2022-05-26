@@ -2,12 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Brand;
-use App\Models\Slider;
+use App\Models\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Sliders extends Component
+class Permission extends Component
 {
     use WithPagination;
 
@@ -20,7 +19,7 @@ class Sliders extends Component
 
     protected $listeners = [
         'refreshComponent' => '$refresh',
-        'destroySlider',
+        'destroyOrder',
     ];
 
     public function updatingSearch()
@@ -28,22 +27,22 @@ class Sliders extends Component
         $this->resetPage();
     }
 
-    public function destroySlider($id)
+    public function destroyOrder($id)
     {
-        Slider::destroy($id);
+        Order::destroy($id);
         $this->emit('refreshComponent');
     }
 
-    public function deleteSlider($id)
+    public function deleteOrder($id)
     {
-        $this->dispatchBrowserEvent('deleteSlider',['id'=>$id]);
+        $this->dispatchBrowserEvent('deleteOrder',['id'=>$id]);
 
     }
 
     public function render()
     {
-        $sliders = Slider::query()->orderBy('id','DESC')->
-        where('title', 'like', '%'.$this->search.'%')->paginate(30);
-        return view('livewire.admin.sliders', compact('sliders'));
+        $permissions = \Spatie\Permission\Models\Permission::query()->orderBy('id','DESC')
+            ->where('name', 'like', '%'.$this->search.'%')->paginate(30);
+        return view('livewire.admin.permission', compact('permissions'));
     }
 }

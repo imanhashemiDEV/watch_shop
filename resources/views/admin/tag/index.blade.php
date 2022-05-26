@@ -22,7 +22,7 @@
 @endsection
 @section('scripts')
     <script>
-        function deleteItem(id) {
+        window.addEventListener('deleteTag', event => {
             Swal.fire({
                 title: 'حذف تگ',
                 text: "آیا از حذف مطمئن هستید؟",
@@ -35,31 +35,15 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    $.ajax(
-                        {
-                            url: url + "/admin/tags/"+id,
-                            type: 'delete',
-                            dataType: "JSON",
-                            data: {
-                                _token:"{{csrf_token()}}",
-                                "id": id
-                            },
-                            success: function (response)
-                            {
-                                Swal.fire(
-                                    'تگ حذف شد',
-                                    'تگ مورد نظر با موفقیت حذف شد',
-                                    'باشه'
-                                );
-                            },
-                            error: function(xhr) {
-                                console.log(xhr.responseText);
-                            }
-                        });
+                    Livewire.emit('destroyTag',event.detail.id);
 
-                    location.reload();
+                    Swal.fire(
+                        'تگ حذف شد',
+                        'تگ مورد نظر با موفقیت حذف شد',
+                    );
+
                 }
             });
-        }
+        })
     </script>
 @endsection

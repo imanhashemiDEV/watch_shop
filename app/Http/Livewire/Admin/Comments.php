@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Brand;
 use App\Models\Comment;
 use App\Models\Product;
 use Livewire\Component;
@@ -13,27 +14,50 @@ class Comments extends Component
 
     protected $paginationTheme='bootstrap';
 
+    public $search = '';
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
+
+    protected $listeners = [
+        'refreshComponent' => '$refresh',
+        'destroyComment',
+    ];
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function destroyComment($id)
+    {
+        Comment::destroy($id);
+        $this->emit('refreshComponent');
+    }
+
+    public function deleteComment($id)
+    {
+        $this->dispatchBrowserEvent('deleteComment',['id'=>$id]);
+    }
+
     public function changeStatus($id){
         $comment = Comment::query()->find($id);
-        if($comment->status=='accepted'){
+        if($comment->status==='accepted'){
             $comment->status='rejected';
             $comment->save();
-        }else if($comment->status=='rejected'){
+        }else if($comment->status==='rejected'){
             $comment->status='accepted';
             $comment->save();
-        }else if($comment->status=='draft'){
+        }else if($comment->status==='draft'){
             $comment->status='accepted';
             $comment->save();
         }
     }
 
-    public function deleteComment($id){
-        Comment::destroy($id);
-    }
-
     public function render()
     {
-        $comments = Comment::with('product')->orderBy('created_at', 'desc')->paginate(20);
+        $comments = Comment::with('product')->orderBy('created_at', 'desc')
+        ->where('body', 'like', '%'.$this->search.'%')->paginate(30);
         return view('livewire.admin.comments', compact('comments'));
     }
 }
