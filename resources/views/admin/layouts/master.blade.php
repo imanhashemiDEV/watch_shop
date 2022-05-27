@@ -18,6 +18,7 @@
         type="text/css">
     <link rel="stylesheet" href="{{url('panel/assets/css/app.css')}}" type="text/css">
     <link rel="stylesheet" href="{{url('css/custom.css')}}" type="text/css">
+    <script src="{{ url('panel/plugins/ckeditor/ckeditor.js') }}"></script>
     @livewireStyles
 </head>
 
@@ -36,6 +37,7 @@
     <script src="{{url('js/kamadatepicker.holidays.js')}}"></script>
     <script src="{{ url('panel/vendors/colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
     <script src="{{ url('panel/assets/js/examples/colorpicker.js') }}"></script>
+
     <script src="{{url('js/custom.js')}}"></script>
     @livewireScripts
     <script>

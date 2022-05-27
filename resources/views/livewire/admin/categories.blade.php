@@ -23,8 +23,8 @@
             <tr>
                 <td class="text-center align-middle">{{$categories->firstItem() + $index  }}</td>
                 <td class="text-center align-middle">
-                    <figure class="avatar avatar-sm">
-                        <img src="{{ url('images/category/small/' . $category->image) }}"
+                    <figure class="avatar avatar">
+                        <img src="{{ url('images/category/big/' . $category->image) }}"
                             class="rounded-circle" alt="image">
                     </figure>
                 </td>

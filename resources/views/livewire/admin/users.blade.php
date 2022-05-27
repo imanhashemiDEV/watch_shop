@@ -9,6 +9,7 @@
         <thead class="thead-light">
         <tr>
             <th class="text-center align-middle text-primary">ردیف</th>
+            <th class="text-center align-middle text-primary">عکس</th>
             <th class="text-center align-middle text-primary">نام و نام خانوادگی</th>
             <th class="text-center align-middle text-primary">ایمیل</th>
             <th class="text-center align-middle text-primary">موبایل</th>
@@ -22,6 +23,12 @@
         @foreach($users as $index => $user)
             <tr>
                 <td class="text-center align-middle">{{$users->firstItem() + $index}}</td>
+                <td class="text-center align-middle">
+                    <figure class="avatar avatar">
+                        <img src="{{ $user->profile_photo_path ? url('images/user_profile/small/' . $user->profile_photo_path) : url('images/user_profile/small/profile.png')}}"
+                             class="rounded-circle" alt="image">
+                    </figure>
+                </td>
                 <td class="text-center align-middle">{{$user->name}}</td>
                 <td class="text-center align-middle">{{$user->email}}</td>
                 <td class="text-center align-middle">{{$user->mobile}}</td>

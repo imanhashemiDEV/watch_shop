@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Enums\UserStatus;
 use App\Models\Address;
 use Laravel\Jetstream\HasTeams;
 use Illuminate\Http\UploadedFile;
@@ -73,10 +74,10 @@ class User extends Authenticatable
     public function user_status($status)
     {
         switch ($status) {
-            case OrderStatus::Active:
+            case UserStatus::Active:
                 return "فعال";
                 break;
-            case OrderStatus::InActive:
+            case UserStatus::InActive:
                 return "غیرفعال ";
                 break;
             default:

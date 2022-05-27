@@ -21,9 +21,9 @@
             <tr>
                 <td class="text-center align-middle">{{$sliders->firstItem() + $index}}</td>
                 <td class="text-center align-middle">
-                    <figure class="avatar avatar-sm">
+                    <figure>
                         <img src="{{ url('images/sliders/small/' . $slider->image) }}"
-                            class="rounded-circle" alt="image">
+                            class="rounded" alt="image">
                     </figure>
                 </td>
                 <td class="text-center align-middle">{{$slider->title}}</td>

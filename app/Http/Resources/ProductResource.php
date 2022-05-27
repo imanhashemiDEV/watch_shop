@@ -32,6 +32,7 @@ class ProductResource extends JsonResource
             'image'=> url('images/product/small/'.$this->image),
             'properties'=> PropertyResource::collection($this->properties),
             'description'=>$this->description,
+            'discussion'=>$this->discussion,
             'comments'=> CommentResource::collection($this->comments)
         ];
     }

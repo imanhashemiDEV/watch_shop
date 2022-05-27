@@ -11,7 +11,6 @@
                 </div>
             @endif
         </div>
-        <?php $i=(isset($_GET['page']))  ? (($_GET['page']-1)*20)+1 : 1; ?>
         <div class="card">
             <div class="card-body">
                <livewire:admin.categories/>
@@ -23,9 +22,9 @@
 @endsection
 @section('scripts')
     <script>
-        window.addEventListener('deleteArticle', event => {
+        window.addEventListener('deleteCategory', event => {
             Swal.fire({
-                title: 'حذف مقاله',
+                title: 'حذف دسته بندی',
                 text: "آیا از حذف مطمئن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
@@ -36,12 +35,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    Livewire.emit('destroyArticle',event.detail.id);
+                    Livewire.emit('destroyCategory',event.detail.id);
 
                     Swal.fire(
-                        'مقاله حذف شد',
-                        'مقاله مورد نظر با موفقیت حذف شد',
-                        'باشه'
+                        'دسته بندی حذف شد',
+                        'دسته بندی مورد نظر با موفقیت حذف شد',
                     );
 
                 }

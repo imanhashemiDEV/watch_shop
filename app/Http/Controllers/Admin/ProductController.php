@@ -43,11 +43,12 @@ class ProductController extends Controller
             'price' => $request->input('price'),
             'discount' => $request->input('discount'),
             'description' => $request->input('description'),
+            'discussion' => $request->input('discussion'),
             'title_en' => $request->input('title_en'),
             'guaranty' => $request->input('guaranty'),
             'product_count' => $request->input('product_count'),
-            'is_special' => $request->input('is_special'),
-            'special_expiration' => ($request->input('special_expiration') != null) ? DateShamsi::shamsi_to_miladi($request->input('special_expiration')) : now(),
+            'is_special' => $request->input('is_special') ==="on",
+            'special_expiration' => ($request->input('special_expiration') !== null) ? DateShamsi::shamsi_to_miladi($request->input('special_expiration')) : now(),
             'image' => $image,
             'category_id' => $request->input('category_id'),
             'brand_id' => $request->input('brand_id')
@@ -93,11 +94,12 @@ class ProductController extends Controller
             'price' => $request->input('price'),
             'discount' => $request->input('discount'),
             'description' => $request->input('description'),
+            'discussion' => $request->input('discussion'),
             'title_en' => $request->input('title_en'),
             'guaranty' => $request->input('guaranty'),
             'product_count' => $request->input('product_count'),
-            'is_special' => $request->input('is_special') =="on" ? true : false,
-            'special_expiration' => ($request->input('special_expiration') != null) ? DateShamsi::shamsi_to_miladi($request->input('special_expiration')) : now(),
+            'is_special' => $request->input('is_special') ==="on",
+            'special_expiration' => ($request->input('special_expiration') !== null) ? DateShamsi::shamsi_to_miladi($request->input('special_expiration')) : now(),
             'image' => $image,
             'category_id' => $request->input('category_id'),
             'brand_id' => $request->input('brand_id')
@@ -132,20 +134,4 @@ class ProductController extends Controller
 
         return redirect()->back()->with('message', 'ویژگی های محصول با موفقیت ثبت شد');
     }
-
-    public function searchProduct(Request $request)
-    {
-      $categories = Category::query()->where('parent_id', '!=', 0)->get();
-
-      $search = $request->search;
-      $products = Product::query()->where('title','like','%'.$search.'%')
-      ->orWhere('slug','like','%'.$search.'%')
-          ->orWhereHas('comments', function ($q) use($search){
-              $q->where('body','like','%'.$search.'%');
-          })->with('comments')
-          ->get();
-
-      return view('front.search', compact('categories','search'));
-    }
-
 }

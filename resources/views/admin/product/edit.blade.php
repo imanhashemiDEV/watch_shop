@@ -96,8 +96,16 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label"> توضیحات محصول</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="description" cols="30" rows="10">
+                                    <textarea class="form-control" id="description" name="description" cols="30" rows="10">
                                             {{$product->description}}
+                                        </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> توضیحات محصول</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="discussion" name="discussion" cols="30" rows="10">
+                                            {{$product->discussion}}
                                         </textarea>
                                 </div>
                             </div>
@@ -183,6 +191,13 @@
         });
 
         $('.form-select').select2();
+
+    ClassicEditor.create( document.querySelector( '#description' ), {
+        language:'fa'
+    } );
+    ClassicEditor.create( document.querySelector( '#discussion' ), {
+        language:'fa'
+    } );
 
 </script>
 @endsection
