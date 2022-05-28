@@ -53,8 +53,7 @@
                             </form>
                         </div>
                         <div class="overflow-hidden rounded col-md-3">
-                            <img src="{{ $category->image ?  url('images/category/big').'/'. $category->image : "
-                                http://www.placehold.it/400" }}" class="rounded img-fluid">
+                            <img src="{{ url('images/category/big').'/'. $category->image}}" class="rounded img-fluid">
                         </div>
                     </div>
                 </div>

@@ -151,8 +151,7 @@
                         </form>
                     </div>
                     <div class="overflow-hidden rounded col-md-3">
-                        <img src="{{ $product->image ?  url('images/product/big').'/'. $product->image : "
-                            http://www.placehold.it/400" }}" class="rounded img-fluid">
+                        <img src="{{ url('images/product/big').'/'. $product->image}}" class="rounded img-fluid">
                     </div>
                 </div>
             </div>
