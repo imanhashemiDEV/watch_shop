@@ -1,5 +1,5 @@
-<div class="table-responsive" tabindex="8" style="overflow: hidden; outline: none;">
-    <table class="table table-striped table-bordered table-hover">
+<div class="table-responsive" tabindex="8">
+    <table class="table table-striped table-hover overflow-auto">
         <thead class="thead-light">
         <tr>
             <th class="text-primary text-center align-middle">ردیف</th>

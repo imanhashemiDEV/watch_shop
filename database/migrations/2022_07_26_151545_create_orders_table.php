@@ -24,11 +24,11 @@ class CreateOrdersTable extends Migration
 
             $table->unsignedBigInteger('address_id');
             $table->foreign('address_id')->references('id')
-                ->on('addresses');
+                ->on('addresses')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
-                ->on('users');
+                ->on('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,11 +29,14 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
+        $image = User::saveImage($request->image);
+
         User::query()->create([
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
+            'profile_photo_path'=>$image
         ]);
 
         return redirect()->back()->with('message','کاربر با موفقیت اضافه شد');
@@ -56,11 +60,15 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         $user = User::query()->find($id);
+
+        $image = User::saveImage($request->image);
+
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'profile_photo_path'=>$image
         ]);
 
         return redirect()->route('users.index')->with('message','کاربر با موفقیت ویرایش شد');

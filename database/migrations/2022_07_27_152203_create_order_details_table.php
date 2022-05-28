@@ -18,10 +18,10 @@ class CreateOrderDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')
-                ->on('orders');
+                ->on('orders')->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')
-                ->on('products');
+                ->on('products')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('count')->default(0);
             $table->integer('total_price')->default(0);
             $table->String('status')->default(OrderStatus::Processing->value);

@@ -12,8 +12,7 @@ class PropertyGroupController extends Controller
 
     public function index()
     {
-        $property_groups = PropertyGroup::query()->paginate(10);
-        return  view('admin.property_group.index',compact('property_groups'));
+        return  view('admin.property_group.index');
     }
 
 

@@ -3,7 +3,6 @@
 @section('content')
     <!-- begin::main content -->
     <main class="main-content">
-
         <div class="row">
             @if(Session::has('message'))
                 <div class="alert alert-info">
@@ -17,15 +16,14 @@
                 <livewire:admin.brands/>
             </div>
         </div>
-
     </main>
     <!-- end::main content -->
 @endsection
 @section('scripts')
     <script>
-        window.addEventListener('deleteArticle', event => {
+        window.addEventListener('deleteBrand', event => {
             Swal.fire({
-                title: 'حذف مقاله',
+                title: 'حذف برند',
                 text: "آیا از حذف مطمئن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
@@ -36,14 +34,12 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    Livewire.emit('destroyArticle',event.detail.id);
+                    Livewire.emit('destroyBrand',event.detail.id);
 
                     Swal.fire(
-                        'مقاله حذف شد',
-                        'مقاله مورد نظر با موفقیت حذف شد',
-                        'باشه'
+                        'برند حذف شد',
+                        'برند مورد نظر با موفقیت حذف شد',
                     );
-
                 }
             });
         })

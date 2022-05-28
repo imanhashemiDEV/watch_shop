@@ -18,9 +18,9 @@
 @endsection
 @section('scripts')
     <script>
-        window.addEventListener('deleteCategory', event => {
+        window.addEventListener('deleteProduct', event => {
             Swal.fire({
-                title: 'حذف دسته بندی',
+                title: 'حذف محصول',
                 text: "آیا از حذف مطمئن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
@@ -31,11 +31,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    Livewire.emit('destroyCategory',event.detail.id);
+                    Livewire.emit('destroyProduct',event.detail.id);
 
                     Swal.fire(
-                        'دسته بندی حذف شد',
-                        'دسته بندی مورد نظر با موفقیت حذف شد',
+                        ' محصول حذف شد',
+                        'محصول  مورد نظر با موفقیت حذف شد',
                     );
 
                 }

@@ -59,6 +59,10 @@
                                 <input type="text" class="form-control text-left"  dir="rtl" name="instagram" value="{{old('instagram')}}">
                             </div>
                         </div>
+                        <div class="form-group row custom-file col-sm-10 offset-2">
+                            <label class="custom-file-label" for="customFile">انتخاب عکس  </label>
+                            <input type="file" class="custom-file-input" id="customFile" name='image'>
+                        </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <button type="submit" class="btn btn-primary">ثبت</button>

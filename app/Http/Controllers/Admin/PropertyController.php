@@ -12,8 +12,7 @@ class PropertyController extends Controller
 
     public function index()
     {
-        $properties = Property::query()->paginate(10);
-        return view('admin.properties.index', compact('properties'));
+        return view('admin.properties.index');
     }
 
 

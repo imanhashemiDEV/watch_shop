@@ -32,9 +32,11 @@ class CreateProductsTable extends Migration
             $table->timestamp('special_expiration')->useCurrent();
             $table->String('status')->default(ProductStatus::Active->value);
             $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate();
+            $table->foreign('category_id')->references('id')
+                ->on('categories')->cascadeOnUpdate()->cascadeOnDelete();
             $table->bigInteger('brand_id')->unsigned();
-            $table->foreign('brand_id')->references('id')->on('brands')->cascadeOnUpdate();
+            $table->foreign('brand_id')->references('id')
+                ->on('brands')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

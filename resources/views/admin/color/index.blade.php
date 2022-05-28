@@ -22,9 +22,9 @@
 @endsection
 @section('scripts')
     <script>
-        function deleteItem(id) {
+        window.addEventListener('deleteColor', event => {
             Swal.fire({
-                title: 'حذف تگ',
+                title: 'حذف رنگ',
                 text: "آیا از حذف مطمئن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
@@ -35,31 +35,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    $.ajax(
-                        {
-                            url: url + "/admin/colors/"+id,
-                            type: 'delete',
-                            dataType: "JSON",
-                            data: {
-                                _token:"{{csrf_token()}}",
-                                "id": id
-                            },
-                            success: function (response)
-                            {
-                                Swal.fire(
-                                    'رنگ حذف شد',
-                                    'رنگ مورد نظر با موفقیت حذف شد',
-                                    'باشه'
-                                );
-                            },
-                            error: function(xhr) {
-                                console.log(xhr.responseText);
-                            }
-                        });
+                    Livewire.emit('destroyColor',event.detail.id);
 
-                    location.reload();
+                    Swal.fire(
+                        'رنگ حذف شد',
+                        'رنگ مورد نظر با موفقیت حذف شد',
+                    );
                 }
             });
-        }
+        })
     </script>
 @endsection
