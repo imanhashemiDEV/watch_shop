@@ -35,7 +35,7 @@ class ProductRepository{
     // get amazing producte order by discount paginated
     public static function getAmazingProducts(){
 
-        $products= Product::query()->where('is_amazing',true)
+        $products= Product::query()->where('is_special',true)
         ->orderBy('discount','DESC')->paginate(12);
 
         return ProductListResource::collection($products);
@@ -79,7 +79,7 @@ class ProductRepository{
     //get six amazing products for home page
     public static function getSixAmazingProducts(){
 
-        $products= Product::query()->where('is_amazing',true)
+        $products= Product::query()->where('is_special',true)
         ->orderBy('discount','DESC')->take(6)->get();
 
         return ProductListResource::collection($products);
