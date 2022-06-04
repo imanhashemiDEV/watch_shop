@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->integer('product_count')->default(0);
             $table->string('image')->nullable();
             $table->string('guaranty')->nullable();
-            $table->string('discount')->default(0);
+            $table->integer('discount')->default(0);
             $table->text('description')->nullable();
             $table->text('discussion')->nullable();
             $table->boolean('is_special')->default(false);

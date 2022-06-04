@@ -19,6 +19,7 @@ class ProductListResource extends JsonResource
             'title'=>$this->title,
             'price'=>$this->price,
             'discount'=>$this->discount,
+            'description'=>$this->description,
             'discount_price'=>($this->price - ((($this->price) * ($this->discount)) / 100)),
             'product_count'=>$this->product_count,
             'category'=>$this->category->title,

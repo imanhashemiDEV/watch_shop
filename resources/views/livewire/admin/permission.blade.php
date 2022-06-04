@@ -1,4 +1,4 @@
-<div class="table-responsive" tabindex="8">
+<div class="table-responsive overflow-auto" tabindex="8">
     <table class="table table-striped table-hover overflow-auto">
         <thead class="thead-light">
         <tr>

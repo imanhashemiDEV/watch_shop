@@ -1,4 +1,4 @@
-<div class="table-responsive" tabindex="8">
+<div class="table-responsive overflow-auto" tabindex="8">
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">عنوان جستجو</label>
         <div class="col-sm-10">

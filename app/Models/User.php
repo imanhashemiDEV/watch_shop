@@ -115,8 +115,8 @@ class User extends Authenticatable
                 $constraint->aspectRatio();
             });
 
-            Storage::disk('local')->put('user_profile/small/' . $name, (string)$smallImage->encode('jpg', 90));
-            Storage::disk('local')->put('user_profile/big/' . $name, (string)$bigImage->encode('jpg', 90));
+            Storage::disk('local')->put('user_profile/small/' . $name, (string)$smallImage->encode('png', 90));
+            Storage::disk('local')->put('user_profile/big/' . $name, (string)$bigImage->encode('png', 90));
 
             return $name;
         }else{

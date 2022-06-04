@@ -1,11 +1,11 @@
-<div class="table-responsive" tabindex="8">
+<div class="table-responsive overflow-auto" tabindex="8">
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">عنوان جستجو</label>
         <div class="col-sm-10">
             <input type="text" class="form-control text-left"  dir="rtl" wire:model="search" >
         </div>
     </div>
-    <table class="table table-striped table-hover overflow-auto">
+    <table class="table table-striped table-hover">
         <thead class="thead-light">
         <tr>
             <th class="text-center align-middle text-primary">ردیف</th>
@@ -21,9 +21,9 @@
             <tr>
                 <td class="text-center align-middle">{{$brands->firstItem() + $index}}</td>
                 <td class="text-center align-middle">
-                    <figure class="avatar avatar-sm">
-                        <img src="{{ url('images/brands/small/' . $brand->image) }}"
-                            class="rounded-circle" alt="image">
+                    <figure>
+                        <img  width="200" src="{{ url('images/brands/small/' . $brand->image) }}"
+                            class="rounded" alt="image">
                     </figure>
                 </td>
                 <td class="text-center align-middle">{{$brand->title}}</td>

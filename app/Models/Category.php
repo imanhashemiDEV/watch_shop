@@ -39,8 +39,8 @@ class Category extends Model
             $constraint->aspectRatio();
         });
 
-        Storage::disk('local')->put('category/small/' . $name, (string)$smallImage->encode('jpg', 90));
-        Storage::disk('local')->put('category/big/' . $name, (string)$bigImage->encode('jpg', 90));
+        Storage::disk('local')->put('category/small/' . $name, (string)$smallImage->encode('png', 90));
+        Storage::disk('local')->put('category/big/' . $name, (string)$bigImage->encode('png', 90));
 
         //$file->storeAs('category/small/', $name,'local');
 

@@ -32,8 +32,8 @@ class Brand extends Model
             $constraint->aspectRatio();
         });
 
-        Storage::disk('local')->put('brands/small/' . $name, (string)$smallImage->encode('jpg', 90));
-        Storage::disk('local')->put('brands/big/' . $name, (string)$bigImage->encode('jpg', 90));
+        Storage::disk('local')->put('brands/small/' . $name, (string)$smallImage->encode('png', 90));
+        Storage::disk('local')->put('brands/big/' . $name, (string)$bigImage->encode('png', 90));
 
         return $name;
     }

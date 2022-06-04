@@ -78,8 +78,8 @@ class Product extends Model
             $constraint->aspectRatio();
         });
 
-        Storage::disk('local')->put('product/small/' . $name, (string)$smallImage->encode('jpg', 90));
-        Storage::disk('local')->put('product/big/' . $name, (string)$bigImage->encode('jpg', 90));
+        Storage::disk('local')->put('product/small/' . $name, (string)$smallImage->encode('png', 90));
+        Storage::disk('local')->put('product/big/' . $name, (string)$bigImage->encode('png', 90));
 
         return $name;
     }
