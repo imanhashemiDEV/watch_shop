@@ -26,6 +26,7 @@ class ProductResource extends JsonResource
             'product_count'=>$this->product_count,
             'category'=>$this->category->title,
             'category_id'=>$this->category_id,
+            'colors'=> ColorResource::collection($this->colors),
             'brand'=>$this->brand->title,
             'brand_id'=>$this->brand_id,
             'review'=>$this->review,
@@ -33,7 +34,7 @@ class ProductResource extends JsonResource
             'properties'=> PropertyResource::collection($this->properties),
             'description'=>$this->description,
             'discussion'=>$this->discussion,
-            'comments'=> CommentResource::collection($this->comments)
+            'comments'=> CommentResource::collection($this->comments),
         ];
     }
 }
