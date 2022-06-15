@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Enums\OrderStatus;
 use App\Enums\UserStatus;
-use App\Models\Brand;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;

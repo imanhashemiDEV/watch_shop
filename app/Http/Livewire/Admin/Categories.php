@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Brand;
 use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
