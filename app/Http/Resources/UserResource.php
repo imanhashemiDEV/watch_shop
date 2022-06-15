@@ -19,12 +19,12 @@ class UserResource extends JsonResource
             'name'=>$this->name,
             'mobile'=>$this->mobile,
             'phone'=>$this->phone,
-            'address'=> AddressResource::collection($this->addresses)->first()
+            'address'=> AddressResource::collection($this->addresses)->first(),
         ];
     }
 
-
-    public function with($request){
+    public function with($request)
+    {
         return [
             'status'=>200,
         ];

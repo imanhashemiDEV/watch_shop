@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Brand;
-use App\Models\Comment;
-use App\Models\Product;
-use App\Http\Services\Keys;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Http\Resources\ProductResource;
+use App\Http\Services\Keys;
+use App\Models\Brand;
+use App\Models\Comment;
+use App\Models\Product;
 use App\Repositories\ProductRepository;
+use Illuminate\Http\Request;
 
 class ProductPageApiController extends Controller
 {
@@ -32,7 +32,7 @@ class ProductPageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => "صفحه محصولات فروشگاه ساعت",
+            'message' => 'صفحه محصولات فروشگاه ساعت',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::all_products  => ProductRepository::getAllProducts()->response()->getData(true),
@@ -40,8 +40,7 @@ class ProductPageApiController extends Controller
         ], 200);
     }
 
-
-     /**
+    /**
      * @OA\Get(
      ** path="/api/v1/newest_products",
      *  tags={"Products Page"},
@@ -59,7 +58,7 @@ class ProductPageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => "صفحه محصولات فروشگاه ساعت",
+            'message' => 'صفحه محصولات فروشگاه ساعت',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::all_products  => ProductRepository::getNewestProducts()->response()->getData(true),
@@ -67,7 +66,7 @@ class ProductPageApiController extends Controller
         ], 200);
     }
 
-     /**
+    /**
      * @OA\Get(
      ** path="/api/v1/cheapest_products",
      *  tags={"Products Page"},
@@ -85,7 +84,7 @@ class ProductPageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => "صفحه محصولات فروشگاه ساعت",
+            'message' => 'صفحه محصولات فروشگاه ساعت',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::all_products  => ProductRepository::getCheapestProducts()->response()->getData(true),
@@ -93,8 +92,7 @@ class ProductPageApiController extends Controller
         ], 200);
     }
 
-
-     /**
+    /**
      * @OA\Get(
      ** path="/api/v1/most_expensive_products",
      *  tags={"Products Page"},
@@ -112,7 +110,7 @@ class ProductPageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => "صفحه محصولات فروشگاه ساعت",
+            'message' => 'صفحه محصولات فروشگاه ساعت',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::all_products  => ProductRepository::getMostExpensiveProducts()->response()->getData(true),
@@ -120,8 +118,7 @@ class ProductPageApiController extends Controller
         ], 200);
     }
 
-
-     /**
+    /**
      * @OA\Get(
      ** path="/api/v1/most_viewed_products",
      *  tags={"Products Page"},
@@ -139,14 +136,13 @@ class ProductPageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => "صفحه محصولات فروشگاه ساعت",
+            'message' => 'صفحه محصولات فروشگاه ساعت',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::all_products  => ProductRepository::getAllProducts()->response()->getData(true),
             ],
         ], 200);
     }
-
 
     /**
      * @OA\Get(
@@ -174,14 +170,13 @@ class ProductPageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => "صفحه محصولات فروشگاه ساعت بر اساس دسته بندی",
+            'message' => 'صفحه محصولات فروشگاه ساعت بر اساس دسته بندی',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::products_by_category => ProductRepository::getProductsByCategory($id)->response()->getData(true),
             ],
         ], 200);
     }
-
 
     /**
      * @OA\Get(
@@ -209,7 +204,7 @@ class ProductPageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => " صفحه محصولات فروشگاه ساعت بر اساس برند",
+            'message' => ' صفحه محصولات فروشگاه ساعت بر اساس برند',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::products_by_brands  => ProductRepository::getProductsByBrand($id)->response()->getData(true),
@@ -217,8 +212,7 @@ class ProductPageApiController extends Controller
         ], 200);
     }
 
-
-     /**
+    /**
      * @OA\Post(
      ** path="/api/v1/search_product",
      *  tags={"Products Page"},
@@ -250,14 +244,13 @@ class ProductPageApiController extends Controller
 
         return response()->json([
             'result' => true,
-            'message' => " صفحه محصولات فروشگاه ساعت بر اساس برند",
+            'message' => ' صفحه محصولات فروشگاه ساعت بر اساس برند',
             'data' => [
                 Keys::all_brands  => Brand::getAllBrands(),
                 Keys::products_by_brands  => ProductRepository::getSearchedProducts($search)->response()->getData(true),
             ],
         ], 200);
     }
-
 
     /**
      * @OA\Get(
@@ -285,14 +278,14 @@ class ProductPageApiController extends Controller
      **/
     public function productDetail($id)
     {
-        $product =  Product::query()->find($id);
+        $product = Product::query()->find($id);
         $product->increment('review');
 
         return response()->json([
             'result' => true,
-            'message' => " صفحه جزئیات محصول فروشگاه ساعت   ",
+            'message' => ' صفحه جزئیات محصول فروشگاه ساعت   ',
             'data' => [
-                new ProductResource($product)
+                new ProductResource($product),
             ],
         ], 200);
     }
@@ -315,7 +308,7 @@ class ProductPageApiController extends Controller
     public function saveComment(Request $request)
     {
         $user = auth()->user();
-        $product =  Product::query()->find($request->product_id);
+        $product = Product::query()->find($request->product_id);
 
         $comment = new Comment;
         $comment->body = $request->body;
@@ -325,10 +318,8 @@ class ProductPageApiController extends Controller
 
         return response()->json([
             'result' => true,
-            'message' => " نظر ثبت شد و پس از تایید نمایش داده خواهد شد",
+            'message' => ' نظر ثبت شد و پس از تایید نمایش داده خواهد شد',
             'data' => [],
         ], 200);
     }
-
-
 }

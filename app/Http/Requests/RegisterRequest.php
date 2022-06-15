@@ -32,7 +32,4 @@ class RegisterRequest extends FormRequest
             'lng' => 'required',
         ];
     }
-
 }
-
-

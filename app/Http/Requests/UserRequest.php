@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'name'=>'required',
             'email'=>'required|unique:users,email,'.$this->user,
             'mobile'=>'required|unique:users,mobile,'.$this->user,
-            'password'=>'required'
+            'password'=>'required',
         ];
     }
 }

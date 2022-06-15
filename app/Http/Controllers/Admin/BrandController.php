@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Brand;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
+use App\Models\Brand;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
     public function index()
     {
-
         return  view('admin.brand.index');
     }
 
@@ -22,12 +21,11 @@ class BrandController extends Controller
 
     public function store(BrandRequest $request)
     {
-
         $image = Brand::saveImage($request->image);
 
         $Brand = Brand::query()->create([
             'title' => $request->input('title'),
-            'image' => $image
+            'image' => $image,
         ]);
 
         return redirect()->back()->with('message', 'برند با موفقیت اضافه شد');
@@ -41,6 +39,7 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::query()->find($id);
+
         return view('admin.brand.edit', compact('brand'));
     }
 
@@ -48,15 +47,15 @@ class BrandController extends Controller
     {
         $brand = Brand::query()->find($id);
 
-        if($request->image){
+        if ($request->image) {
             $image = Brand::saveImage($request->image);
-        }else{
+        } else {
             $image = $brand->image;
         }
 
         $brand->update([
             'title' => $request->input('title'),
-            'image' => $image
+            'image' => $image,
         ]);
 
         return redirect()->route('brands.index')->with('message', 'برند با موفقیت ویرایش شد');

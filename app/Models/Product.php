@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
-use Intervention\Image\Facades\Image;
-use App\Http\Resources\ProductResource;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\ProductListResource;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Resources\ProductResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'title',
         'slug',
         'image',
@@ -29,7 +29,7 @@ class Product extends Model
         'sell',
         'product_count',
         'is_special',
-        'special_expiration'
+        'special_expiration',
     ];
 
     public function category()
@@ -39,22 +39,22 @@ class Product extends Model
 
     public function brand()
     {
-       return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Brand::class);
     }
 
     public function galleries()
     {
-       return $this->hasMany(Gallery::class);
+        return $this->hasMany(Gallery::class);
     }
 
     public function colors()
     {
-        return $this->belongsToMany(Color::class,'color_product');
+        return $this->belongsToMany(Color::class, 'color_product');
     }
 
     public function properties()
     {
-        return $this->belongsToMany(Property::class,'product_property')
+        return $this->belongsToMany(Property::class, 'product_property')
             ->withPivot(['value']);
     }
 
@@ -70,7 +70,7 @@ class Product extends Model
 
     public static function saveImage($file): string
     {
-        $name = time() .'.'. $file->extension();
+        $name = time().'.'.$file->extension();
         $smallImage = Image::make($file->getRealPath());
         $bigImage = Image::make($file->getRealPath());
 
@@ -78,10 +78,9 @@ class Product extends Model
             $constraint->aspectRatio();
         });
 
-        Storage::disk('local')->put('product/small/' . $name, (string)$smallImage->encode('png', 90));
-        Storage::disk('local')->put('product/big/' . $name, (string)$bigImage->encode('png', 90));
+        Storage::disk('local')->put('product/small/'.$name, (string) $smallImage->encode('png', 90));
+        Storage::disk('local')->put('product/big/'.$name, (string) $bigImage->encode('png', 90));
 
         return $name;
     }
-
 }

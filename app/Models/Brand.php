@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Http\Resources\BrandResource;
-use Intervention\Image\Facades\Image;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Intervention\Image\Facades\Image;
 
 class Brand extends Model
 {
@@ -14,7 +14,7 @@ class Brand extends Model
 
     protected $fillable = [
         'title',
-        'image'
+        'image',
     ];
 
     public function products()
@@ -24,7 +24,7 @@ class Brand extends Model
 
     public static function saveImage($file): string
     {
-        $name = time() .'.'. $file->extension();
+        $name = time().'.'.$file->extension();
         $smallImage = Image::make($file->getRealPath());
         $bigImage = Image::make($file->getRealPath());
 
@@ -32,14 +32,16 @@ class Brand extends Model
             $constraint->aspectRatio();
         });
 
-        Storage::disk('local')->put('brands/small/' . $name, (string)$smallImage->encode('png', 90));
-        Storage::disk('local')->put('brands/big/' . $name, (string)$bigImage->encode('png', 90));
+        Storage::disk('local')->put('brands/small/'.$name, (string) $smallImage->encode('png', 90));
+        Storage::disk('local')->put('brands/big/'.$name, (string) $bigImage->encode('png', 90));
 
         return $name;
     }
 
-    public static function getAllBrands(){
-        $brands= Brand::query()->get();
+    public static function getAllBrands()
+    {
+        $brands = self::query()->get();
+
         return BrandResource::collection($brands);
     }
 }

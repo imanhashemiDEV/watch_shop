@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Intervention\Image\Facades\Image;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Intervention\Image\Facades\Image;
 
 class Gallery extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'image',
-        'product_id'
+        'product_id',
     ];
 
     public function product()
@@ -23,7 +23,7 @@ class Gallery extends Model
 
     public static function saveImage($file): string
     {
-        $name = time() .'.'. $file->extension();
+        $name = time().'.'.$file->extension();
         $smallImage = Image::make($file->getRealPath());
         $bigImage = Image::make($file->getRealPath());
 
@@ -31,8 +31,8 @@ class Gallery extends Model
             $constraint->aspectRatio();
         });
 
-        Storage::disk('local')->put('product/small/' . $name, (string)$smallImage->encode('jpg', 90));
-        Storage::disk('local')->put('product/big/' . $name, (string)$bigImage->encode('jpg', 90));
+        Storage::disk('local')->put('product/small/'.$name, (string) $smallImage->encode('jpg', 90));
+        Storage::disk('local')->put('product/big/'.$name, (string) $bigImage->encode('jpg', 90));
 
         //$file->storeAs('category/small/', $name,'local');
 

@@ -11,9 +11,10 @@ class Tags extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -36,14 +37,14 @@ class Tags extends Component
 
     public function deleteTag($id)
     {
-        $this->dispatchBrowserEvent('deleteTag',['id'=>$id]);
-
+        $this->dispatchBrowserEvent('deleteTag', ['id'=>$id]);
     }
 
     public function render()
     {
-        $tags = Tag::query()->orderBy('id','DESC')->
+        $tags = Tag::query()->orderBy('id', 'DESC')->
         where('title', 'like', '%'.$this->search.'%')->paginate(30);
+
         return view('livewire.admin.tags', compact('tags'));
     }
 }

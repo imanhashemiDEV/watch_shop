@@ -17,6 +17,7 @@ class SendNotifGroupsJob implements ShouldQueue
     public $tries = 1;
 
     protected $users;
+
     protected $sendData;
 
     /**
@@ -37,7 +38,7 @@ class SendNotifGroupsJob implements ShouldQueue
      */
     public function handle()
     {
-        #send
+        //send
         NotificationGroupsCenter::send($this->sendData, $this->users);
     }
 }

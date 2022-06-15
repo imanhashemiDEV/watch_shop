@@ -8,6 +8,5 @@ enum CommentStatus: String
 
     case Rejected = 'rejected';
 
-    case Draft ='draft';
-
+    case Draft = 'draft';
 }

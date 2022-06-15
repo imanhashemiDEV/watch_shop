@@ -24,14 +24,14 @@ class PermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:permissions,name'
+            'name'=>'required|unique:permissions,name',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'=>'تکمیل عنوان مجوز الزامی است'
+            'name.required'=>'تکمیل عنوان مجوز الزامی است',
         ];
     }
 }

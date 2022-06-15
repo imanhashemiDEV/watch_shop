@@ -5,18 +5,17 @@ namespace App\Http\Controllers\Api\V1;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PaymentRequest;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Shetabit\Multipay\Invoice;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PaymentRequest;
-use App\Models\OrderDetail;
 use Shetabit\Payment\Facade\Payment;
 
 class PaymentController extends Controller
 {
-
     public function payment(PaymentRequest $request)
     {
         $total_price = 0;
@@ -36,7 +35,7 @@ class PaymentController extends Controller
             'status' => 0,
             'address_id' => $user->addresses()->latest()->first()->id,
             'user_id' => $user->id,
-            'code'=>Helper::generateRandomRefId(6)
+            'code'=>Helper::generateRandomRefId(6),
         ]);
 
         foreach ($request->orders as $orderDetail) {
@@ -50,11 +49,11 @@ class PaymentController extends Controller
             ]);
         }
 
-        $result =  Payment::purchase(
+        $result = Payment::purchase(
             (new Invoice)->amount($total_price),
             function ($driver, $transactionId) use ($order) {
                 $order->update([
-                    'transaction_id' => $transactionId
+                    'transaction_id' => $transactionId,
                 ]);
             }
         )->pay()->toJson();
@@ -71,36 +70,30 @@ class PaymentController extends Controller
         $order_details = OrderDetail::query()->where('order_id', $order->id)->get();
 
         if ($_GET['Status'] == 'OK') {
-
             $order->update([
                 'status' => PaymentStatus::Success,
             ]);
 
-            foreach($order_details as $order_detail){
-              $product = Product::query()->find($order_detail->product_id);
-              $product->increment('sell');
-
+            foreach ($order_details as $order_detail) {
+                $product = Product::query()->find($order_detail->product_id);
+                $product->increment('sell');
             }
 
             return view('admin.pay.accept', compact('code'));
-
-        }else{
-
+        } else {
             $order->update([
                 'status' => PaymentStatus::Failed,
             ]);
 
-            foreach($order_details as $order_detail){
-              $product = Product::query()->find($order_detail->product_id);
-              $product->increment('sell');
+            foreach ($order_details as $order_detail) {
+                $product = Product::query()->find($order_detail->product_id);
+                $product->increment('sell');
 
-              $order_detail->status = OrderStatus::Failed;
-              $order_detail->save();
+                $order_detail->status = OrderStatus::Failed;
+                $order_detail->save();
             }
 
             return view('admin.pay.reject');
-
         }
-
     }
 }

@@ -8,6 +8,7 @@
         "php": "^8.1",
         "arcanedev/log-viewer": "~9.0",
         "darkaonline/l5-swagger": "^8.3",
+        "friendsofphp/php-cs-fixer": "^3.8",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "hekmatinasser/verta": "^1.12",

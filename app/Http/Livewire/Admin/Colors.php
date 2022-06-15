@@ -11,9 +11,10 @@ class Colors extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -36,13 +37,14 @@ class Colors extends Component
 
     public function deleteColor($id)
     {
-        $this->dispatchBrowserEvent('deleteColor',['id'=>$id]);
+        $this->dispatchBrowserEvent('deleteColor', ['id'=>$id]);
     }
 
     public function render()
     {
-        $colors = Color::query()->orderBy('id','DESC')->
+        $colors = Color::query()->orderBy('id', 'DESC')->
         where('title', 'like', '%'.$this->search.'%')->paginate(30);
-        return view('livewire.admin.colors',compact('colors'));
+
+        return view('livewire.admin.colors', compact('colors'));
     }
 }

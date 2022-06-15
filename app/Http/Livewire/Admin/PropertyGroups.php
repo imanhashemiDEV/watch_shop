@@ -11,9 +11,10 @@ class PropertyGroups extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -36,13 +37,14 @@ class PropertyGroups extends Component
 
     public function deletePropertyGroup($id)
     {
-        $this->dispatchBrowserEvent('deletePropertyGroup',['id'=>$id]);
+        $this->dispatchBrowserEvent('deletePropertyGroup', ['id'=>$id]);
     }
 
     public function render()
     {
-        $property_groups = PropertyGroup::query()->orderBy('id','DESC')->
+        $property_groups = PropertyGroup::query()->orderBy('id', 'DESC')->
         where('title', 'like', '%'.$this->search.'%')->paginate(30);
-        return view('livewire.admin.property-groups',compact('property_groups'));
+
+        return view('livewire.admin.property-groups', compact('property_groups'));
     }
 }

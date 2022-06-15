@@ -38,6 +38,5 @@ class saveNotifGroupsJob implements ShouldQueue
         foreach ($this->data as $data) {
             SendNotification::query()->create($data);
         }
-
     }
 }

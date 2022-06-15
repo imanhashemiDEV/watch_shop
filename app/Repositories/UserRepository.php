@@ -12,7 +12,6 @@ use App\Models\Order;
 
 class UserRepository
 {
-
     // received products
     public static function receivedUserOrder($user)
     {
@@ -30,7 +29,6 @@ class UserRepository
             return $q->where('status', OrderStatus::Received);
         })->where('user_id', $user->id)
             ->where('status', PaymentStatus::Success)->count();
-
     }
 
     //  cancelled products
@@ -52,7 +50,6 @@ class UserRepository
             ->where('status', PaymentStatus::Success)->count();
     }
 
-
     // processing products
     public static function processingUserOrder($user)
     {
@@ -66,7 +63,7 @@ class UserRepository
 
     public static function processingUserOrderCount($user)
     {
-       return Order::query()->whereHas('orderDetails', function ($q) {
+        return Order::query()->whereHas('orderDetails', function ($q) {
             return $q->where('status', OrderStatus::Processing);
         })->where('user_id', $user->id)
             ->where('status', PaymentStatus::Success)->count();

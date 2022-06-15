@@ -21,12 +21,11 @@ class SliderController extends Controller
 
     public function store(SliderRequest $request)
     {
-
         $image = Slider::saveImage($request->image);
 
         $slider = Slider::query()->create([
             'title' => $request->input('title'),
-            'image' => $image
+            'image' => $image,
         ]);
 
         return redirect()->back()->with('message', 'اسلایدر با موفقیت اضافه شد');
@@ -40,6 +39,7 @@ class SliderController extends Controller
     public function edit($id)
     {
         $slider = Slider::query()->find($id);
+
         return view('admin.slider.edit', compact('slider'));
     }
 
@@ -47,15 +47,15 @@ class SliderController extends Controller
     {
         $slider = Slider::query()->find($id);
 
-        if($request->image){
+        if ($request->image) {
             $image = Slider::saveImage($request->image);
-        }else{
+        } else {
             $image = $slider->image;
         }
 
         $slider->update([
             'title' => $request->input('title'),
-            'image' => $image
+            'image' => $image,
         ]);
 
         return redirect()->route('sliders.index')->with('message', 'اسلایدر با موفقیت ویرایش شد');

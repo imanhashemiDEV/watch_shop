@@ -17,7 +17,7 @@ class BrandResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->title,
-            'image'=> url('images/brands/small/'.$this->image)
+            'image'=> url('images/brands/small/'.$this->image),
         ];
     }
 }

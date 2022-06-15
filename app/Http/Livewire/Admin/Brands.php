@@ -10,9 +10,10 @@ class Brands extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -35,13 +36,14 @@ class Brands extends Component
 
     public function deleteBrand($id)
     {
-        $this->dispatchBrowserEvent('deleteBrand',['id'=>$id]);
+        $this->dispatchBrowserEvent('deleteBrand', ['id'=>$id]);
     }
 
     public function render()
     {
-        $brands = Brand::query()->orderBy('id','DESC')->
+        $brands = Brand::query()->orderBy('id', 'DESC')->
         where('title', 'like', '%'.$this->search.'%')->paginate(30);
+
         return view('livewire.admin.brands', compact('brands'));
     }
 }

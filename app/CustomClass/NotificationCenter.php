@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\CustomClass;
 
 use Carbon\Carbon;
@@ -14,12 +13,11 @@ class NotificationCenter
 {
     public static function send($data, $user)
     {
-        $api_key = "AAAAELGquKw:APA91bGm615Hluftc5SaeZffC3Q_GdA8YYX26uOtgTP_8Niop4d4DzvkcFsA8TSPrCysYoimytQ4VzaC4jsLug52zqhr78l8EaUJ8j_RRfMXigpxbgBZH2ylUcsGQArz8vVh8NAO44gD";
+        $api_key = 'AAAAELGquKw:APA91bGm615Hluftc5SaeZffC3Q_GdA8YYX26uOtgTP_8Niop4d4DzvkcFsA8TSPrCysYoimytQ4VzaC4jsLug52zqhr78l8EaUJ8j_RRfMXigpxbgBZH2ylUcsGQArz8vVh8NAO44gD';
         $url = 'https://fcm.googleapis.com/fcm/send';
         $fcm = $user->fcm_token;
 
-        if ($fcm != "" && $fcm != null && $fcm != 1) {
-
+        if ($fcm != '' && $fcm != null && $fcm != 1) {
             $fields = [
                 'registration_ids' => [$fcm],
                 'time_to_live' => 86400,
@@ -27,10 +25,10 @@ class NotificationCenter
             ];
 
             $headers = [
-                'Authorization: key=' . $api_key,
+                'Authorization: key='.$api_key,
                 'Content-Type: application/json',
             ];
-            #Send Response To FireBase Server
+            //Send Response To FireBase Server
             $ch = curl_init();
 
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -49,7 +47,7 @@ class NotificationCenter
             // decode JSON response
             $response = json_decode($result, true);
             if ($response === null) {
-                throw new Exception('Invalid Response For send Notifi = ' . $result);
+                throw new Exception('Invalid Response For send Notifi = '.$result);
             }
 
             if ($response['success'] == 0) {
@@ -62,15 +60,10 @@ class NotificationCenter
             curl_close($ch);
 
             return true;
-
         } else {  /// dont have fcm
             $name = $user->mobile ? $user->mobile : ($user->email ? $user->email : $user->id);
             $message = "کاربر {$name} نوتیفیکیشن دریافت نکرد چون توکن fcm نداشت.";
             Log::channel('notif')->warning($message);
         }
     }
-
 }
-
-
-

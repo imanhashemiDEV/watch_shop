@@ -11,9 +11,10 @@ class Properties extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -36,12 +37,12 @@ class Properties extends Component
 
     public function deleteProperty($id)
     {
-        $this->dispatchBrowserEvent('deleteProperty',['id'=>$id]);
+        $this->dispatchBrowserEvent('deleteProperty', ['id'=>$id]);
     }
 
     public function render()
     {
-        $properties = Property::query()->orderBy('id','DESC')->
+        $properties = Property::query()->orderBy('id', 'DESC')->
         where('title', 'like', '%'.$this->search.'%')->paginate(30);
 
         return view('livewire.admin.properties', compact('properties'));

@@ -10,36 +10,37 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'total_price',
         'status',
         'address_id',
         'transaction_id',
         'user_id',
-        'code'
+        'code',
     ];
 
     public function orderDetails()
     {
-       return $this->hasMany(OrderDetail::class);
+        return $this->hasMany(OrderDetail::class);
     }
 
     public function recievedOrderDetails()
     {
-        return $this->hasMany(OrderDetail::class)->where('status',OrderStatus::Received);
+        return $this->hasMany(OrderDetail::class)->where('status', OrderStatus::Received);
     }
 
     public function cancelledOrderDetails()
     {
-        return $this->hasMany(OrderDetail::class)->where('status',OrderStatus::Cancelled);
+        return $this->hasMany(OrderDetail::class)->where('status', OrderStatus::Cancelled);
     }
 
     public function processingOrderDetails()
     {
-        return $this->hasMany(OrderDetail::class)->where('status',OrderStatus::Processing);
+        return $this->hasMany(OrderDetail::class)->where('status', OrderStatus::Processing);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 

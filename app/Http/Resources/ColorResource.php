@@ -16,7 +16,7 @@ class ColorResource extends JsonResource
     {
         return [
             'title'=> $this->title,
-            'code'=> $this->code
+            'code'=> $this->code,
         ];
     }
 }

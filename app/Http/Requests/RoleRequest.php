@@ -24,14 +24,14 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required'
+            'name'=>'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'=>'تکمیل عنوان نقش الزامی است'
+            'name.required'=>'تکمیل عنوان نقش الزامی است',
         ];
     }
 }

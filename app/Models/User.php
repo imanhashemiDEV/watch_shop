@@ -5,18 +5,18 @@ namespace App\Models;
 use App\Enums\OrderStatus;
 use App\Enums\UserStatus;
 use App\Models\Address;
-use Laravel\Jetstream\HasTeams;
-use Illuminate\Http\UploadedFile;
-use Laravel\Sanctum\HasApiTokens;
-use Intervention\Image\Facades\Image;
-use Laravel\Jetstream\HasProfilePhoto;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Jetstream\HasTeams;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -37,7 +37,7 @@ class User extends Authenticatable
         'mobile',
         'profile_photo_path',
         'phone',
-        'status'
+        'status',
     ];
 
     /**
@@ -70,18 +70,17 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-
     public function user_status($status)
     {
         switch ($status) {
             case UserStatus::Active:
-                return "فعال";
+                return 'فعال';
                 break;
             case UserStatus::InActive:
-                return "غیرفعال ";
+                return 'غیرفعال ';
                 break;
             default:
-                return "نامشخص";
+                return 'نامشخص';
                 break;
         }
     }
@@ -90,7 +89,7 @@ class User extends Authenticatable
     {
         tap($this->profile_photo_path, function ($previous) use ($photo) {
             $this->forceFill([
-                'profile_photo_path' => Storage::disk('public')->put('user_profile', $photo)
+                'profile_photo_path' => Storage::disk('public')->put('user_profile', $photo),
             ])->save();
 
             if ($previous) {
@@ -99,15 +98,15 @@ class User extends Authenticatable
         });
     }
 
-
-    public function addresses(){
-        return $this->hasMany(Address::class)->orderBy('id','DESC');
+    public function addresses()
+    {
+        return $this->hasMany(Address::class)->orderBy('id', 'DESC');
     }
 
     public static function saveImage($file): string
     {
-        if($file){
-            $name = time() .'.'. $file->extension();
+        if ($file) {
+            $name = time().'.'.$file->extension();
             $smallImage = Image::make($file->getRealPath());
             $bigImage = Image::make($file->getRealPath());
 
@@ -115,20 +114,21 @@ class User extends Authenticatable
                 $constraint->aspectRatio();
             });
 
-            Storage::disk('local')->put('user_profile/small/' . $name, (string)$smallImage->encode('png', 90));
-            Storage::disk('local')->put('user_profile/big/' . $name, (string)$bigImage->encode('png', 90));
+            Storage::disk('local')->put('user_profile/small/'.$name, (string) $smallImage->encode('png', 90));
+            Storage::disk('local')->put('user_profile/big/'.$name, (string) $bigImage->encode('png', 90));
 
             return $name;
-        }else{
-            return "";
+        } else {
+            return '';
         }
     }
 
-    public static function updateRegisteredUser($user,$request,$image){
+    public static function updateRegisteredUser($user, $request, $image)
+    {
         $user->update([
             'name' => $request->name,
             'phone' => $request->phone,
-            'profile_photo_path' => $image
+            'profile_photo_path' => $image,
         ]);
         $user->addresses()->create([
             'address' => $request->address,

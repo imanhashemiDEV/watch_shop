@@ -11,9 +11,10 @@ class Sliders extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -36,14 +37,14 @@ class Sliders extends Component
 
     public function deleteSlider($id)
     {
-        $this->dispatchBrowserEvent('deleteSlider',['id'=>$id]);
-
+        $this->dispatchBrowserEvent('deleteSlider', ['id'=>$id]);
     }
 
     public function render()
     {
-        $sliders = Slider::query()->orderBy('id','DESC')->
+        $sliders = Slider::query()->orderBy('id', 'DESC')->
         where('title', 'like', '%'.$this->search.'%')->paginate(30);
+
         return view('livewire.admin.sliders', compact('sliders'));
     }
 }

@@ -20,7 +20,7 @@ class OrderDetailResource extends JsonResource
             'count'=>$this->count,
             'price'=>$this->price,
             'discount_price'=>$this->discount_price,
-            'status'=>$this->status
+            'status'=>$this->status,
         ];
     }
 }

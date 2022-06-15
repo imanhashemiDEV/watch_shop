@@ -14,7 +14,6 @@ class TagController extends Controller
 {
     public function index()
     {
-
         return view('admin.tag.index');
     }
 
@@ -28,6 +27,7 @@ class TagController extends Controller
         $tag = Tag::query()->create([
             'title' => $request->input('title'),
         ]);
+
         return redirect()->back()->with('message', 'تگ با موفقیت اضافه شد');
     }
 
@@ -39,6 +39,7 @@ class TagController extends Controller
     public function edit($id)
     {
         $tag = Tag::query()->find($id);
+
         return view('admin.tag.edit', compact('tag'));
     }
 
@@ -47,12 +48,14 @@ class TagController extends Controller
         Tag::query()->find($id)->update([
             'title' => $request->input('title'),
         ]);
+
         return redirect()->route('tags.index')->with('message', 'تگ با موفقیت ویرایش شد');
     }
 
     public function destroy($id)
     {
         Tag::destroy($id);
+
         return redirect()->back()->with('message', 'تگ با موفقیت حذف شد');
     }
 }

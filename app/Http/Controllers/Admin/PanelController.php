@@ -14,9 +14,10 @@ class PanelController extends Controller
     public function index()
     {
         $products = Product::query()->count();
-        $orders = Order::query()->where('status','success')->count();
+        $orders = Order::query()->where('status', 'success')->count();
         $comments = Comment::query()->count();
         $users = User::query()->count();
-        return view('admin.index', compact('users','products','comments','orders'));
+
+        return view('admin.index', compact('users', 'products', 'comments', 'orders'));
     }
 }

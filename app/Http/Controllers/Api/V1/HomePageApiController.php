@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Slider;
-use App\Models\Product;
-use App\Models\Category;
-use App\Http\Services\Keys;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Services\Keys;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Slider;
 use App\Repositories\ProductRepository;
+use Illuminate\Http\Request;
 
 class HomePageApiController extends Controller
 {
-
-
     /**
      * @OA\Get(
      ** path="/api/v1/home",
@@ -32,7 +30,7 @@ class HomePageApiController extends Controller
     {
         return response()->json([
             'result' => true,
-            'message' => "صفحه اصلی فروشگاه ساعت",
+            'message' => 'صفحه اصلی فروشگاه ساعت',
             'data' => [
                 Keys::sliders  => Slider::getSliders(),
                 Keys::categories  => Category::getAllCategories(),

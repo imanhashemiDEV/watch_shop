@@ -16,21 +16,20 @@ class SendAndSaveNotifGroupsJob implements ShouldQueue
     public $tries = 1;
 
     protected $users;
+
     protected $body;
+
     protected $title;
 
     public function __construct($users, $title, $body)
     {
-
         $this->users = $users;
         $this->message = $body;
         $this->title = $title;
-
     }
 
     public function handle()
     {
-
         $data = [
             'id' => 1,
             'title' => $this->title,
@@ -38,9 +37,9 @@ class SendAndSaveNotifGroupsJob implements ShouldQueue
         ];
 
         $sendData = [
-            "notificationTitle" => $data['title'],
-            "notificationBody" => $data['body'],
-            "notificationDataObject" => $data,
+            'notificationTitle' => $data['title'],
+            'notificationBody' => $data['body'],
+            'notificationDataObject' => $data,
         ];
 
         $users_save = $this->users->chunk(20);
@@ -48,7 +47,7 @@ class SendAndSaveNotifGroupsJob implements ShouldQueue
         foreach ($users_save as $q_users) {
             $save_notif = [];
             foreach ($q_users as $q_user) {
-                $save_notif [] = [
+                $save_notif[] = [
                     'title' => $this->title,
                     'body' => $this->body,
                     'user_id' => $q_user->id,

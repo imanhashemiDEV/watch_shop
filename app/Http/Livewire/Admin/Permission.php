@@ -10,9 +10,10 @@ class Permission extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -35,14 +36,14 @@ class Permission extends Component
 
     public function deleteOrder($id)
     {
-        $this->dispatchBrowserEvent('deleteOrder',['id'=>$id]);
-
+        $this->dispatchBrowserEvent('deleteOrder', ['id'=>$id]);
     }
 
     public function render()
     {
-        $permissions = \Spatie\Permission\Models\Permission::query()->orderBy('id','DESC')
+        $permissions = \Spatie\Permission\Models\Permission::query()->orderBy('id', 'DESC')
             ->where('name', 'like', '%'.$this->search.'%')->paginate(30);
+
         return view('livewire.admin.permission', compact('permissions'));
     }
 }

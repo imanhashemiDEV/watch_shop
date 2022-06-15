@@ -299,7 +299,7 @@ return [
             'username' => '',
             'password' => '',
             'SignData' => '',
-            'callbackUrl' => ''
+            'callbackUrl' => '',
         ],
         'vandar' => [
             'apiPurchaseUrl' => 'https://ipg.vandar.io/api/v3/send',
@@ -308,7 +308,7 @@ return [
             'callbackUrl' => '',
             'merchantId' => '',
             'description' => 'payment using Vandar',
-        ]
+        ],
     ],
 
     /*
@@ -351,6 +351,6 @@ return [
         'sepordeh' => \Shetabit\Multipay\Drivers\Sepordeh\Sepordeh::class,
         'rayanpay' => \Shetabit\Multipay\Drivers\Rayanpay\Rayanpay::class,
         'sizpay' => \Shetabit\Multipay\Drivers\Sizpay\Sizpay::class,
-        'vandar' => \Shetabit\Multipay\Drivers\Vandar\Vandar::class
-    ]
+        'vandar' => \Shetabit\Multipay\Drivers\Vandar\Vandar::class,
+    ],
 ];

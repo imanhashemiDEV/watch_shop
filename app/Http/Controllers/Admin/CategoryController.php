@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-
     public function index()
     {
         return  view('admin.category.index');
@@ -20,19 +19,19 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::query()->pluck('title', 'id');
+
         return view('admin.category.create', compact('categories'));
     }
 
     public function store(CategoryRequest $request)
     {
-
         $image = Category::saveImage($request->image);
 
         $category = Category::query()->create([
             'title' => $request->input('title'),
             'slug' => Helper::make_slug($request->input('title')),
             'parent_id' => $request->input('parent_id'),
-            'image' => $image
+            'image' => $image,
         ]);
 
         return redirect()->back()->with('message', 'دسته بندی با موفقیت اضافه شد');
@@ -47,6 +46,7 @@ class CategoryController extends Controller
     {
         $category = Category::query()->find($id);
         $categories = Category::query()->pluck('title', 'id');
+
         return view('admin.category.edit', compact('category', 'categories'));
     }
 
@@ -54,18 +54,17 @@ class CategoryController extends Controller
     {
         $category = Category::query()->find($id);
 
-        if($request->image){
+        if ($request->image) {
             $image = Category::saveImage($request->image);
-        }else{
+        } else {
             $image = $category->image;
         }
-
 
         $category->update([
             'title' => $request->input('title'),
             'slug' => Helper::make_slug($request->input('title')),
             'parent_id' => $request->input('parent_id'),
-            'image' => $image
+            'image' => $image,
         ]);
 
         return redirect()->route('categories.index')->with('message', 'دسته بندی با موفقیت ویرایش شد');

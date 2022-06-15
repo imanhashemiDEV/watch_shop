@@ -16,11 +16,9 @@ class SwaggerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(env('APP_DEBUG')){
-
+        if (env('APP_DEBUG')) {
             return $next($request);
-        }else{
-
+        } else {
             return  redirect()->route('home');
         }
     }

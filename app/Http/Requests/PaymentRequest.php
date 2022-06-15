@@ -30,13 +30,13 @@ class PaymentRequest extends FormRequest
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'orders.required'=>'ارسال لیست خرید الزامی است',
             'orders.array'=>'خرید باید به صورت لیست باشد',
             'orders.*.product_id.required'=>'آیدی محصول الزامی است',
             'orders.*.count.required'=>'تعداد محصول الزامی است',
         ];
-
     }
 }

@@ -11,9 +11,10 @@ class Products extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -36,14 +37,14 @@ class Products extends Component
 
     public function deleteProduct($id)
     {
-        $this->dispatchBrowserEvent('deleteProduct',['id'=>$id]);
-
+        $this->dispatchBrowserEvent('deleteProduct', ['id'=>$id]);
     }
 
     public function render()
     {
         $products = Product::query()->latest()
         ->where('title', 'like', '%'.$this->search.'%')->paginate(30);
+
         return view('livewire.admin.products', compact('products'));
     }
 }

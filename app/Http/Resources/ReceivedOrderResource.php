@@ -18,7 +18,7 @@ class ReceivedOrderResource extends JsonResource
             'id'=>$this->id,
             'code'=>$this->code,
             'status'=>$this->status,
-            'order_details'=>OrderDetailResource::collection($this->recievedOrderDetails)
+            'order_details'=>OrderDetailResource::collection($this->recievedOrderDetails),
         ];
     }
 }

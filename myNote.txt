@@ -1,0 +1,6 @@
+
+
+//////////   Codes  //////////
+for cs fixer
+composer require friendsofphp/php-cs-fixer
+.\vendor\bin\php-cs-fixer fix

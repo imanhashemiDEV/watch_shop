@@ -8,11 +8,8 @@
 
 namespace App\Helpers;
 
-
 class ConverterNum
 {
-
-
     public static function convert($string)
     {
         $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
@@ -38,9 +35,9 @@ class ConverterNum
             '8' => '۸',
             '9' => '۹',
         ];
+
         return strtr($num, $persian_num_array);
     }
-
 
     public static function persian2LatinDigit($string)
     {
@@ -53,6 +50,4 @@ class ConverterNum
 
         return $string;
     }
-
-
 }

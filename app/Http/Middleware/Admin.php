@@ -16,10 +16,10 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        $user =auth()->user();
-        if($user->hasRole(['ادمین']) || $user->super_admin==1){
+        $user = auth()->user();
+        if ($user->hasRole(['ادمین']) || $user->super_admin == 1) {
             return $next($request);
-        }else{
+        } else {
             return  redirect()->route('home');
         }
     }

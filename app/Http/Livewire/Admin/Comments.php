@@ -12,9 +12,10 @@ class Comments extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -37,19 +38,20 @@ class Comments extends Component
 
     public function deleteComment($id)
     {
-        $this->dispatchBrowserEvent('deleteComment',['id'=>$id]);
+        $this->dispatchBrowserEvent('deleteComment', ['id'=>$id]);
     }
 
-    public function changeStatus($id){
+    public function changeStatus($id)
+    {
         $comment = Comment::query()->find($id);
-        if($comment->status==='accepted'){
-            $comment->status='rejected';
+        if ($comment->status === 'accepted') {
+            $comment->status = 'rejected';
             $comment->save();
-        }else if($comment->status==='rejected'){
-            $comment->status='accepted';
+        } elseif ($comment->status === 'rejected') {
+            $comment->status = 'accepted';
             $comment->save();
-        }else if($comment->status==='draft'){
-            $comment->status='accepted';
+        } elseif ($comment->status === 'draft') {
+            $comment->status = 'accepted';
             $comment->save();
         }
     }
@@ -58,6 +60,7 @@ class Comments extends Component
     {
         $comments = Comment::with('product')->orderBy('created_at', 'desc')
         ->where('body', 'like', '%'.$this->search.'%')->paginate(30);
+
         return view('livewire.admin.comments', compact('comments'));
     }
 }

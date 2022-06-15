@@ -10,9 +10,10 @@ class Role extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme='bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
+
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -35,13 +36,14 @@ class Role extends Component
 
     public function deleteRole($id)
     {
-        $this->dispatchBrowserEvent('deleteRole',['id'=>$id]);
+        $this->dispatchBrowserEvent('deleteRole', ['id'=>$id]);
     }
 
     public function render()
     {
-        $roles = \Spatie\Permission\Models\Role::query()->orderBy('id','DESC')
+        $roles = \Spatie\Permission\Models\Role::query()->orderBy('id', 'DESC')
         ->where('name', 'like', '%'.$this->search.'%')->paginate(30);
-        return view('livewire.admin.role',compact('roles'));
+
+        return view('livewire.admin.role', compact('roles'));
     }
 }

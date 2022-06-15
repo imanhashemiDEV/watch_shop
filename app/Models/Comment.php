@@ -9,14 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    protected $fillable=[
+
+    protected $fillable = [
         'body',
         'status',
         'user_id',
-        'parent_id'
+        'parent_id',
     ];
 
-    public function commentable(){
+    public function commentable()
+    {
         return $this->morphTo();
     }
 
@@ -34,16 +36,16 @@ class Comment extends Model
     {
         switch ($status) {
             case CommentStatus::Accepted:
-                return "تایید شده";
+                return 'تایید شده';
                 break;
             case CommentStatus::Rejected:
-                return "تایید نشده ";
+                return 'تایید نشده ';
                 break;
             case CommentStatus::Draft:
-                return "بررسی اولیه";
+                return 'بررسی اولیه';
                 break;
             default:
-                return "نامشخص";
+                return 'نامشخص';
                 break;
         }
     }

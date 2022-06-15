@@ -9,8 +9,8 @@ class PropertyGroup extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'title','category_id'
+    protected $fillable = [
+        'title', 'category_id',
     ];
 
     public function category()

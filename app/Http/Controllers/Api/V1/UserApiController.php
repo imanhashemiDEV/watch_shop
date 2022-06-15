@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Exceptions\UserException;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Http\Services\Keys;
 use App\Models\User;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use Hekmatinasser\Verta\Facades\Verta;
+use Illuminate\Http\Request;
 
 class UserApiController extends Controller
 {
-
     /**
      * @OA\Post(
      * path="/api/v1/profile",
@@ -60,7 +59,6 @@ class UserApiController extends Controller
      **/
     public function userAddresses()
     {
-
         $user = auth()->user();
 
         return response()->json([
@@ -86,7 +84,6 @@ class UserApiController extends Controller
      **/
     public function userReceivedOrders()
     {
-
         $user = auth()->user();
 
         return response()->json([
@@ -95,7 +92,6 @@ class UserApiController extends Controller
             'data' => UserRepository::receivedUserOrder($user),
         ], 200);
     }
-
 
     /**
      * @OA\Post(
@@ -113,7 +109,6 @@ class UserApiController extends Controller
      **/
     public function userCancelledOrders()
     {
-
         $user = auth()->user();
 
         return response()->json([
@@ -122,7 +117,6 @@ class UserApiController extends Controller
             'data' => UserRepository::cancelledUserOrder($user),
         ], 200);
     }
-
 
     /**
      * @OA\Post(
@@ -140,7 +134,6 @@ class UserApiController extends Controller
      **/
     public function userProcessingOrders()
     {
-
         $user = auth()->user();
 
         return response()->json([
