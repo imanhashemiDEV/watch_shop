@@ -224,6 +224,7 @@ class ProductPageApiController extends Controller
      *           @OA\Schema(
      *           @OA\Property(
      *                  property="search",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *     )

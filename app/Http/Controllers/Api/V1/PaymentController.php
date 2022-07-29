@@ -21,15 +21,18 @@ class PaymentController extends Controller
      ** path="/api/v1/payment",
      *  tags={"Payment"},
      *  description="send products id in basket to payment",
-     *   security={{"sanctum":{}}},
+
      *   @OA\RequestBody(
      *    required=true,
      *          @OA\MediaType(
      *           mediaType="multipart/form-data",
      *           @OA\Schema(
      *           @OA\Property(
-     *                  property="orders[]",
-     *                  type="integer",
+     *                  property="orders",
+     *                  description="Product ID",
+     *                  type="array",
+      *                 collectionFormat="multi",
+     *                  @OA\Items(type="integer", format="id")
      *               ),
      *     )
      *   )
@@ -45,6 +48,7 @@ class PaymentController extends Controller
      **/
     public function payment(PaymentRequest $request)
     {
+        dd($request->orders);
         $total_price = 0;
         $user = auth()->user();
 

@@ -29,6 +29,7 @@ class AuthApiController extends Controller
      *           @OA\Schema(
      *           @OA\Property(
      *                  property="mobile",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *     )
@@ -88,10 +89,12 @@ class AuthApiController extends Controller
      *           @OA\Schema(
      *           @OA\Property(
      *                  property="mobile",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *           @OA\Property(
      *                  property="code",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *     )
@@ -164,6 +167,7 @@ class AuthApiController extends Controller
      *           @OA\Schema(
      *               @OA\Property(
      *                  property="image",
+     * description="Product ID",
      *                  type="array",
      *                  @OA\Items(
      *                       type="string",
@@ -172,26 +176,32 @@ class AuthApiController extends Controller
      *               ),
      *           @OA\Property(
      *                  property="phone",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *          @OA\Property(
      *                  property="name",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *          @OA\Property(
      *                  property="address",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *          @OA\Property(
      *                  property="postal_code",
+     * description="Product ID",
      *                  type="string",
      *               ),
      *          @OA\Property(
      *                  property="lat",
+     * description="Product ID",
      *                  type="double",
      *               ),
      *          @OA\Property(
      *                  property="lng",
+     * description="Product ID",
      *                  type="double",
      *               ),
      *           ),

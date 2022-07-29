@@ -20,6 +20,7 @@
                             "schema": {
                                 "properties": {
                                     "mobile": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     }
                                 },
@@ -52,9 +53,11 @@
                             "schema": {
                                 "properties": {
                                     "mobile": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     },
                                     "code": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     }
                                 },
@@ -87,6 +90,7 @@
                             "schema": {
                                 "properties": {
                                     "image": {
+                                        "description": "Product ID",
                                         "type": "array",
                                         "items": {
                                             "type": "string",
@@ -94,22 +98,28 @@
                                         }
                                     },
                                     "phone": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     },
                                     "name": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     },
                                     "address": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     },
                                     "postal_code": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     },
                                     "lat": {
+                                        "description": "Product ID",
                                         "type": "number",
                                         "format": "double"
                                     },
                                     "lng": {
+                                        "description": "Product ID",
                                         "type": "number",
                                         "format": "double"
                                     }
@@ -164,8 +174,14 @@
                         "multipart/form-data": {
                             "schema": {
                                 "properties": {
-                                    "orders[]": {
-                                        "type": "integer"
+                                    "orders": {
+                                        "description": "Product ID",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "format": "id"
+                                        },
+                                        "collectionFormat": "multi"
                                     }
                                 },
                                 "type": "object"
@@ -180,12 +196,7 @@
                             "application/json": {}
                         }
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             }
         },
         "/api/v1/all_products": {
@@ -341,6 +352,7 @@
                             "schema": {
                                 "properties": {
                                     "search": {
+                                        "description": "Product ID",
                                         "type": "string"
                                     }
                                 },
