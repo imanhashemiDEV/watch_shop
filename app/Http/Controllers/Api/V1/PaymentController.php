@@ -16,6 +16,33 @@ use Shetabit\Payment\Facade\Payment;
 
 class PaymentController extends Controller
 {
+     /**
+     * @OA\Post(
+     ** path="/api/v1/payment",
+     *  tags={"Payment"},
+     *  description="send products id in basket to payment",
+     *   security={{"sanctum":{}}},
+     *   @OA\RequestBody(
+     *    required=true,
+     *          @OA\MediaType(
+     *           mediaType="multipart/form-data",
+     *           @OA\Schema(
+     *           @OA\Property(
+     *                  property="orders[]",
+     *                  type="integer",
+     *               ),
+     *     )
+     *   )
+     * ),
+     *   @OA\Response(
+     *      response=200,
+     *      description="Its Ok",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   )
+     *)
+     **/
     public function payment(PaymentRequest $request)
     {
         $total_price = 0;
@@ -55,8 +82,7 @@ class PaymentController extends Controller
                 $order->update([
                     'transaction_id' => $transactionId,
                 ]);
-            }
-        )->pay()->toJson();
+            })->pay()->toJson();
 
         return json_decode($result);
     }

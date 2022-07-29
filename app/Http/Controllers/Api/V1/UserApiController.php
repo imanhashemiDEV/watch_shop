@@ -60,7 +60,6 @@ class UserApiController extends Controller
     public function userAddresses()
     {
         $user = auth()->user();
-
         return response()->json([
             'result' => true,
             'message' => 'آدرس های کاربر',
@@ -110,7 +109,6 @@ class UserApiController extends Controller
     public function userCancelledOrders()
     {
         $user = auth()->user();
-
         return response()->json([
             'result' => true,
             'message' => 'سفارش های کنسل شده کاربر',
@@ -135,7 +133,6 @@ class UserApiController extends Controller
     public function userProcessingOrders()
     {
         $user = auth()->user();
-
         return response()->json([
             'result' => true,
             'message' => 'سفارش های در حال پردازش کاربر',
